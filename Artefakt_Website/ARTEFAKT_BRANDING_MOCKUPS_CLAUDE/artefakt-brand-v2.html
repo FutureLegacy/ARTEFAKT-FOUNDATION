@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>artefakt — brand identity system v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@300;400;500;700&family=Barlow+Condensed:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --W: #f5f2ec;
+  --K: #0d0c0a;
+  --R: #c8522a;
+  --G: #8c8880;
+  --L: #d4cfc6;
+  --unit: 24px;
+  --ff-display: 'Playfair Display', Georgia, serif;
+  --ff-body: 'EB Garamond', Garamond, serif;
+  --ff-mono: 'IBM Plex Mono', monospace;
+  --ff-cond: 'Barlow Condensed', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--W); color: var(--K); font-family: var(--ff-mono); font-size: 11px; line-height: 1; letter-spacing: 0.05em; }
+.page { max-width: 1200px; margin: 0 auto; }
+.s { padding: calc(var(--unit)*4) calc(var(--unit)*3); border-bottom: 1px solid var(--K); position: relative; }
+.s--ink { background: var(--K); color: var(--W); border-bottom-color: #333; }
+.s--red { background: var(--R); color: var(--W); }
+.s--mid { background: #ede9e0; }
+.label {
+  font-family: var(--ff-mono); font-size: 9px; font-weight: 400; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--G); display: flex; align-items: center;
+  gap: var(--unit); margin-bottom: calc(var(--unit)*3);
+}
+.label::before { content:''; display:block; width:var(--unit); height:1px; background:var(--R); flex-shrink:0; }
+.label::after { content:''; flex:1; height:1px; background:var(--L); }
+.s--ink .label { color:#555; }
+.s--ink .label::after { background:#333; }
+.nav {
+  position: sticky; top: 0; z-index: 100; background: var(--K);
+  display: flex; align-items: stretch; border-bottom: 2px solid var(--R); height: 40px;
+}
+.nav-mark { display:flex; align-items:center; padding:0 20px; border-right:1px solid #333; gap:10px; }
+.nav-mark-sq { width:18px; height:18px; border:1.5px solid var(--R); display:flex; align-items:center; justify-content:center; }
+.nav-mark-sq span { font-family:var(--ff-display); font-weight:900; font-size:11px; color:var(--W); line-height:1; margin-top:-1px; }
+.nav-id { font-family:var(--ff-mono); font-size:9px; letter-spacing:0.25em; color:var(--G); text-transform:uppercase; }
+.nav-links { display:flex; align-items:stretch; list-style:none; margin-left:auto; }
+.nav-links li { display:flex; }
+.nav-links a { display:flex; align-items:center; padding:0 14px; font-family:var(--ff-mono); font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--G); text-decoration:none; border-left:1px solid #222; transition:color .15s,background .15s; }
+.nav-links a:hover { color:var(--W); background:#1a1a18; }
+.contact-grid { display:grid; grid-template-columns:repeat(8,1fr); grid-template-rows:repeat(4,1fr); gap:3px; }
+.frame { background:#1a1816; border:1px solid #2a2825; position:relative; overflow:hidden; aspect-ratio:1; }
+.frame--filled { background:#111; }
+.frame--filled::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 30% 40%,#2a2825 0%,transparent 60%),radial-gradient(ellipse at 70% 60%,#151312 0%,transparent 50%); }
+.frame--red { background:var(--R); border-color:#a04020; }
+.frame-n { position:absolute; top:3px; left:4px; font-family:var(--ff-mono); font-size:6px; color:rgba(255,255,255,0.15); letter-spacing:0.1em; }
+.hero-word { font-family:var(--ff-display); font-weight:900; font-size:clamp(80px,14vw,200px); line-height:0.85; letter-spacing:-0.04em; color:var(--K); text-transform:lowercase; }
+.hero-word .r { color:var(--R); }
+.hero-layout { display:grid; grid-template-columns:7fr 3fr; gap:0; align-items:end; min-height:60vh; padding-bottom:calc(var(--unit)*2); }
+.hero-right { padding-left:calc(var(--unit)*2); padding-bottom:8px; border-left:1px solid var(--K); display:flex; flex-direction:column; gap:var(--unit); justify-content:flex-end; height:100%; }
+.hero-tagline { font-family:var(--ff-mono); font-size:10px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--K); line-height:2.2; writing-mode:vertical-rl; transform:rotate(180deg); align-self:flex-start; }
+.hero-meta { font-family:var(--ff-mono); font-size:9px; color:var(--G); letter-spacing:0.15em; line-height:2; }
+.mark-system { display:flex; gap:calc(var(--unit)*2); flex-wrap:wrap; align-items:flex-end; }
+.mark-cell { display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
+.mark-sz { font-size:8px; color:var(--G); letter-spacing:0.15em; }
+.palette { display:grid; grid-template-columns:3fr 2fr 1fr 1fr 1fr; gap:3px; }
+.swatch { padding:calc(var(--unit)*2) var(--unit); display:flex; flex-direction:column; justify-content:flex-end; gap:4px; min-height:160px; }
+.sw-name { font-family:var(--ff-mono); font-size:9px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; }
+.sw-hex { font-family:var(--ff-mono); font-size:8px; opacity:.55; letter-spacing:0.1em; }
+.sw-use { font-family:var(--ff-mono); font-size:8px; opacity:.4; line-height:1.6; letter-spacing:0.05em; }
+.sw-d { color:rgba(255,255,255,.9); }
+.sw-l { color:rgba(0,0,0,.7); }
+.lockup-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; }
+.lk { padding:calc(var(--unit)*2.5) calc(var(--unit)*2); display:flex; flex-direction:column; justify-content:space-between; min-height:200px; position:relative; }
+.lk-id { position:absolute; bottom:10px; right:12px; font-size:8px; color:var(--G); letter-spacing:0.2em; text-transform:uppercase; }
+.lk-word { font-family:var(--ff-display); font-weight:900; font-size:40px; letter-spacing:-0.03em; line-height:0.9; text-transform:lowercase; }
+.lk-sub { font-family:var(--ff-mono); font-size:8px; letter-spacing:0.3em; text-transform:uppercase; margin-top:10px; }
+.card-wrap { display:grid; grid-template-columns:1fr 1fr; gap:calc(var(--unit)*2); }
+.card { aspect-ratio:1.75; border:1px solid var(--K); position:relative; overflow:hidden; box-shadow:6px 6px 0 var(--K); }
+.card-inner { position:absolute; inset:0; padding:calc(var(--unit)*1.5); display:flex; flex-direction:column; justify-content:space-between; }
+.letterhead { background:var(--W); border:1px solid var(--K); box-shadow:6px 6px 0 var(--K); padding:calc(var(--unit)*3); position:relative; }
+.lh-stripe { position:absolute; top:0; left:0; right:0; height:6px; background:var(--R); }
+.lh-header { display:grid; grid-template-columns:1fr 1fr; gap:var(--unit); padding-top:calc(var(--unit)*1.5); padding-bottom:calc(var(--unit)*1.5); border-bottom:1px solid var(--K); margin-bottom:calc(var(--unit)*2); }
+.lh-addr { text-align:right; font-family:var(--ff-mono); font-size:9px; color:var(--G); line-height:2; letter-spacing:0.1em; }
+.lh-body { font-family:var(--ff-body); font-size:15px; line-height:1.8; color:var(--K); }
+.lh-body p { margin-bottom:14px; }
+.lh-footer { margin-top:calc(var(--unit)*2); padding-top:var(--unit); border-top:1px solid var(--L); display:flex; justify-content:space-between; align-items:center; }
+.pillars { display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
+.pillar { padding:calc(var(--unit)*2.5) calc(var(--unit)*1.5); border-right:1px solid; position:relative; }
+.pillar:last-child { border-right:none; }
+.pillar-n { font-family:var(--ff-mono); font-size:60px; font-weight:700; line-height:1; opacity:.08; position:absolute; top:var(--unit); right:var(--unit); }
+.pillar-verb { font-family:var(--ff-cond); font-weight:900; font-size:28px; letter-spacing:0.04em; text-transform:uppercase; line-height:1; margin-bottom:var(--unit); }
+.pillar-dot { width:6px; height:6px; background:var(--R); border-radius:50%; margin-bottom:var(--unit); }
+.pillar-body { font-family:var(--ff-body); font-size:14px; line-height:1.6; opacity:.75; }
+.usage-grid { display:grid; grid-template-columns:1fr 1fr; gap:calc(var(--unit)*4); }
+.use-item { display:flex; gap:var(--unit); padding:var(--unit) 0; border-bottom:1px solid var(--L); align-items:flex-start; }
+.use-mark { font-family:var(--ff-mono); font-size:11px; font-weight:700; flex-shrink:0; width:16px; padding-top:2px; }
+.use-mark--y { color:var(--R); }
+.use-mark--n { color:var(--L); }
+.use-text { font-family:var(--ff-body); font-size:15px; line-height:1.6; color:var(--K); }
+.use-text--n { color:var(--G); text-decoration:line-through; text-decoration-color:var(--L); }
+.voice-grid { display:grid; grid-template-columns:1fr 1fr; gap:calc(var(--unit)*3); }
+.voice-item { padding:calc(var(--unit)*1.5); border:1px solid var(--L); position:relative; }
+.voice-item::before { content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:var(--R); }
+.voice-kicker { font-family:var(--ff-mono); font-size:8px; letter-spacing:0.25em; text-transform:uppercase; color:var(--G); margin-bottom:10px; padding-left:12px; }
+.voice-text { font-family:var(--ff-body); font-style:italic; font-size:17px; line-height:1.55; padding-left:12px; }
+.t-display { font-family:var(--ff-display); font-weight:900; font-size:clamp(40px,8vw,120px); line-height:.88; letter-spacing:-0.03em; text-transform:lowercase; }
+.t-display em { font-style:italic; color:var(--R); }
+.t-headline { font-family:var(--ff-display); font-weight:900; font-style:italic; font-size:clamp(28px,4vw,56px); line-height:1.05; letter-spacing:-0.02em; }
+.t-cond { font-family:var(--ff-cond); font-weight:900; font-size:clamp(20px,3vw,36px); letter-spacing:0.08em; text-transform:uppercase; line-height:1.1; }
+.t-body { font-family:var(--ff-body); font-size:18px; line-height:1.65; max-width:560px; }
+.t-body em { font-style:italic; }
+.t-quote { font-family:var(--ff-body); font-style:italic; font-size:clamp(20px,2.5vw,32px); line-height:1.4; border-left:3px solid var(--R); padding-left:calc(var(--unit)*1.5); max-width:640px; }
+.t-mono { font-family:var(--ff-mono); font-size:11px; letter-spacing:0.15em; line-height:2; color:var(--G); }
+@keyframes in-up { from{opacity:0;transform:translateY(32px)} to{opacity:1;transform:translateY(0)} }
+.a1{animation:in-up .6s cubic-bezier(.22,1,.36,1) both;animation-delay:.05s}
+.a2{animation:in-up .6s cubic-bezier(.22,1,.36,1) both;animation-delay:.2s}
+.a3{animation:in-up .6s cubic-bezier(.22,1,.36,1) both;animation-delay:.35s}
+@media(max-width:900px){
+  .s{padding:calc(var(--unit)*3) calc(var(--unit)*2)}
+  .hero-layout{grid-template-columns:1fr;min-height:auto}
+  .hero-right{border-left:none;border-top:1px solid var(--K);padding:var(--unit) 0;flex-direction:row;flex-wrap:wrap}
+  .hero-tagline{writing-mode:horizontal-tb;transform:none}
+  .lockup-grid{grid-template-columns:1fr 1fr}
+  .pillars{grid-template-columns:1fr 1fr}
+  .card-wrap{grid-template-columns:1fr}
+  .usage-grid,.voice-grid{grid-template-columns:1fr}
+  .palette{grid-template-columns:1fr 1fr 1fr}
+  .contact-grid{grid-template-columns:repeat(6,1fr)}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-mark">
+    <div class="nav-mark-sq"><span>a</span></div>
+    <span class="nav-id">artefakt — brand system v2</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#idea">idea</a></li>
+    <li><a href="#mark">mark</a></li>
+    <li><a href="#colour">colour</a></li>
+    <li><a href="#type">type</a></li>
+    <li><a href="#collateral">collateral</a></li>
+    <li><a href="#pillars">pillars</a></li>
+    <li><a href="#voice">voice</a></li>
+    <li><a href="#rules">rules</a></li>
+  </ul>
+</nav>
+<div class="page">
+
+<!-- 00 GENERATIVE IDEA -->
+<section class="s s--ink" id="idea">
+  <div class="label">00 — the generative idea</div>
+  <div class="contact-grid a1" style="margin-bottom:calc(var(--unit)*3);">
+    <div class="frame frame--filled"><span class="frame-n">1</span></div>
+    <div class="frame frame--filled" style="background:#0a0908"><span class="frame-n">2</span></div>
+    <div class="frame frame--red"><span class="frame-n" style="color:rgba(0,0,0,.2)">3</span></div>
+    <div class="frame"><span class="frame-n">4</span></div>
+    <div class="frame frame--filled"><span class="frame-n">5</span></div>
+    <div class="frame frame--filled" style="background:#141210"><span class="frame-n">6</span></div>
+    <div class="frame"><span class="frame-n">7</span></div>
+    <div class="frame frame--filled"><span class="frame-n">8</span></div>
+    <div class="frame" style="grid-column:span 2;display:flex;align-items:flex-end;padding:10px 12px;background:var(--R);">
+      <span style="font-family:var(--ff-display);font-weight:900;font-size:20px;color:var(--W);letter-spacing:-0.03em;line-height:1;text-transform:lowercase;">arte</span>
+    </div>
+    <div class="frame frame--filled" style="background:#0d0b09"><span class="frame-n">10</span></div>
+    <div class="frame frame--filled"><span class="frame-n">11</span></div>
+    <div class="frame" style="display:flex;align-items:flex-end;padding:10px 12px;background:#111;">
+      <span style="font-family:var(--ff-display);font-weight:900;font-size:20px;color:var(--W);letter-spacing:-0.03em;line-height:1;text-transform:lowercase;">f<span style="color:var(--R)">akt</span></span>
+    </div>
+    <div class="frame frame--filled" style="background:#0f0e0c"><span class="frame-n">13</span></div>
+    <div class="frame"><span class="frame-n">14</span></div>
+    <div class="frame frame--filled"><span class="frame-n">15</span></div>
+    <div class="frame frame--filled" style="background:#151311"><span class="frame-n">16</span></div>
+    <div class="frame frame--filled"><span class="frame-n">17</span></div>
+    <div class="frame"><span class="frame-n">18</span></div>
+    <div class="frame frame--filled" style="background:#0c0b09"><span class="frame-n">19</span></div>
+    <div class="frame frame--filled"><span class="frame-n">20</span></div>
+    <div class="frame"><span class="frame-n">21</span></div>
+    <div class="frame frame--red"><span class="frame-n" style="color:rgba(0,0,0,.2)">22</span></div>
+    <div class="frame frame--filled" style="background:#111"><span class="frame-n">23</span></div>
+    <div class="frame"><span class="frame-n">24</span></div>
+    <div class="frame frame--filled" style="background:#0e0d0b"><span class="frame-n">25</span></div>
+    <div class="frame frame--filled"><span class="frame-n">26</span></div>
+    <div class="frame"><span class="frame-n">27</span></div>
+    <div class="frame frame--filled" style="background:#131210"><span class="frame-n">28</span></div>
+    <div class="frame frame--filled"><span class="frame-n">29</span></div>
+    <div class="frame"><span class="frame-n">30</span></div>
+    <div class="frame frame--filled" style="background:#0b0a08"><span class="frame-n">31</span></div>
+    <div class="frame frame--red"><span class="frame-n" style="color:rgba(0,0,0,.2)">32</span></div>
+  </div>
+  <div class="a2" style="display:grid;grid-template-columns:1fr 1fr;gap:calc(var(--unit)*3);align-items:end;">
+    <p style="font-family:var(--ff-body);font-style:italic;font-size:clamp(18px,2.5vw,26px);line-height:1.5;color:rgba(245,242,236,.85);border-left:3px solid var(--R);padding-left:calc(var(--unit)*1.5);">The contact sheet is the primary unit: a grid of fragments, some filled, some void, numbered and sequential. Artefakt dismantles things and reconstructs them elsewhere. The identity does the same.</p>
+    <p style="font-family:var(--ff-mono);font-size:9px;color:#444;line-height:2.2;letter-spacing:0.15em;">PRINCIPLE 01 — THE GRID IS THE MARK<br>PRINCIPLE 02 — FRAGMENT AND RECONSTRUCT<br>PRINCIPLE 03 — STRUCTURE BEFORE ORNAMENT<br>PRINCIPLE 04 — THE VOID IS ACTIVE<br>PRINCIPLE 05 — RED MARKS WHAT MATTERS</p>
+  </div>
+</section>
+
+<!-- 01 PRIMARY WORDMARK -->
+<section class="s" style="padding-bottom:0;border-bottom:none;">
+  <div class="label">01 — primary wordmark</div>
+  <div class="hero-layout a2">
+    <div>
+      <div class="hero-word">arte<span class="r">f</span>akt</div>
+      <div style="margin-top:calc(var(--unit)*1.5);display:flex;gap:var(--unit);align-items:center;">
+        <div style="width:calc(var(--unit)*2);height:2px;background:var(--R);"></div>
+        <span style="font-family:var(--ff-mono);font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--G);">Playfair Display 900 — lowercase always</span>
+      </div>
+    </div>
+    <div class="hero-right a3">
+      <div class="hero-tagline">witness<span style="color:var(--R)">.</span> connect<span style="color:var(--R)">.</span> educate<span style="color:var(--R)">.</span> sustain<span style="color:var(--R)">.</span></div>
+      <div class="hero-meta">Calgary · AB<br>Treaty 7 Territory<br>——<br>Chicago · IL<br>South Shore</div>
+    </div>
+  </div>
+</section>
+<div style="height:6px;background:var(--R);"></div>
+
+<!-- 02 MARK SYSTEM -->
+<section class="s s--mid" id="mark">
+  <div class="label">02 — mark system</div>
+  <div class="mark-system">
+    <div class="mark-cell">
+      <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+        <rect x="1.5" y="1.5" width="117" height="117" stroke="#0d0c0a" stroke-width="3"/>
+        <rect x="10" y="10" width="100" height="100" stroke="#0d0c0a" stroke-width=".75" opacity=".2"/>
+        <line x1="60" y1="0" x2="60" y2="12" stroke="#c8522a" stroke-width="1.5"/>
+        <line x1="60" y1="108" x2="60" y2="120" stroke="#c8522a" stroke-width="1.5"/>
+        <line x1="0" y1="60" x2="12" y2="60" stroke="#c8522a" stroke-width="1.5"/>
+        <line x1="108" y1="60" x2="120" y2="60" stroke="#c8522a" stroke-width="1.5"/>
+        <rect x="8" y="8" width="4" height="4" fill="#c8522a"/>
+        <rect x="108" y="8" width="4" height="4" fill="#c8522a"/>
+        <rect x="8" y="108" width="4" height="4" fill="#c8522a"/>
+        <rect x="108" y="108" width="4" height="4" fill="#c8522a"/>
+        <text x="60" y="78" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="900" font-size="56" fill="#0d0c0a" letter-spacing="-2">a</text>
+      </svg>
+      <span class="mark-sz">120 — primary</span>
+    </div>
+    <div class="mark-cell">
+      <svg width="80" height="80" viewBox="0 0 120 120" fill="none">
+        <rect x="1.5" y="1.5" width="117" height="117" stroke="#0d0c0a" stroke-width="3"/>
+        <rect x="10" y="10" width="100" height="100" stroke="#0d0c0a" stroke-width=".75" opacity=".2"/>
+        <line x1="60" y1="0" x2="60" y2="12" stroke="#c8522a" stroke-width="1.5"/>
+        <line x1="60" y1="108" x2="60" y2="120" stroke="#c8522a" stroke-width="1.5"/>
+        <line x1="0" y1="60" x2="12" y2="60" stroke="#c8522a" stroke-width="1.5"/>
+        <line x1="108" y1="60" x2="120" y2="60" stroke="#c8522a" stroke-width="1.5"/>
+        <rect x="8" y="8" width="4" height="4" fill="#c8522a"/>
+        <rect x="108" y="8" width="4" height="4" fill="#c8522a"/>
+        <rect x="8" y="108" width="4" height="4" fill="#c8522a"/>
+        <rect x="108" y="108" width="4" height="4" fill="#c8522a"/>
+        <text x="60" y="78" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="900" font-size="56" fill="#0d0c0a" letter-spacing="-2">a</text>
+      </svg>
+      <span class="mark-sz">80</span>
+    </div>
+    <div class="mark-cell">
+      <svg width="48" height="48" viewBox="0 0 120 120" fill="none">
+        <rect x="1.5" y="1.5" width="117" height="117" stroke="#0d0c0a" stroke-width="4"/>
+        <rect x="8" y="8" width="4" height="4" fill="#c8522a"/>
+        <rect x="108" y="8" width="4" height="4" fill="#c8522a"/>
+        <rect x="8" y="108" width="4" height="4" fill="#c8522a"/>
+        <rect x="108" y="108" width="4" height="4" fill="#c8522a"/>
+        <text x="60" y="80" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="900" font-size="60" fill="#0d0c0a">a</text>
+      </svg>
+      <span class="mark-sz">48</span>
+    </div>
+    <div class="mark-cell">
+      <svg width="32" height="32" viewBox="0 0 120 120" fill="none">
+        <rect x="1.5" y="1.5" width="117" height="117" stroke="#0d0c0a" stroke-width="5"/>
+        <text x="60" y="82" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="900" font-size="64" fill="#0d0c0a">a</text>
+      </svg>
+      <span class="mark-sz">32</span>
+    </div>
+    <div class="mark-cell">
+      <svg width="20" height="20" viewBox="0 0 120 120" fill="none">
+        <rect x="0" y="0" width="120" height="120" fill="#0d0c0a"/>
+        <text x="60" y="84" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="900" font-size="68" fill="#f5f2ec">a</text>
+      </svg>
+      <span class="mark-sz">20 favicon</span>
+    </div>
+    <div class="mark-cell" style="background:var(--K);padding:16px;margin-left:auto;">
+      <svg width="80" height="80" viewBox="0 0 120 120" fill="none">
+        <rect x="1.5" y="1.5" width="117" height="117" stroke="#f5f2ec" stroke-width="3"/>
+        <rect x="10" y="10" width="100" height="100" stroke="#f5f2ec" stroke-width=".75" opacity=".15"/>
+        <line x1="60" y1="0" x2="60" y2="12" stroke="#c8522a" stroke-width="1.5"/>
+        <line x1="60" y1="108" x2="60" y2="120" stroke="#c8522a" stroke-width="1.5"/>
+        <line x1="0" y1="60" x2="12" y2="60" stroke="#c8522a" stroke-width="1.5"/>
+        <line x1="108" y1="60" x2="120" y2="60" stroke="#c8522a" stroke-width="1.5"/>
+        <rect x="8" y="8" width="4" height="4" fill="#c8522a"/>
+        <rect x="108" y="8" width="4" height="4" fill="#c8522a"/>
+        <rect x="8" y="108" width="4" height="4" fill="#c8522a"/>
+        <rect x="108" y="108" width="4" height="4" fill="#c8522a"/>
+        <text x="60" y="78" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="900" font-size="56" fill="#f5f2ec" letter-spacing="-2">a</text>
+      </svg>
+      <span class="mark-sz" style="color:var(--G)">dark ground</span>
+    </div>
+    <div class="mark-cell" style="background:var(--R);padding:16px;">
+      <svg width="80" height="80" viewBox="0 0 120 120" fill="none">
+        <rect x="1.5" y="1.5" width="117" height="117" stroke="#f5f2ec" stroke-width="3"/>
+        <rect x="8" y="8" width="4" height="4" fill="#0d0c0a"/>
+        <rect x="108" y="8" width="4" height="4" fill="#0d0c0a"/>
+        <rect x="8" y="108" width="4" height="4" fill="#0d0c0a"/>
+        <rect x="108" y="108" width="4" height="4" fill="#0d0c0a"/>
+        <text x="60" y="78" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="900" font-size="56" fill="#f5f2ec" letter-spacing="-2">a</text>
+      </svg>
+      <span class="mark-sz" style="color:rgba(255,255,255,.5)">red ground</span>
+    </div>
+  </div>
+  <div style="height:1px;background:var(--L);margin:calc(var(--unit)*2) 0;"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:calc(var(--unit)*2);">
+    <div>
+      <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px;">Registration marks</div>
+      <div style="font-family:var(--ff-body);font-size:14px;line-height:1.6;">Cross-hairs at mid-points derive from photographic contact sheet registration. Active at larger sizes, simplified at small.</div>
+    </div>
+    <div>
+      <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px;">Corner anchors</div>
+      <div style="font-family:var(--ff-body);font-size:14px;line-height:1.6;">Four red squares at each corner: the physical corners of the film frame. Red, like the safelight.</div>
+    </div>
+    <div>
+      <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px;">The letterform</div>
+      <div style="font-family:var(--ff-body);font-size:14px;line-height:1.6;">Always lowercase. Bayer's principle: case hierarchy is a class system. artefakt does not recognize it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 LOCKUP SYSTEM -->
+<section class="s" style="padding-top:calc(var(--unit)*2);">
+  <div class="label">03 — lockup system</div>
+  <div class="lockup-grid">
+    <div class="lk" style="background:var(--W);border:1px solid var(--K);">
+      <div><div style="width:32px;height:3px;background:var(--R);margin-bottom:16px;"></div><div class="lk-word" style="color:var(--K);">arte<span style="color:var(--R)">f</span>akt</div></div>
+      <div><div class="lk-sub" style="color:var(--G);">witness. connect. educate. sustain.</div></div>
+      <span class="lk-id">paper / primary</span>
+    </div>
+    <div class="lk" style="background:var(--K);">
+      <div><div style="width:32px;height:3px;background:var(--R);margin-bottom:16px;"></div><div class="lk-word" style="color:var(--W);">arte<span style="color:var(--R)">f</span>akt</div></div>
+      <div><div class="lk-sub" style="color:#555;">witness. connect. educate. sustain.</div></div>
+      <span class="lk-id" style="color:#444;">ink / primary dark</span>
+    </div>
+    <div class="lk" style="background:var(--R);">
+      <div><div style="width:32px;height:3px;background:var(--W);margin-bottom:16px;"></div><div class="lk-word" style="color:var(--W);">arte<span style="color:var(--K)">f</span>akt</div></div>
+      <div><div class="lk-sub" style="color:rgba(255,255,255,.55);">witness. connect. educate. sustain.</div></div>
+      <span class="lk-id" style="color:rgba(255,255,255,.35);">red / event use</span>
+    </div>
+    <div class="lk" style="background:var(--W);border:1px solid var(--L);">
+      <div><div style="width:32px;height:3px;background:var(--K);margin-bottom:16px;"></div><div class="lk-word" style="color:var(--K);">artefakt</div></div>
+      <div><div class="lk-sub" style="color:var(--G);">witness. connect. educate. sustain.</div></div>
+      <span class="lk-id">monochrome</span>
+    </div>
+    <div class="lk" style="background:#ede9e0;border:1px solid var(--L);">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <svg width="40" height="40" viewBox="0 0 120 120" fill="none" style="flex-shrink:0;margin-top:4px;">
+          <rect x="1.5" y="1.5" width="117" height="117" stroke="#0d0c0a" stroke-width="4"/>
+          <rect x="8" y="8" width="5" height="5" fill="#c8522a"/>
+          <rect x="107" y="8" width="5" height="5" fill="#c8522a"/>
+          <rect x="8" y="107" width="5" height="5" fill="#c8522a"/>
+          <rect x="107" y="107" width="5" height="5" fill="#c8522a"/>
+          <text x="60" y="82" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="900" font-size="62" fill="#0d0c0a">a</text>
+        </svg>
+        <div>
+          <div class="lk-word" style="color:var(--K);font-size:32px;">arte<span style="color:var(--R)">f</span>akt</div>
+          <div class="lk-sub" style="color:var(--G);font-size:7px;margin-top:8px;">witness. connect. educate. sustain.</div>
+        </div>
+      </div>
+      <span class="lk-id">mark + wordmark horizontal</span>
+    </div>
+    <div class="lk" style="background:var(--K);">
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start;">
+        <svg width="36" height="36" viewBox="0 0 120 120" fill="none">
+          <rect x="1.5" y="1.5" width="117" height="117" stroke="#f5f2ec" stroke-width="4"/>
+          <rect x="8" y="8" width="5" height="5" fill="#c8522a"/>
+          <rect x="107" y="8" width="5" height="5" fill="#c8522a"/>
+          <rect x="8" y="107" width="5" height="5" fill="#c8522a"/>
+          <rect x="107" y="107" width="5" height="5" fill="#c8522a"/>
+          <text x="60" y="82" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="900" font-size="62" fill="#f5f2ec">a</text>
+        </svg>
+        <div>
+          <div class="lk-word" style="color:var(--W);font-size:34px;">arte<span style="color:var(--R)">f</span>akt</div>
+          <div class="lk-sub" style="color:#555;font-size:7px;margin-top:8px;">calgary · chicago · treaty 7</div>
+        </div>
+      </div>
+      <span class="lk-id" style="color:#444;">stacked dark / geographic</span>
+    </div>
+  </div>
+</section>
+<div style="height:4px;background:var(--K);"></div>
+
+<!-- 04 COLOUR -->
+<section class="s s--ink" id="colour">
+  <div class="label">04 — colour system</div>
+  <div class="palette">
+    <div class="swatch sw-l" style="background:#f5f2ec;"><div class="sw-name">paper</div><div class="sw-hex">#F5F2EC</div><div class="sw-use">Primary ground.<br>Warm, not clinical.<br>The photographic print.</div></div>
+    <div class="swatch sw-d" style="background:#0d0c0a;"><div class="sw-name">ink</div><div class="sw-hex">#0D0C0A</div><div class="sw-use">Primary mark.<br>Warm black.<br>Exposed film base.</div></div>
+    <div class="swatch sw-d" style="background:#c8522a;"><div class="sw-name">darkroom red</div><div class="sw-hex">#C8522A</div><div class="sw-use">Single accent.<br>The safelight.<br>Use with restraint.</div></div>
+    <div class="swatch sw-d" style="background:#8c8880;"><div class="sw-name">graphite</div><div class="sw-hex">#8C8880</div><div class="sw-use">Secondary type.<br>Captions, metadata.</div></div>
+    <div class="swatch sw-l" style="background:#d4cfc6;"><div class="sw-name">rule</div><div class="sw-hex">#D4CFC6</div><div class="sw-use">Borders, dividers.<br>Never backgrounds.</div></div>
+  </div>
+  <div style="margin-top:calc(var(--unit)*2);padding:calc(var(--unit)*1.5);border-left:3px solid var(--R);max-width:600px;">
+    <p style="font-family:var(--ff-body);font-style:italic;font-size:17px;line-height:1.6;color:rgba(245,242,236,.8);">Bauhaus primary doctrine: red and black on white. The palette does not expand. When you want to add a colour, resist. The constraint is the system.</p>
+  </div>
+</section>
+
+<!-- 05 TYPE -->
+<section class="s" id="type">
+  <div class="label">05 — type system</div>
+  <div style="margin-bottom:calc(var(--unit)*3);">
+    <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.25em;text-transform:uppercase;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--L);">display — playfair display 900 — lowercase — primary headlines</div>
+    <div class="t-display"><em>if you lived here</em><br>you'd be home by now</div>
+    <div style="margin-top:10px;font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.2em;">PLAYFAIR DISPLAY / 900 / LOWERCASE / -0.03EM / 0.88 LINE-HEIGHT</div>
+  </div>
+  <div style="height:1px;background:var(--L);margin:calc(var(--unit)*2) 0;"></div>
+  <div style="display:grid;grid-template-columns:1fr 2px 1fr;gap:calc(var(--unit)*2);align-items:start;margin-bottom:calc(var(--unit)*3);">
+    <div>
+      <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.25em;text-transform:uppercase;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--L);">headline — italic editorial</div>
+      <div class="t-headline">Documentary as<br>Accountability</div>
+    </div>
+    <div style="background:var(--L);height:100%;"></div>
+    <div>
+      <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.25em;text-transform:uppercase;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--L);">condensed — barlow 900 — subheads</div>
+      <div class="t-cond">Calgary — Chicago<br>Treaty 7 Territory</div>
+    </div>
+  </div>
+  <div style="height:1px;background:var(--L);margin:calc(var(--unit)*2) 0;"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:calc(var(--unit)*3);margin-bottom:calc(var(--unit)*3);">
+    <div>
+      <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.25em;text-transform:uppercase;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--L);">body — eb garamond 400</div>
+      <div class="t-body">Artefakt is a placeless institution built on the weight of things that outlast their owners — the photograph, the demolished house, the discarded machine. <em>The archive is the argument.</em></div>
+    </div>
+    <div>
+      <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.25em;text-transform:uppercase;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--L);">pullquote — garamond italic</div>
+      <div class="t-quote">"We work with materials that have outlasted their intended lives. The discarded image still knows something."</div>
+    </div>
+  </div>
+  <div style="height:1px;background:var(--L);margin:calc(var(--unit)*2) 0;"></div>
+  <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.25em;text-transform:uppercase;margin-bottom:var(--unit);">type scale</div>
+  <table style="width:100%;border-collapse:collapse;">
+    <tbody>
+      <tr style="border-bottom:1px solid var(--L);"><td style="padding:12px 0;width:80px;font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.15em;">display</td><td style="padding:12px 16px;"><span style="font-family:var(--ff-display);font-weight:900;font-size:48px;line-height:1;letter-spacing:-.03em;">Aa</span></td><td style="padding:12px 0;font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.1em;">Playfair Display 900 · 48–200px · lowercase · -0.03em</td></tr>
+      <tr style="border-bottom:1px solid var(--L);"><td style="padding:12px 0;font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.15em;">headline</td><td style="padding:12px 16px;"><span style="font-family:var(--ff-display);font-weight:900;font-style:italic;font-size:32px;line-height:1;">Aa</span></td><td style="padding:12px 0;font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.1em;">Playfair Display 900 Italic · 28–56px</td></tr>
+      <tr style="border-bottom:1px solid var(--L);"><td style="padding:12px 0;font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.15em;">subhead</td><td style="padding:12px 16px;"><span style="font-family:var(--ff-cond);font-weight:900;font-size:22px;letter-spacing:.08em;text-transform:uppercase;">Aa</span></td><td style="padding:12px 0;font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.1em;">Barlow Condensed 900 · uppercase · 14–36px</td></tr>
+      <tr style="border-bottom:1px solid var(--L);"><td style="padding:12px 0;font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.15em;">body</td><td style="padding:12px 16px;"><span style="font-family:var(--ff-body);font-size:20px;">Aa</span></td><td style="padding:12px 0;font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.1em;">EB Garamond 400 · 16–20px · 1.65 lh</td></tr>
+      <tr><td style="padding:12px 0;font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.15em;">caption</td><td style="padding:12px 16px;"><span style="font-family:var(--ff-mono);font-size:12px;letter-spacing:.12em;">Aa</span></td><td style="padding:12px 0;font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.1em;">IBM Plex Mono · 8–12px · 0.1–0.3em</td></tr>
+    </tbody>
+  </table>
+</section>
+<div style="height:4px;background:var(--K);"></div>
+
+<!-- 06 COLLATERAL -->
+<section class="s s--mid" id="collateral">
+  <div class="label">06 — collateral</div>
+  <div class="card-wrap">
+    <div>
+      <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px;">business card — front</div>
+      <div class="card">
+        <div class="card-inner" style="background:var(--K);">
+          <div style="width:100%;height:3px;background:var(--R);"></div>
+          <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:2px;opacity:.12;">
+            <div style="background:#fff;height:8px;"></div><div style="background:var(--R);height:8px;"></div><div style="height:8px;"></div><div style="background:#fff;height:8px;"></div><div style="height:8px;"></div><div style="background:#fff;height:8px;"></div>
+          </div>
+          <div style="font-family:var(--ff-display);font-weight:900;font-size:36px;letter-spacing:-.03em;color:var(--W);text-transform:lowercase;line-height:1;">arte<span style="color:var(--R)">f</span>akt</div>
+          <div><div style="font-family:var(--ff-mono);font-size:7px;color:#555;letter-spacing:.25em;text-transform:uppercase;">witness. connect. educate. sustain.</div></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px;">business card — back</div>
+      <div class="card">
+        <div class="card-inner" style="background:var(--W);border:1px solid var(--K);">
+          <div style="width:3px;height:100%;position:absolute;left:0;top:0;background:var(--R);"></div>
+          <div style="padding-left:16px;">
+            <div style="font-family:var(--ff-mono);font-size:8px;color:var(--R);letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px;">Jonathan Lowenstein</div>
+            <div style="font-family:var(--ff-body);font-style:italic;font-size:13px;color:var(--K);line-height:1.4;">Documentary Photographer<br>& Filmmaker</div>
+          </div>
+          <div style="padding-left:16px;"><div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.1em;line-height:2.2;">artefakt.org<br>gristleandbone @ Vimeo<br>4525 Monterey Ave NE<br>Calgary · AB · Treaty 7</div></div>
+          <div style="padding-left:16px;"><div style="font-family:var(--ff-mono);font-size:7px;color:var(--R);letter-spacing:.1em;line-height:2;">Guggenheim · Nat Geo · TED · NOOR</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:calc(var(--unit)*3);">
+    <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px;">letterhead</div>
+    <div class="letterhead">
+      <div class="lh-stripe"></div>
+      <div class="lh-header">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <svg width="32" height="32" viewBox="0 0 120 120" fill="none">
+            <rect x="1.5" y="1.5" width="117" height="117" stroke="#0d0c0a" stroke-width="4"/>
+            <rect x="8" y="8" width="5" height="5" fill="#c8522a"/>
+            <rect x="107" y="8" width="5" height="5" fill="#c8522a"/>
+            <rect x="8" y="107" width="5" height="5" fill="#c8522a"/>
+            <rect x="107" y="107" width="5" height="5" fill="#c8522a"/>
+            <text x="60" y="82" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="900" font-size="62" fill="#0d0c0a">a</text>
+          </svg>
+          <div>
+            <div style="font-family:var(--ff-display);font-weight:900;font-size:26px;letter-spacing:-.03em;line-height:1;text-transform:lowercase;color:var(--K);">arte<span style="color:var(--R)">f</span>akt</div>
+            <div style="font-family:var(--ff-mono);font-size:7px;color:var(--G);letter-spacing:.25em;text-transform:uppercase;margin-top:4px;">witness. connect. educate. sustain.</div>
+          </div>
+        </div>
+        <div class="lh-addr">4525 Monterey Ave NE<br>Calgary, Alberta — Treaty 7 Territory<br>artefakt.org · artefaktmedia.ca</div>
+      </div>
+      <div class="lh-body">
+        <p>Dear [Recipient],</p>
+        <p>Artefakt is a documentary photography, film, and visual storytelling organization operating across Canada and the United States. Founded on the premise that the archive is a form of argument, we use the photograph, the film, and the collected object as instruments of accountability.</p>
+        <p>Our work begins in the material world — in discarded electronics, demolished houses, and the lives recorded in both...</p>
+      </div>
+      <div class="lh-footer">
+        <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.15em;">witness. connect. educate. sustain.</div>
+        <div style="width:24px;height:2px;background:var(--R);"></div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:calc(var(--unit)*3);">
+    <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px;">email signature</div>
+    <div style="background:var(--K);padding:calc(var(--unit)*2);max-width:480px;border-left:3px solid var(--R);">
+      <div style="font-family:var(--ff-display);font-weight:900;font-size:18px;letter-spacing:-.02em;color:var(--W);text-transform:lowercase;margin-bottom:4px;">jonathan lowenstein</div>
+      <div style="font-family:var(--ff-body);font-style:italic;font-size:13px;color:#666;margin-bottom:12px;">Documentary Photographer & Filmmaker</div>
+      <div style="height:1px;background:#222;margin-bottom:12px;"></div>
+      <div style="font-family:var(--ff-display);font-weight:900;font-size:15px;letter-spacing:-.02em;color:var(--W);text-transform:lowercase;margin-bottom:4px;">arte<span style="color:var(--R)">f</span>akt</div>
+      <div style="font-family:var(--ff-mono);font-size:8px;color:#444;letter-spacing:.15em;margin-bottom:10px;">CALGARY · TREATY 7 · ARTEFAKT.ORG</div>
+      <div style="font-family:var(--ff-mono);font-size:8px;color:var(--R);letter-spacing:.1em;line-height:2;">Guggenheim Fellow · Nat Geo Explorer · TED Senior Fellow · NOOR Images</div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 PILLARS -->
+<section class="s s--ink" id="pillars" style="padding-left:0;padding-right:0;padding-bottom:0;">
+  <div style="padding:0 calc(var(--unit)*3);"><div class="label">07 — the four pillars</div></div>
+  <div class="pillars" style="margin-top:calc(var(--unit)*2);">
+    <div class="pillar" style="background:var(--K);border-color:#222;color:var(--W);"><span class="pillar-n">01</span><div class="pillar-dot"></div><div class="pillar-verb">Witness</div><div class="pillar-body">Long-form documentary photography, archive building, and the photograph as evidence and argument.</div></div>
+    <div class="pillar" style="background:#111;border-color:#222;color:var(--W);"><span class="pillar-n">02</span><div class="pillar-dot"></div><div class="pillar-verb">Connect</div><div class="pillar-body">Community, platform, and cross-border storytelling between Calgary, Chicago, and beyond.</div></div>
+    <div class="pillar" style="background:#181614;border-color:#222;color:var(--W);"><span class="pillar-n">03</span><div class="pillar-dot"></div><div class="pillar-verb">Educate</div><div class="pillar-body">Academy, workshops, fellowships, and public programming rooted in Treaty 7 Territory and South Shore.</div></div>
+    <div class="pillar" style="background:var(--R);border-color:var(--R);color:var(--W);"><span class="pillar-n" style="opacity:.1">04</span><div class="pillar-dot" style="background:var(--W)"></div><div class="pillar-verb">Sustain</div><div class="pillar-body">E-cycling, materials resale, archive licensing, and the reclaimed object as cultural and financial infrastructure.</div></div>
+  </div>
+  <div style="padding:calc(var(--unit)*2) calc(var(--unit)*3);border-top:1px solid #222;display:flex;gap:calc(var(--unit)*2);align-items:flex-start;">
+    <div style="width:3px;height:40px;background:var(--R);flex-shrink:0;margin-top:3px;"></div>
+    <p style="font-family:var(--ff-body);font-style:italic;font-size:15px;line-height:1.7;color:#555;max-width:600px;">Sustain is fourth because it is the infrastructure the other three depend on. The recycling operation is not peripheral to the mission — it is how the mission remains possible. Innovation will be demonstrated through the work, not announced.</p>
+  </div>
+</section>
+
+<!-- 08 VOICE -->
+<section class="s" id="voice">
+  <div class="label">08 — voice & messaging</div>
+  <div style="display:grid;grid-template-columns:2px 1fr;gap:calc(var(--unit)*2);margin-bottom:calc(var(--unit)*3);">
+    <div style="background:var(--R);"></div>
+    <div>
+      <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.25em;text-transform:uppercase;margin-bottom:16px;">mission statement</div>
+      <div style="font-family:var(--ff-display);font-weight:900;font-style:italic;font-size:clamp(24px,4vw,52px);line-height:1.1;letter-spacing:-.02em;max-width:700px;">artefakt holds the record. we document what is at stake, what has been lost, and what endures.</div>
+    </div>
+  </div>
+  <div style="height:1px;background:var(--L);margin-bottom:calc(var(--unit)*3);"></div>
+  <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.25em;text-transform:uppercase;margin-bottom:calc(var(--unit)*1.5);">voice principles</div>
+  <div class="voice-grid">
+    <div class="voice-item"><div class="voice-kicker">direct</div><div class="voice-text">The financial argument and the ethical argument are the same argument. Make both.</div></div>
+    <div class="voice-item"><div class="voice-kicker">material first</div><div class="voice-text">Houses before housing. Objects before concepts. The specific before the general.</div></div>
+    <div class="voice-item"><div class="voice-kicker">no announcement</div><div class="voice-text">Innovation is demonstrated, not declared. The work is the proof.</div></div>
+    <div class="voice-item"><div class="voice-kicker">archive as infrastructure</div><div class="voice-text">Not nostalgia. Not heritage. An operating system for what comes next.</div></div>
+  </div>
+</section>
+
+<!-- 09 RULES -->
+<section class="s s--mid" id="rules">
+  <div class="label">09 — usage rules</div>
+  <div class="usage-grid">
+    <div>
+      <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.25em;text-transform:uppercase;margin-bottom:var(--unit);">do</div>
+      <div class="use-item"><div class="use-mark use-mark--y">+</div><div class="use-text">Always lowercase. "artefakt" not "Artefakt" not "ARTEFAKT".</div></div>
+      <div class="use-item"><div class="use-mark use-mark--y">+</div><div class="use-text">The red <em>f</em> appears in the wordmark on light and dark grounds.</div></div>
+      <div class="use-item"><div class="use-mark use-mark--y">+</div><div class="use-text">Use the contact sheet grid as a compositional device in layouts.</div></div>
+      <div class="use-item"><div class="use-mark use-mark--y">+</div><div class="use-text">The red horizontal bar is the primary structural divider.</div></div>
+      <div class="use-item"><div class="use-mark use-mark--y">+</div><div class="use-text">Asymmetric grids are correct. Centred layouts are not.</div></div>
+      <div class="use-item" style="border-bottom:none"><div class="use-mark use-mark--y">+</div><div class="use-text">Box shadow: 6px 6px 0 ink. Hard, not soft. No blur.</div></div>
+    </div>
+    <div>
+      <div style="font-family:var(--ff-mono);font-size:8px;color:var(--G);letter-spacing:.25em;text-transform:uppercase;margin-bottom:var(--unit);">don't</div>
+      <div class="use-item"><div class="use-mark use-mark--n">—</div><div class="use-text use-text--n">Don't capitalize the wordmark under any circumstances.</div></div>
+      <div class="use-item"><div class="use-mark use-mark--n">—</div><div class="use-text use-text--n">Don't add colours outside the five-colour palette.</div></div>
+      <div class="use-item"><div class="use-mark use-mark--n">—</div><div class="use-text use-text--n">Don't use drop shadows, gradients, or soft glows.</div></div>
+      <div class="use-item"><div class="use-mark use-mark--n">—</div><div class="use-text use-text--n">Don't place the wordmark on photographic texture without a field.</div></div>
+      <div class="use-item"><div class="use-mark use-mark--n">—</div><div class="use-text use-text--n">Don't stretch, rotate, or alter letterform proportions.</div></div>
+      <div class="use-item" style="border-bottom:none"><div class="use-mark use-mark--n">—</div><div class="use-text use-text--n">Don't announce innovation. Show it.</div></div>
+    </div>
+  </div>
+</section>
+
+<footer style="background:var(--K);padding:calc(var(--unit)*2) calc(var(--unit)*3);display:flex;justify-content:space-between;align-items:center;border-top:2px solid var(--R);">
+  <div style="display:flex;align-items:center;gap:14px;">
+    <svg width="24" height="24" viewBox="0 0 120 120" fill="none">
+      <rect x="1.5" y="1.5" width="117" height="117" stroke="#f5f2ec" stroke-width="4"/>
+      <rect x="8" y="8" width="5" height="5" fill="#c8522a"/>
+      <rect x="107" y="8" width="5" height="5" fill="#c8522a"/>
+      <rect x="8" y="107" width="5" height="5" fill="#c8522a"/>
+      <rect x="107" y="107" width="5" height="5" fill="#c8522a"/>
+      <text x="60" y="82" text-anchor="middle" font-family="'Playfair Display',serif" font-weight="900" font-size="62" fill="#f5f2ec">a</text>
+    </svg>
+    <span style="font-family:var(--ff-display);font-weight:900;font-size:18px;color:var(--W);text-transform:lowercase;letter-spacing:-.02em;">arte<span style="color:var(--R)">f</span>akt</span>
+  </div>
+  <div style="font-family:var(--ff-mono);font-size:8px;color:#444;letter-spacing:.15em;text-align:right;line-height:2;">BRAND IDENTITY SYSTEM — VERSION 2.0<br>CALGARY · ALBERTA · TREATY 7 TERRITORY</div>
+</footer>
+
+</div>
+</body>
+</html>

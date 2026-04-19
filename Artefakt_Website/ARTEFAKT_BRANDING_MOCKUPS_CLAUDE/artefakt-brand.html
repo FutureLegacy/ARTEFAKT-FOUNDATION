@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artefakt — Brand Identity System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=Barlow+Condensed:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink:        #0e0d0b;
+    --charcoal:   #1c1a17;
+    --graphite:   #2e2b26;
+    --warm-black: #181612;
+    --silver:     #8c8880;
+    --warm-grey:  #b5b0a8;
+    --fog:        #d6d1c8;
+    --cream:      #f0ebe0;
+    --parchment:  #f7f3eb;
+    --accent:     #c8522a;        /* darkroom amber-red */
+    --accent-dim: #8f3a1d;
+    --gold:       #b8963c;
+    --gold-dim:   #7a6228;
+
+    --ff-serif:   'Playfair Display', 'Georgia', serif;
+    --ff-roman:   'EB Garamond', 'Garamond', serif;
+    --ff-mono:    'IBM Plex Mono', monospace;
+    --ff-cond:    'Barlow Condensed', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: var(--ff-roman);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ─── SECTION SCAFFOLDING ─────────────────────────────── */
+  .section {
+    padding: 80px 60px;
+    border-bottom: 1px solid var(--fog);
+    position: relative;
+  }
+  .section--dark {
+    background: var(--warm-black);
+    color: var(--parchment);
+    border-bottom: 1px solid var(--graphite);
+  }
+  .section--mid {
+    background: var(--cream);
+  }
+  .section--charcoal {
+    background: var(--charcoal);
+    color: var(--parchment);
+  }
+
+  .section-label {
+    font-family: var(--ff-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--silver);
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--fog);
+  }
+  .section--dark .section-label,
+  .section--charcoal .section-label { color: var(--silver); }
+  .section--dark .section-label::after,
+  .section--charcoal .section-label::after { background: var(--graphite); }
+
+  /* ─── LOGO MARK ───────────────────────────────────────── */
+  .logo-primary {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .logo-wordmark {
+    font-family: var(--ff-serif);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+  .logo-wordmark .frak {
+    position: relative;
+  }
+  .logo-wordmark .cut {
+    color: var(--accent);
+  }
+
+  .logo-sub {
+    font-family: var(--ff-cond);
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--silver);
+    margin-top: 4px;
+    font-size: 0.38em;
+  }
+
+  /* SVG MARK */
+  .brand-mark svg { display: block; }
+
+  /* ─── LOGO LOCKUP GRID ────────────────────────────────── */
+  .lockup-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .lockup-cell {
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 220px;
+    position: relative;
+  }
+  .lockup-cell--light { background: var(--parchment); }
+  .lockup-cell--dark  { background: var(--warm-black); }
+  .lockup-cell--accent { background: var(--accent); }
+  .lockup-cell--cream { background: var(--cream); }
+  .lockup-cell--charcoal { background: var(--charcoal); }
+  .lockup-cell--photo {
+    background: #111 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="200" height="200" filter="url(%23n)" opacity="0.15"/></svg>') center/cover;
+  }
+
+  .lockup-label {
+    position: absolute;
+    bottom: 12px;
+    left: 16px;
+    font-family: var(--ff-mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+
+  /* ─── COLOR PALETTE ───────────────────────────────────── */
+  .palette-row {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+  .swatch {
+    flex: 1;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px 12px;
+    position: relative;
+  }
+  .swatch-name {
+    font-family: var(--ff-mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+  .swatch-hex {
+    font-family: var(--ff-mono);
+    font-size: 9px;
+    opacity: 0.6;
+    letter-spacing: 0.1em;
+  }
+  .swatch--dark .swatch-name,
+  .swatch--dark .swatch-hex { color: rgba(255,255,255,0.8); }
+  .swatch--light .swatch-name,
+  .swatch--light .swatch-hex { color: rgba(0,0,0,0.6); }
+
+  /* ─── TYPE SPECIMENS ──────────────────────────────────── */
+  .type-specimen {
+    margin-bottom: 56px;
+  }
+  .type-specimen:last-child { margin-bottom: 0; }
+
+  .specimen-meta {
+    font-family: var(--ff-mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--silver);
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--fog);
+  }
+
+  .t-display {
+    font-family: var(--ff-serif);
+    font-weight: 900;
+    font-size: clamp(48px, 8vw, 108px);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .t-display em { font-style: italic; color: var(--accent); }
+
+  .t-headline {
+    font-family: var(--ff-serif);
+    font-weight: 700;
+    font-size: clamp(28px, 4vw, 52px);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+  }
+
+  .t-subhead {
+    font-family: var(--ff-cond);
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--graphite);
+  }
+
+  .t-body {
+    font-family: var(--ff-roman);
+    font-size: 18px;
+    line-height: 1.7;
+    max-width: 620px;
+    color: var(--charcoal);
+  }
+  .t-body em { font-style: italic; }
+
+  .t-caption {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    line-height: 1.6;
+    color: var(--silver);
+  }
+
+  .t-pullquote {
+    font-family: var(--ff-serif);
+    font-style: italic;
+    font-size: clamp(22px, 3vw, 36px);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    border-left: 3px solid var(--accent);
+    padding-left: 28px;
+    color: var(--charcoal);
+    max-width: 700px;
+  }
+
+  /* ─── TAGLINE / MISSION TREATMENTS ───────────────────── */
+  .mission-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    margin-top: 24px;
+  }
+
+  /* ─── PRINT COLLATERAL ────────────────────────────────── */
+  .collateral-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  /* Business card */
+  .biz-card {
+    width: 100%;
+    aspect-ratio: 1.75;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+  }
+  .biz-card--front {
+    background: var(--warm-black);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .biz-card--back {
+    background: var(--accent);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  /* Letterhead */
+  .letterhead {
+    background: var(--parchment);
+    border: 1px solid var(--fog);
+    padding: 48px;
+    border-radius: 2px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  .letterhead::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--accent);
+  }
+  .letterhead-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--fog);
+    margin-bottom: 32px;
+  }
+  .letterhead-address {
+    font-family: var(--ff-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--silver);
+    line-height: 1.8;
+    text-align: right;
+  }
+  .letterhead-body {
+    font-family: var(--ff-roman);
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--charcoal);
+  }
+  .letterhead-body p { margin-bottom: 16px; }
+
+  /* ─── ICON / MARK SYSTEM ──────────────────────────────── */
+  .icon-grid {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+  .icon-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .icon-cell span {
+    font-family: var(--ff-mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+
+  /* ─── STAMP / EMBOSS ──────────────────────────────────── */
+  .stamp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    padding: 20px;
+    font-family: var(--ff-cond);
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-size: 11px;
+    position: relative;
+  }
+  .stamp::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    opacity: 0.4;
+  }
+
+  /* ─── PHOTO CAPTION TREATMENT ─────────────────────────── */
+  .photo-frame {
+    position: relative;
+    background: #111;
+    overflow: hidden;
+  }
+  .photo-frame::after {
+    content: attr(data-caption);
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 16px 20px 14px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    font-family: var(--ff-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ───────────────────────────── */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  /* ─── DIVIDER TREATMENTS ──────────────────────────────── */
+  .rule-ornamental {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0;
+    color: var(--fog);
+  }
+  .rule-ornamental::before,
+  .rule-ornamental::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--fog);
+  }
+  .rule-ornamental span {
+    font-family: var(--ff-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--warm-grey);
+  }
+
+  /* ─── ANIMATED INTRO ──────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .anim-1 { animation: fadeUp 0.7s ease both; animation-delay: 0.1s; }
+  .anim-2 { animation: fadeUp 0.7s ease both; animation-delay: 0.3s; }
+  .anim-3 { animation: fadeUp 0.7s ease both; animation-delay: 0.5s; }
+
+  /* ─── MISC ────────────────────────────────────────────── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .mt-lg { margin-top: 48px; }
+  .mt-md { margin-top: 32px; }
+  .mt-sm { margin-top: 16px; }
+
+  hr.thin { border: none; border-top: 1px solid var(--fog); margin: 40px 0; }
+
+  /* invert colors for dark section text */
+  .section--dark .t-display  { color: var(--parchment); }
+  .section--dark .t-headline { color: var(--parchment); }
+  .section--dark .t-subhead  { color: var(--warm-grey); }
+  .section--dark .t-body     { color: var(--warm-grey); }
+  .section--dark .t-pullquote { color: var(--cream); border-left-color: var(--accent); }
+  .section--dark .rule-ornamental::before,
+  .section--dark .rule-ornamental::after { background: var(--graphite); }
+  .section--dark .rule-ornamental span   { color: var(--silver); }
+  .section--dark hr.thin { border-top-color: var(--graphite); }
+  .section--charcoal .t-display  { color: var(--cream); }
+
+  /* scroll indicator */
+  .page-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--warm-black);
+    padding: 12px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--graphite);
+  }
+  .page-nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .page-nav-links a {
+    font-family: var(--ff-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .page-nav-links a:hover { color: var(--cream); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .section { padding: 60px 28px; }
+    .lockup-grid { grid-template-columns: 1fr 1fr; }
+    .two-col, .three-col, .collateral-grid, .mission-block { grid-template-columns: 1fr; }
+    .page-nav { padding: 12px 24px; }
+    .page-nav-links { gap: 16px; }
+  }
+  @media (max-width: 600px) {
+    .lockup-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ───────────────────────────────────────────────── -->
+<nav class="page-nav">
+  <div style="display:flex;align-items:center;gap:12px;">
+    <svg width="20" height="20" viewBox="0 0 40 40" fill="none">
+      <rect x="1" y="1" width="38" height="38" stroke="#c8522a" stroke-width="1.5"/>
+      <rect x="7" y="7" width="26" height="26" stroke="#c8522a" stroke-width="0.75" opacity="0.5"/>
+      <line x1="20" y1="1" x2="20" y2="39" stroke="#c8522a" stroke-width="0.75" opacity="0.4"/>
+      <line x1="1" y1="20" x2="39" y2="20" stroke="#c8522a" stroke-width="0.75" opacity="0.4"/>
+      <text x="20" y="25" text-anchor="middle" font-family="'Playfair Display', serif" font-weight="700" font-size="14" fill="#f0ebe0">A</text>
+    </svg>
+    <span style="font-family:var(--ff-mono);font-size:10px;letter-spacing:0.25em;color:var(--silver);text-transform:uppercase;">Brand Identity System</span>
+  </div>
+  <ul class="page-nav-links">
+    <li><a href="#logo">Logo</a></li>
+    <li><a href="#palette">Colour</a></li>
+    <li><a href="#type">Typography</a></li>
+    <li><a href="#collateral">Collateral</a></li>
+    <li><a href="#voice">Voice</a></li>
+  </ul>
+</nav>
+
+<!-- ══ 01 · HERO / IDENTITY STATEMENT ══════════════════════ -->
+<section class="section section--dark grain" style="padding-top:120px;padding-bottom:120px;position:relative;overflow:hidden;">
+  <!-- Background grain texture -->
+  <div style="position:absolute;inset:0;opacity:0.03;background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%224%22 stitchTiles=%22stitch%22/></filter><rect width=%22300%22 height=%22300%22 filter=%22url(%23n)%22/></svg>');pointer-events:none;"></div>
+
+  <div class="anim-1">
+    <div class="section-label">01 — Identity</div>
+  </div>
+
+  <div class="anim-2" style="margin-bottom:48px;">
+    <!-- PRIMARY WORDMARK -->
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="font-family:var(--ff-serif);font-weight:900;font-size:clamp(64px,12vw,160px);line-height:0.88;letter-spacing:-0.03em;color:var(--parchment);">
+        arte<span style="color:var(--accent);">f</span>akt
+      </div>
+      <div style="font-family:var(--ff-cond);font-weight:300;letter-spacing:0.55em;text-transform:uppercase;color:var(--silver);font-size:clamp(11px,1.5vw,16px);padding-left:6px;">
+        Witness. Connect. Sustain.
+      </div>
+    </div>
+  </div>
+
+  <div class="anim-3" style="max-width:580px;">
+    <p style="font-family:var(--ff-roman);font-style:italic;font-size:clamp(16px,2.2vw,22px);line-height:1.6;color:var(--warm-grey);border-left:3px solid var(--accent);padding-left:24px;">
+      A placeless institution built on the weight of things that outlast their owners — the photograph, the demolished house, the discarded machine.
+    </p>
+  </div>
+
+  <!-- Decorative rule -->
+  <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent) 0%,transparent 100%);"></div>
+</section>
+
+
+<!-- ══ 02 · PRIMARY LOGO SYSTEM ════════════════════════════ id="logo" -->
+<section class="section section--mid" id="logo">
+  <div class="section-label">02 — Logo System</div>
+
+  <!-- WORDMARK ANATOMY -->
+  <div class="mt-md" style="margin-bottom:64px;">
+    <div class="specimen-meta">Primary Wordmark — All Weights</div>
+
+    <div style="display:flex;flex-direction:column;gap:40px;">
+      <!-- Full weight -->
+      <div style="display:flex;align-items:baseline;gap:24px;flex-wrap:wrap;">
+        <div style="font-family:var(--ff-serif);font-weight:900;font-size:72px;line-height:1;letter-spacing:-0.03em;color:var(--ink);">
+          arte<span style="color:var(--accent);">f</span>akt
+        </div>
+        <span style="font-family:var(--ff-mono);font-size:10px;color:var(--silver);letter-spacing:0.15em;">Black / Primary</span>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:24px;flex-wrap:wrap;">
+        <div style="font-family:var(--ff-serif);font-weight:700;font-size:72px;line-height:1;letter-spacing:-0.03em;color:var(--ink);">
+          arte<span style="color:var(--accent);">f</span>akt
+        </div>
+        <span style="font-family:var(--ff-mono);font-size:10px;color:var(--silver);letter-spacing:0.15em;">Bold / Secondary</span>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:24px;flex-wrap:wrap;">
+        <div style="font-family:var(--ff-serif);font-weight:900;font-style:italic;font-size:72px;line-height:1;letter-spacing:-0.03em;color:var(--ink);">
+          arte<span style="color:var(--accent);">f</span>akt
+        </div>
+        <span style="font-family:var(--ff-mono);font-size:10px;color:var(--silver);letter-spacing:0.15em;">Black Italic / Editorial</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="thin">
+
+  <!-- LOCKUP GRID -->
+  <div class="specimen-meta mt-md">Logo on Backgrounds</div>
+  <div class="lockup-grid mt-sm">
+
+    <!-- Light -->
+    <div class="lockup-cell lockup-cell--light">
+      <div style="font-family:var(--ff-serif);font-weight:900;font-size:42px;letter-spacing:-0.025em;line-height:1;color:var(--ink);">arte<span style="color:var(--accent);">f</span>akt</div>
+      <div style="font-family:var(--ff-cond);font-weight:300;letter-spacing:0.45em;text-transform:uppercase;color:var(--silver);font-size:10px;margin-top:8px;">Witness. Connect. Sustain.</div>
+      <span class="lockup-label" style="color:var(--warm-grey);">Parchment</span>
+    </div>
+
+    <!-- Dark -->
+    <div class="lockup-cell lockup-cell--dark">
+      <div style="font-family:var(--ff-serif);font-weight:900;font-size:42px;letter-spacing:-0.025em;line-height:1;color:var(--parchment);">arte<span style="color:var(--accent);">f</span>akt</div>
+      <div style="font-family:var(--ff-cond);font-weight:300;letter-spacing:0.45em;text-transform:uppercase;color:var(--silver);font-size:10px;margin-top:8px;">Witness. Connect. Sustain.</div>
+      <span class="lockup-label" style="color:var(--silver);">Warm Black</span>
+    </div>
+
+    <!-- Accent -->
+    <div class="lockup-cell lockup-cell--accent">
+      <div style="font-family:var(--ff-serif);font-weight:900;font-size:42px;letter-spacing:-0.025em;line-height:1;color:var(--parchment);">arte<span style="color:var(--warm-black);">f</span>akt</div>
+      <div style="font-family:var(--ff-cond);font-weight:300;letter-spacing:0.45em;text-transform:uppercase;color:rgba(247,243,235,0.7);font-size:10px;margin-top:8px;">Witness. Connect. Sustain.</div>
+      <span class="lockup-label" style="color:rgba(247,243,235,0.6);">Accent / Event use</span>
+    </div>
+
+    <!-- Monochrome dark -->
+    <div class="lockup-cell lockup-cell--charcoal">
+      <div style="font-family:var(--ff-serif);font-weight:900;font-size:42px;letter-spacing:-0.025em;line-height:1;color:var(--parchment);">artefakt</div>
+      <div style="font-family:var(--ff-cond);font-weight:300;letter-spacing:0.45em;text-transform:uppercase;color:var(--silver);font-size:10px;margin-top:8px;">Witness. Connect. Sustain.</div>
+      <span class="lockup-label" style="color:var(--silver);">Monochrome variant</span>
+    </div>
+
+    <!-- Stacked / compact -->
+    <div class="lockup-cell lockup-cell--cream">
+      <div style="text-align:left;">
+        <div style="font-family:var(--ff-cond);font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(--silver);font-size:10px;">Calgary · Chicago</div>
+        <div style="font-family:var(--ff-serif);font-weight:900;font-size:48px;letter-spacing:-0.025em;line-height:0.95;color:var(--ink);margin:6px 0;">arte<span style="color:var(--accent);">f</span>akt</div>
+        <div style="font-family:var(--ff-roman);font-style:italic;font-size:13px;color:var(--silver);">Witness. Connect. Sustain.</div>
+      </div>
+      <span class="lockup-label" style="color:var(--warm-grey);">With tagline</span>
+    </div>
+
+    <!-- Reversed monochrome -->
+    <div class="lockup-cell lockup-cell--dark" style="background:#0e0d0b;">
+      <div style="font-family:var(--ff-serif);font-weight:900;font-style:italic;font-size:42px;letter-spacing:-0.025em;line-height:1;color:var(--gold);">arte<span style="color:var(--parchment);">f</span>akt</div>
+      <div style="font-family:var(--ff-cond);font-weight:300;letter-spacing:0.45em;text-transform:uppercase;color:var(--gold-dim);font-size:10px;margin-top:8px;">Witness. Connect. Sustain.</div>
+      <span class="lockup-label" style="color:var(--silver);">Gold / Prestige</span>
+    </div>
+
+  </div>
+
+  <!-- ICON / BRANDMARK -->
+  <hr class="thin" style="margin-top:64px;">
+  <div class="specimen-meta mt-md">Icon Mark — Scale System</div>
+  <div class="icon-grid mt-sm">
+
+    <!-- Mark XL -->
+    <div class="icon-cell">
+      <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="92" height="92" stroke="#0e0d0b" stroke-width="2.5"/>
+        <rect x="10" y="10" width="76" height="76" stroke="#0e0d0b" stroke-width="0.75" opacity="0.25"/>
+        <line x1="2" y1="48" x2="94" y2="48" stroke="#0e0d0b" stroke-width="0.75" opacity="0.2"/>
+        <line x1="48" y1="2" x2="48" y2="94" stroke="#0e0d0b" stroke-width="0.75" opacity="0.2"/>
+        <text x="48" y="62" text-anchor="middle" font-family="'Playfair Display', serif" font-weight="900" font-size="38" fill="#0e0d0b">A</text>
+        <text x="56" y="62" font-family="'Playfair Display', serif" font-weight="900" font-size="38" fill="#c8522a">.</text>
+      </svg>
+      <span>96px</span>
+    </div>
+
+    <div class="icon-cell">
+      <svg width="64" height="64" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="92" height="92" stroke="#0e0d0b" stroke-width="2.5"/>
+        <rect x="10" y="10" width="76" height="76" stroke="#0e0d0b" stroke-width="0.75" opacity="0.25"/>
+        <line x1="2" y1="48" x2="94" y2="48" stroke="#0e0d0b" stroke-width="0.75" opacity="0.2"/>
+        <line x1="48" y1="2" x2="48" y2="94" stroke="#0e0d0b" stroke-width="0.75" opacity="0.2"/>
+        <text x="48" y="62" text-anchor="middle" font-family="'Playfair Display', serif" font-weight="900" font-size="38" fill="#0e0d0b">A</text>
+        <text x="56" y="62" font-family="'Playfair Display', serif" font-weight="900" font-size="38" fill="#c8522a">.</text>
+      </svg>
+      <span>64px</span>
+    </div>
+
+    <div class="icon-cell">
+      <svg width="48" height="48" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="92" height="92" stroke="#0e0d0b" stroke-width="2.5"/>
+        <rect x="10" y="10" width="76" height="76" stroke="#0e0d0b" stroke-width="0.75" opacity="0.25"/>
+        <text x="48" y="62" text-anchor="middle" font-family="'Playfair Display', serif" font-weight="900" font-size="38" fill="#0e0d0b">A</text>
+        <text x="56" y="62" font-family="'Playfair Display', serif" font-weight="900" font-size="38" fill="#c8522a">.</text>
+      </svg>
+      <span>48px</span>
+    </div>
+
+    <div class="icon-cell">
+      <svg width="32" height="32" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="92" height="92" stroke="#0e0d0b" stroke-width="3"/>
+        <text x="48" y="64" text-anchor="middle" font-family="'Playfair Display', serif" font-weight="900" font-size="42" fill="#0e0d0b">A</text>
+      </svg>
+      <span>32px</span>
+    </div>
+
+    <div class="icon-cell">
+      <svg width="20" height="20" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="92" height="92" stroke="#0e0d0b" stroke-width="4"/>
+        <text x="48" y="66" text-anchor="middle" font-family="'Playfair Display', serif" font-weight="900" font-size="46" fill="#0e0d0b">A</text>
+      </svg>
+      <span>20px</span>
+    </div>
+
+    <!-- Dark variant -->
+    <div class="icon-cell" style="background:var(--warm-black);padding:16px;border-radius:2px;">
+      <svg width="64" height="64" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="92" height="92" stroke="#f0ebe0" stroke-width="2.5"/>
+        <rect x="10" y="10" width="76" height="76" stroke="#f0ebe0" stroke-width="0.75" opacity="0.2"/>
+        <line x1="2" y1="48" x2="94" y2="48" stroke="#f0ebe0" stroke-width="0.75" opacity="0.15"/>
+        <line x1="48" y1="2" x2="48" y2="94" stroke="#f0ebe0" stroke-width="0.75" opacity="0.15"/>
+        <text x="48" y="62" text-anchor="middle" font-family="'Playfair Display', serif" font-weight="900" font-size="38" fill="#f0ebe0">A</text>
+        <text x="56" y="62" font-family="'Playfair Display', serif" font-weight="900" font-size="38" fill="#c8522a">.</text>
+      </svg>
+      <span style="color:var(--silver);">Dark</span>
+    </div>
+
+    <!-- Accent variant -->
+    <div class="icon-cell" style="background:var(--accent);padding:16px;border-radius:2px;">
+      <svg width="64" height="64" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="92" height="92" stroke="#f0ebe0" stroke-width="2.5"/>
+        <rect x="10" y="10" width="76" height="76" stroke="#f0ebe0" stroke-width="0.75" opacity="0.3"/>
+        <text x="48" y="62" text-anchor="middle" font-family="'Playfair Display', serif" font-weight="900" font-size="38" fill="#f0ebe0">A</text>
+        <text x="56" y="62" font-family="'Playfair Display', serif" font-weight="900" font-size="38" fill="#0e0d0b">.</text>
+      </svg>
+      <span style="color:var(--accent-dim);">Accent</span>
+    </div>
+
+    <!-- Stamp -->
+    <div class="icon-cell">
+      <div class="stamp" style="width:96px;height:96px;color:var(--ink);flex-direction:column;gap:2px;font-size:8px;">
+        <span style="font-family:var(--ff-serif);font-weight:900;font-size:22px;letter-spacing:-0.02em;">A</span>
+        <span>artefakt</span>
+      </div>
+      <span>Seal</span>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ══ 03 · COLOUR PALETTE ═════════════════════════════════ id="palette" -->
+<section class="section" id="palette">
+  <div class="section-label">03 — Colour Palette</div>
+
+  <div class="palette-row">
+    <div class="swatch swatch--dark" style="background:#0e0d0b;flex:2;">
+      <div class="swatch-name">Ink</div>
+      <div class="swatch-hex">#0E0D0B — Primary Text, Logo</div>
+    </div>
+    <div class="swatch swatch--dark" style="background:#1c1a17;">
+      <div class="swatch-name">Charcoal</div>
+      <div class="swatch-hex">#1C1A17</div>
+    </div>
+    <div class="swatch swatch--dark" style="background:#2e2b26;">
+      <div class="swatch-name">Graphite</div>
+      <div class="swatch-hex">#2E2B26</div>
+    </div>
+  </div>
+
+  <div class="palette-row">
+    <div class="swatch swatch--dark" style="background:#c8522a;flex:1.5;">
+      <div class="swatch-name">Darkroom Red</div>
+      <div class="swatch-hex">#C8522A — Primary Accent</div>
+    </div>
+    <div class="swatch swatch--dark" style="background:#8f3a1d;">
+      <div class="swatch-name">Ember</div>
+      <div class="swatch-hex">#8F3A1D — Accent Dim</div>
+    </div>
+    <div class="swatch swatch--dark" style="background:#b8963c;">
+      <div class="swatch-name">Archive Gold</div>
+      <div class="swatch-hex">#B8963C — Prestige</div>
+    </div>
+    <div class="swatch swatch--dark" style="background:#7a6228;">
+      <div class="swatch-name">Amber</div>
+      <div class="swatch-hex">#7A6228</div>
+    </div>
+  </div>
+
+  <div class="palette-row">
+    <div class="swatch swatch--light" style="background:#f7f3eb;flex:1.5;">
+      <div class="swatch-name">Parchment</div>
+      <div class="swatch-hex">#F7F3EB — Page Ground</div>
+    </div>
+    <div class="swatch swatch--light" style="background:#f0ebe0;">
+      <div class="swatch-name">Cream</div>
+      <div class="swatch-hex">#F0EBE0 — Alt Background</div>
+    </div>
+    <div class="swatch swatch--light" style="background:#d6d1c8;">
+      <div class="swatch-name">Fog</div>
+      <div class="swatch-hex">#D6D1C8 — Borders</div>
+    </div>
+    <div class="swatch swatch--light" style="background:#b5b0a8;">
+      <div class="swatch-name">Warm Grey</div>
+      <div class="swatch-hex">#B5B0A8 — Secondary Text</div>
+    </div>
+    <div class="swatch swatch--light" style="background:#8c8880;">
+      <div class="swatch-name">Silver</div>
+      <div class="swatch-hex">#8C8880 — Captions, Mono</div>
+    </div>
+  </div>
+
+  <div class="mt-lg">
+    <div class="specimen-meta">Usage Principles</div>
+    <div class="two-col mt-sm">
+      <div>
+        <p class="t-body" style="font-size:15px;">
+          <strong>Ink on Parchment</strong> is the default print and screen pairing. It evokes photographic process and archival material — warm, not clinical. The near-black is warmer than pure black, reducing harshness on screen.
+        </p>
+      </div>
+      <div>
+        <p class="t-body" style="font-size:15px;">
+          <strong>Darkroom Red</strong> is used sparingly: the <em>f</em> in the wordmark, accent rules, key dates, and calls to action. It refers to the safelight — the one colour that does not expose film.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 04 · TYPOGRAPHY ═════════════════════════════════════ id="type" -->
+<section class="section section--mid" id="type">
+  <div class="section-label">04 — Typography</div>
+
+  <!-- Display -->
+  <div class="type-specimen">
+    <div class="specimen-meta">Display — Playfair Display Black · 900 · Primary Headlines</div>
+    <div class="t-display">
+      <em>If You Lived Here</em><br>You'd Be Home By Now
+    </div>
+    <div class="t-caption mt-sm">Playfair Display / 900 / -0.02em tracking / 0.88 line-height</div>
+  </div>
+
+  <!-- Headline -->
+  <div class="type-specimen">
+    <div class="specimen-meta">Headline — Playfair Display Bold · 700</div>
+    <div class="t-headline">Documentary Photography<br>as a Form of Accountability</div>
+    <div class="t-caption mt-sm">Playfair Display / 700 / -0.015em tracking / 1.1 line-height</div>
+  </div>
+
+  <!-- Subhead -->
+  <div class="type-specimen">
+    <div class="specimen-meta">Subhead — Barlow Condensed SemiBold · All Caps</div>
+    <div class="t-subhead">Calgary — Chicago — Treaty 7 Territory</div>
+    <div class="t-caption mt-sm">Barlow Condensed / 600 / 0.12em tracking / uppercase</div>
+  </div>
+
+  <!-- Body -->
+  <div class="type-specimen">
+    <div class="specimen-meta">Body — EB Garamond Regular · Long-form Text</div>
+    <div class="t-body">
+      Artefakt is a documentary photography, film, and visual storytelling organization operating across Canada and the United States. It is a placeless institution — rooted in specific places precisely because it refuses to be contained by them. <em>The work is the record. The archive is the argument.</em>
+    </div>
+    <div class="t-caption mt-sm">EB Garamond / 400 / 18px / 1.7 line-height</div>
+  </div>
+
+  <!-- Pullquote -->
+  <div class="type-specimen">
+    <div class="specimen-meta">Pullquote — EB Garamond Italic · Editorial Emphasis</div>
+    <div class="t-pullquote">
+      "We work with materials that have outlasted their intended lives — the discarded image, the demolished house, the obsolete machine — and ask what they still know."
+    </div>
+    <div class="t-caption mt-sm">EB Garamond / 400 Italic / 36px / 1.35 line-height / accent border</div>
+  </div>
+
+  <!-- Caption / Mono -->
+  <div class="type-specimen">
+    <div class="specimen-meta">Caption & Code — IBM Plex Mono</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+      <div>
+        <div class="t-caption" style="font-size:12px;line-height:1.8;">
+          © 2024 Artefakt / NOOR Images<br>
+          Calgary, Alberta · Treaty 7 Territory<br>
+          4525 Monterey Ave NE<br>
+          artefakt.org · artefaktmedia.ca
+        </div>
+      </div>
+      <div>
+        <div class="t-caption" style="font-size:12px;line-height:1.8;color:var(--accent);">
+          Guggenheim Fellow<br>
+          National Geographic Explorer<br>
+          TED Senior Fellow<br>
+          NOOR Images — Founding Member
+        </div>
+      </div>
+    </div>
+    <div class="t-caption mt-sm" style="margin-top:16px;">IBM Plex Mono / 300–500 / 10–12px / 0.1–0.25em tracking</div>
+  </div>
+
+  <!-- Type scale -->
+  <hr class="thin">
+  <div class="specimen-meta mt-md">Type Scale Reference</div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px;">
+    <div style="display:flex;align-items:baseline;gap:24px;border-bottom:1px solid var(--fog);padding-bottom:10px;">
+      <span style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);width:80px;flex-shrink:0;">Display</span>
+      <span style="font-family:var(--ff-serif);font-weight:900;font-size:52px;line-height:1;letter-spacing:-0.02em;">Aa</span>
+      <span style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);">Playfair Display Black · 52–160px</span>
+    </div>
+    <div style="display:flex;align-items:baseline;gap:24px;border-bottom:1px solid var(--fog);padding-bottom:10px;">
+      <span style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);width:80px;flex-shrink:0;">Headline</span>
+      <span style="font-family:var(--ff-serif);font-weight:700;font-size:36px;line-height:1;">Aa</span>
+      <span style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);">Playfair Display Bold · 28–52px</span>
+    </div>
+    <div style="display:flex;align-items:baseline;gap:24px;border-bottom:1px solid var(--fog);padding-bottom:10px;">
+      <span style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);width:80px;flex-shrink:0;">Subhead</span>
+      <span style="font-family:var(--ff-cond);font-weight:600;font-size:20px;letter-spacing:0.1em;text-transform:uppercase;">Aa</span>
+      <span style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);">Barlow Condensed 600 · 14–24px · Uppercase</span>
+    </div>
+    <div style="display:flex;align-items:baseline;gap:24px;border-bottom:1px solid var(--fog);padding-bottom:10px;">
+      <span style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);width:80px;flex-shrink:0;">Body</span>
+      <span style="font-family:var(--ff-roman);font-size:20px;">Aa</span>
+      <span style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);">EB Garamond Regular · 16–20px · 1.6–1.8 lh</span>
+    </div>
+    <div style="display:flex;align-items:baseline;gap:24px;">
+      <span style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);width:80px;flex-shrink:0;">Caption</span>
+      <span style="font-family:var(--ff-mono);font-size:13px;letter-spacing:0.1em;">Aa</span>
+      <span style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);">IBM Plex Mono · 9–12px · 0.1–0.25em spacing</span>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ══ 05 · COLLATERAL ══════════════════════════════════════ id="collateral" -->
+<section class="section section--dark" id="collateral">
+  <div class="section-label">05 — Print Collateral</div>
+
+  <div class="collateral-grid mt-md">
+
+    <!-- Business Card Front -->
+    <div>
+      <div class="specimen-meta" style="color:var(--silver);">Business Card — Front</div>
+      <div class="biz-card biz-card--front mt-sm" style="position:relative;overflow:hidden;">
+        <!-- subtle horizontal scan lines -->
+        <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,0.015) 3px,rgba(255,255,255,0.015) 4px);pointer-events:none;"></div>
+        <!-- top bar -->
+        <div style="width:40px;height:2px;background:var(--accent);"></div>
+        <!-- wordmark -->
+        <div style="font-family:var(--ff-serif);font-weight:900;font-size:32px;letter-spacing:-0.025em;line-height:1;color:var(--parchment);margin-top:auto;">
+          arte<span style="color:var(--accent);">f</span>akt
+        </div>
+        <div style="font-family:var(--ff-cond);font-weight:300;letter-spacing:0.4em;text-transform:uppercase;color:var(--silver);font-size:8px;margin-top:6px;">Witness. Connect. Sustain.</div>
+      </div>
+    </div>
+
+    <!-- Business Card Back -->
+    <div>
+      <div class="specimen-meta" style="color:var(--silver);">Business Card — Back</div>
+      <div class="biz-card biz-card--front mt-sm" style="background:var(--graphite);">
+        <div style="font-family:var(--ff-mono);font-size:9px;color:var(--accent);letter-spacing:0.2em;text-transform:uppercase;">Jonathan Lowenstein</div>
+        <div style="font-family:var(--ff-roman);font-style:italic;font-size:14px;color:var(--warm-grey);margin-top:4px;">Documentary Photographer & Filmmaker</div>
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:4px;">
+          <div style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);letter-spacing:0.1em;">artefakt.org</div>
+          <div style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);letter-spacing:0.1em;">gristleandbone @ Vimeo</div>
+          <div style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);letter-spacing:0.1em;">Calgary · Chicago</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Letterhead -->
+    <div style="grid-column:1/-1;">
+      <div class="specimen-meta" style="color:var(--silver);">Letterhead — Partial View</div>
+      <div class="letterhead mt-sm">
+        <div class="letterhead-header">
+          <div>
+            <div style="font-family:var(--ff-serif);font-weight:900;font-size:28px;letter-spacing:-0.025em;line-height:1;color:var(--ink);">arte<span style="color:var(--accent);">f</span>akt</div>
+            <div style="font-family:var(--ff-cond);font-weight:300;letter-spacing:0.4em;text-transform:uppercase;color:var(--silver);font-size:9px;margin-top:5px;">Witness. Connect. Sustain.</div>
+          </div>
+          <div class="letterhead-address">
+            4525 Monterey Ave NE<br>
+            Calgary, Alberta — Treaty 7 Territory<br>
+            artefakt.org · artefaktmedia.ca<br>
+            Guggenheim Fellow · NOOR Images
+          </div>
+        </div>
+        <div class="letterhead-body">
+          <p>Dear [Recipient],</p>
+          <p>Artefakt is a documentary photography, film, and visual storytelling organization operating across Canada and the United States. Founded on the premise that the archive is a form of argument, we use the photograph, the film, and the collected object as instruments of accountability.</p>
+          <p>Our work begins in the material world — in discarded electronics, demolished houses, and the lives recorded in both — and asks what endures when a neighbourhood changes, a community disperses, or a city's memory is erased...</p>
+        </div>
+        <!-- bottom rule -->
+        <div style="margin-top:40px;padding-top:16px;border-top:1px solid var(--fog);display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);letter-spacing:0.1em;">Witness. Connect. Sustain.</div>
+          <div style="width:32px;height:1px;background:var(--accent);"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- STAMP & SEAL TREATMENTS -->
+  <div class="rule-ornamental mt-lg"><span>Marks & Seals</span></div>
+  <div style="display:flex;gap:40px;flex-wrap:wrap;align-items:center;margin-top:24px;">
+
+    <div class="stamp" style="color:var(--parchment);width:110px;height:110px;font-size:8.5px;flex-direction:column;gap:3px;">
+      <span style="font-family:var(--ff-serif);font-weight:900;font-size:26px;letter-spacing:-0.02em;color:var(--accent);">A</span>
+      <span style="font-family:var(--ff-cond);font-weight:700;letter-spacing:0.25em;">artefakt</span>
+      <span style="font-family:var(--ff-mono);font-size:7px;opacity:0.5;">EST. 2024</span>
+    </div>
+
+    <div class="stamp" style="color:var(--parchment);width:110px;height:110px;font-size:7px;flex-direction:column;gap:2px;border-radius:0;">
+      <span style="font-family:var(--ff-serif);font-weight:900;font-size:20px;letter-spacing:-0.02em;">arte<span style="color:var(--accent);">f</span>akt</span>
+      <span style="font-family:var(--ff-cond);font-weight:300;letter-spacing:0.3em;text-transform:uppercase;">Archive</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="font-family:var(--ff-cond);font-weight:900;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:var(--silver);border:1px solid var(--graphite);padding:8px 16px;">artefakt.org</div>
+      <div style="font-family:var(--ff-cond);font-weight:900;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:var(--silver);border:1px solid var(--accent);padding:8px 16px;color:var(--accent);">Witness. Connect. Sustain.</div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ══ 06 · VOICE & MESSAGING ══════════════════════════════ id="voice" -->
+<section class="section section--mid" id="voice">
+  <div class="section-label">06 — Voice & Messaging</div>
+
+  <div class="mission-block">
+    <div>
+      <div class="specimen-meta">Mission Statement</div>
+      <div class="t-pullquote mt-sm">
+        Artefakt holds the record. We document what is at stake, what has been lost, and what endures — in houses, in communities, in objects, and in photographs.
+      </div>
+    </div>
+    <div>
+      <div class="specimen-meta">Tagline Variants</div>
+      <div style="display:flex;flex-direction:column;gap:16px;margin-top:16px;">
+        <div style="border-left:2px solid var(--fog);padding:12px 20px;">
+          <div style="font-family:var(--ff-roman);font-style:italic;font-size:18px;color:var(--ink);">Witness. Connect. Sustain.</div>
+          <div style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);margin-top:4px;letter-spacing:0.1em;">Primary / Retained — Organisational Mission Line</div>
+        </div>
+        <div style="border-left:2px solid var(--fog);padding:12px 20px;">
+          <div style="font-family:var(--ff-roman);font-style:italic;font-size:18px;color:var(--ink);">The archive is the argument.</div>
+          <div style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);margin-top:4px;letter-spacing:0.1em;">Editorial / Short Form</div>
+        </div>
+        <div style="border-left:2px solid var(--fog);padding:12px 20px;">
+          <div style="font-family:var(--ff-roman);font-style:italic;font-size:18px;color:var(--ink);">Documentary photography as accountability.</div>
+          <div style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);margin-top:4px;letter-spacing:0.1em;">Grant / Institutional</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="thin" style="margin-top:56px;">
+
+  <!-- Four Pillars -->
+  <div class="specimen-meta mt-md">The Four Pillars</div>
+  <div class="three-col mt-sm" style="grid-template-columns:repeat(4,1fr);gap:2px;">
+    <div style="background:var(--ink);color:var(--parchment);padding:32px 24px;">
+      <div style="font-family:var(--ff-mono);font-size:9px;color:var(--accent);letter-spacing:0.2em;margin-bottom:16px;">01</div>
+      <div style="font-family:var(--ff-serif);font-weight:700;font-size:20px;line-height:1.1;margin-bottom:12px;">Documentary Photography</div>
+      <div style="font-family:var(--ff-roman);font-size:13px;line-height:1.6;color:var(--warm-grey);">Long-form visual journalism, archive building, and the photograph as evidence.</div>
+    </div>
+    <div style="background:var(--graphite);color:var(--parchment);padding:32px 24px;">
+      <div style="font-family:var(--ff-mono);font-size:9px;color:var(--accent);letter-spacing:0.2em;margin-bottom:16px;">02</div>
+      <div style="font-family:var(--ff-serif);font-weight:700;font-size:20px;line-height:1.1;margin-bottom:12px;">Film & Moving Image</div>
+      <div style="font-family:var(--ff-roman);font-size:13px;line-height:1.6;color:var(--warm-grey);">Documentary film production, artist residency programming, and cross-border storytelling.</div>
+    </div>
+    <div style="background:var(--charcoal);color:var(--parchment);padding:32px 24px;">
+      <div style="font-family:var(--ff-mono);font-size:9px;color:var(--accent);letter-spacing:0.2em;margin-bottom:16px;">03</div>
+      <div style="font-family:var(--ff-serif);font-weight:700;font-size:20px;line-height:1.1;margin-bottom:12px;">Archive & Materials</div>
+      <div style="font-family:var(--ff-roman);font-size:13px;line-height:1.6;color:var(--warm-grey);">E-cycling, archive licensing, and the reclaimed object as cultural infrastructure.</div>
+    </div>
+    <div style="background:var(--accent);color:var(--parchment);padding:32px 24px;">
+      <div style="font-family:var(--ff-mono);font-size:9px;color:rgba(255,255,255,0.6);letter-spacing:0.2em;margin-bottom:16px;">04</div>
+      <div style="font-family:var(--ff-serif);font-weight:700;font-size:20px;line-height:1.1;margin-bottom:12px;">Academy & Community</div>
+      <div style="font-family:var(--ff-roman);font-size:13px;line-height:1.6;color:rgba(255,255,255,0.75);">Workshops, fellowships, and public programming rooted in Treaty 7 Territory and South Shore.</div>
+    </div>
+  </div>
+
+  <!-- Voice principles -->
+  <hr class="thin" style="margin-top:56px;">
+  <div class="specimen-meta mt-md">Voice Principles</div>
+  <div class="two-col mt-sm">
+    <div>
+      <div style="font-family:var(--ff-cond);font-weight:600;font-size:14px;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink);margin-bottom:12px;">We write like this</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="font-family:var(--ff-roman);font-size:15px;line-height:1.6;color:var(--charcoal);border-left:2px solid var(--accent);padding-left:16px;">Direct. Principled. The financial argument and the ethical argument are the same argument.</div>
+        <div style="font-family:var(--ff-roman);font-size:15px;line-height:1.6;color:var(--charcoal);border-left:2px solid var(--accent);padding-left:16px;">Material before abstract. Houses before housing. Objects before concepts.</div>
+        <div style="font-family:var(--ff-roman);font-size:15px;line-height:1.6;color:var(--charcoal);border-left:2px solid var(--accent);padding-left:16px;">The archive is infrastructure, not nostalgia.</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:var(--ff-cond);font-weight:600;font-size:14px;letter-spacing:0.15em;text-transform:uppercase;color:var(--silver);margin-bottom:12px;">We don't write like this</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="font-family:var(--ff-roman);font-size:15px;line-height:1.6;color:var(--warm-grey);border-left:2px solid var(--fog);padding-left:16px;text-decoration:line-through;text-decoration-color:var(--fog);">Leveraging impactful storytelling to empower communities.</div>
+        <div style="font-family:var(--ff-roman);font-size:15px;line-height:1.6;color:var(--warm-grey);border-left:2px solid var(--fog);padding-left:16px;text-decoration:line-through;text-decoration-color:var(--fog);">We are proud to announce our exciting new initiative.</div>
+        <div style="font-family:var(--ff-roman);font-size:15px;line-height:1.6;color:var(--warm-grey);border-left:2px solid var(--fog);padding-left:16px;text-decoration:line-through;text-decoration-color:var(--fog);">Celebrating diversity through the power of visual arts.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 07 · DIGITAL APPLICATIONS ═══════════════════════════ -->
+<section class="section section--charcoal">
+  <div class="section-label">07 — Digital Applications</div>
+
+  <!-- Email signature -->
+  <div class="specimen-meta" style="color:var(--silver);">Email Signature</div>
+  <div style="background:var(--warm-black);border:1px solid var(--graphite);padding:32px;margin-top:16px;max-width:560px;">
+    <div style="font-family:var(--ff-serif);font-weight:700;font-size:18px;letter-spacing:-0.01em;color:var(--parchment);">Jonathan Lowenstein</div>
+    <div style="font-family:var(--ff-roman);font-style:italic;font-size:13px;color:var(--warm-grey);margin-top:2px;">Documentary Photographer & Filmmaker</div>
+    <div style="height:1px;background:var(--graphite);margin:16px 0;"></div>
+    <div style="font-family:var(--ff-serif);font-weight:700;font-size:16px;letter-spacing:-0.01em;color:var(--parchment);">arte<span style="color:var(--accent);">f</span>akt</div>
+    <div style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);letter-spacing:0.15em;margin-top:4px;">Calgary, Alberta · Treaty 7 Territory · artefakt.org</div>
+    <div style="margin-top:12px;display:flex;gap:16px;flex-wrap:wrap;">
+      <span style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);letter-spacing:0.1em;">Guggenheim Fellow</span>
+      <span style="color:var(--graphite);">·</span>
+      <span style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);letter-spacing:0.1em;">Nat Geo Explorer</span>
+      <span style="color:var(--graphite);">·</span>
+      <span style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);letter-spacing:0.1em;">TED Senior Fellow</span>
+      <span style="color:var(--graphite);">·</span>
+      <span style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);letter-spacing:0.1em;">NOOR Images</span>
+    </div>
+  </div>
+
+  <!-- Social / Avatar -->
+  <div class="rule-ornamental mt-lg" style="color:var(--graphite);"><span>Social Profile Treatments</span></div>
+  <div style="display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap;margin-top:24px;">
+
+    <!-- Square avatar -->
+    <div style="display:flex;flex-direction:column;gap:8px;align-items:center;">
+      <div style="width:80px;height:80px;background:var(--warm-black);display:flex;align-items:center;justify-content:center;border:1px solid var(--graphite);">
+        <svg width="48" height="48" viewBox="0 0 96 96" fill="none">
+          <rect x="2" y="2" width="92" height="92" stroke="#f0ebe0" stroke-width="2.5"/>
+          <text x="48" y="62" text-anchor="middle" font-family="'Playfair Display', serif" font-weight="900" font-size="38" fill="#f0ebe0">A</text>
+          <text x="56" y="62" font-family="'Playfair Display', serif" font-weight="900" font-size="38" fill="#c8522a">.</text>
+        </svg>
+      </div>
+      <span style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);letter-spacing:0.1em;">Square 80px</span>
+    </div>
+
+    <!-- Circle avatar -->
+    <div style="display:flex;flex-direction:column;gap:8px;align-items:center;">
+      <div style="width:80px;height:80px;background:var(--warm-black);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--graphite);">
+        <span style="font-family:var(--ff-serif);font-weight:900;font-size:36px;line-height:1;color:var(--parchment);">A</span>
+      </div>
+      <span style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);letter-spacing:0.1em;">Round 80px</span>
+    </div>
+
+    <!-- Banner mock -->
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="width:320px;height:80px;background:var(--ink);display:flex;align-items:center;justify-content:space-between;padding:0 24px;border:1px solid var(--graphite);">
+        <div style="font-family:var(--ff-serif);font-weight:900;font-size:28px;letter-spacing:-0.025em;color:var(--parchment);">arte<span style="color:var(--accent);">f</span>akt</div>
+        <div style="text-align:right;">
+          <div style="font-family:var(--ff-mono);font-size:8px;color:var(--silver);letter-spacing:0.15em;text-transform:uppercase;">Calgary · Chicago</div>
+          <div style="font-family:var(--ff-roman);font-style:italic;font-size:10px;color:var(--warm-grey);margin-top:2px;">Witness. Connect. Sustain.</div>
+        </div>
+      </div>
+      <span style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);letter-spacing:0.1em;">Social Banner</span>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ══ 08 · USAGE RULES ════════════════════════════════════ -->
+<section class="section">
+  <div class="section-label">08 — Usage Rules</div>
+
+  <div class="two-col mt-sm">
+    <div>
+      <div class="specimen-meta">Do</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:16px;">
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--accent);font-family:var(--ff-mono);font-size:11px;flex-shrink:0;margin-top:3px;">✓</span>
+          <span style="font-family:var(--ff-roman);font-size:15px;line-height:1.5;">Use the wordmark in its established weight (Black 900 or Bold 700) only.</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--accent);font-family:var(--ff-mono);font-size:11px;flex-shrink:0;margin-top:3px;">✓</span>
+          <span style="font-family:var(--ff-roman);font-size:15px;line-height:1.5;">The accent <em>f</em> may be rendered in Darkroom Red on light or dark grounds.</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--accent);font-family:var(--ff-mono);font-size:11px;flex-shrink:0;margin-top:3px;">✓</span>
+          <span style="font-family:var(--ff-roman);font-size:15px;line-height:1.5;">Maintain minimum 16px clear space around the wordmark on all sides.</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--accent);font-family:var(--ff-mono);font-size:11px;flex-shrink:0;margin-top:3px;">✓</span>
+          <span style="font-family:var(--ff-roman);font-size:15px;line-height:1.5;">Use the monochrome wordmark (no accent) when printing in single colour.</span>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <div class="specimen-meta">Don't</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:16px;">
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--warm-grey);font-family:var(--ff-mono);font-size:11px;flex-shrink:0;margin-top:3px;">✗</span>
+          <span style="font-family:var(--ff-roman);font-size:15px;line-height:1.5;color:var(--warm-grey);">Do not capitalize the wordmark. "ARTEFAKT" and "Artefakt" are incorrect.</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--warm-grey);font-family:var(--ff-mono);font-size:11px;flex-shrink:0;margin-top:3px;">✗</span>
+          <span style="font-family:var(--ff-roman);font-size:15px;line-height:1.5;color:var(--warm-grey);">Do not stretch, condense, or rotate the wordmark.</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--warm-grey);font-family:var(--ff-mono);font-size:11px;flex-shrink:0;margin-top:3px;">✗</span>
+          <span style="font-family:var(--ff-roman);font-size:15px;line-height:1.5;color:var(--warm-grey);">Do not place the logo on busy photographic backgrounds without a field.</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--warm-grey);font-family:var(--ff-mono);font-size:11px;flex-shrink:0;margin-top:3px;">✗</span>
+          <span style="font-family:var(--ff-roman);font-size:15px;line-height:1.5;color:var(--warm-grey);">Do not use digital blue, pure white, or any colour outside the defined palette.</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top:80px;padding-top:32px;border-top:1px solid var(--fog);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:gap:16px;">
+    <div>
+      <div style="font-family:var(--ff-serif);font-weight:900;font-size:20px;letter-spacing:-0.02em;color:var(--ink);">arte<span style="color:var(--accent);">f</span>akt</div>
+      <div style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);letter-spacing:0.15em;margin-top:4px;">Brand Identity System — Version 1.0</div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-family:var(--ff-mono);font-size:9px;color:var(--silver);letter-spacing:0.1em;line-height:1.8;">
+        Calgary, Alberta · Treaty 7 Territory<br>
+        artefakt.org · artefaktmedia.ca<br>
+        © 2024 Artefakt
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</body>
+</html>

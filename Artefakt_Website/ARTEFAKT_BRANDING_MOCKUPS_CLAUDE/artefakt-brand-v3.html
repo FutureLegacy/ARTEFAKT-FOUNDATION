@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>artefakt — brand identity v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ─────────────────────────────────────────────────────────
+   ARTEFAKT BRAND SYSTEM V3
+   Paris Texas · Polaroid · Bauhaus IIT · Fractured & Rebuilt
+
+   Conceptual core: the Polaroid mid-development.
+   The image almost there. The chemical bloom.
+   Structure (Bauhaus grid) holding memory (Polaroid frame).
+   Strength through what has been broken and still works.
+
+   Palette: bleached highway. Not warm nostalgia —
+   the white of over-exposed film, the black of the
+   darkroom, the single red of the safelight.
+   
+   Type: IBM Plex Sans exclusively. Bauhaus Bayer principle
+   (lowercase as ideology), IIT computational precision.
+   EB Garamond for the human voice — quotes only.
+───────────────────────────────────────────────────────── */
+
+:root {
+  /* Paris Texas palette —
+     bleached white, road black, faded sky, safelight */
+  --paper:   #f4f1ea;    /* overexposed Polaroid, warm */
+  --bone:    #e8e3d8;    /* Polaroid border, aged */
+  --dust:    #c4bfb4;    /* highway dust, rules */
+  --graphite:#6b6760;    /* secondary type */
+  --asphalt: #1e1c19;    /* road at night */
+  --ink:     #0c0b09;    /* maximum black */
+  --red:     #c8522a;    /* darkroom safelight — only accent */
+
+  /* The grid unit — everything is a multiple */
+  --u: 8px;
+
+  /* Type */
+  --sans: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --serif: 'EB Garamond', Georgia, serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1;
+}
+
+/* ── NAV ─────────────────────────────────────────────── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--ink);
+  height: 40px;
+  display: flex; align-items: center;
+  padding: 0 calc(var(--u)*4);
+  border-bottom: 2px solid var(--red);
+  gap: calc(var(--u)*4);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: calc(var(--u)*1.5);
+  text-decoration: none;
+}
+/* Polaroid mark in nav */
+.nav-polaroid {
+  width: 22px; height: 26px;
+  background: var(--paper);
+  position: relative;
+  flex-shrink: 0;
+  display: flex; align-items: flex-start; justify-content: center;
+  padding-top: 3px;
+}
+.nav-polaroid::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 7px;
+  background: var(--bone);
+  border-top: 0.5px solid var(--dust);
+}
+.nav-polaroid span {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 10px;
+  color: var(--ink);
+  line-height: 1;
+  z-index: 1;
+}
+.nav-wordmark {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+}
+.nav-wordmark .r { color: var(--red); }
+.nav-links {
+  display: flex; list-style: none; margin-left: auto; gap: 0;
+}
+.nav-links a {
+  display: flex; align-items: center;
+  padding: 0 12px; height: 40px;
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--graphite); text-decoration: none;
+  border-left: 1px solid #1a1a17;
+  transition: color .15s;
+}
+.nav-links a:hover { color: var(--paper); }
+
+/* ── SECTION SYSTEM ──────────────────────────────────── */
+.s {
+  padding: calc(var(--u)*8) calc(var(--u)*6);
+  border-bottom: 1px solid var(--dust);
+  position: relative;
+}
+.s--ink   { background: var(--ink); color: var(--paper); }
+.s--bone  { background: var(--bone); }
+.s--asphalt { background: var(--asphalt); color: var(--paper); }
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 9px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--dust);
+  display: flex; align-items: center; gap: calc(var(--u)*3);
+  margin-bottom: calc(var(--u)*6);
+}
+.section-label::before {
+  content: ''; width: 2px; height: 16px;
+  background: var(--red); flex-shrink: 0;
+}
+.section-label::after {
+  content: ''; flex: 1; height: 1px; background: var(--dust);
+}
+.s--ink .section-label { color: #333; }
+.s--ink .section-label::after { background: #222; }
+.s--asphalt .section-label { color: #333; }
+.s--asphalt .section-label::after { background: #2a2825; }
+
+/* ── POLAROID MARK — the core identity unit ──────────── */
+/*
+  A Polaroid photograph:
+  - 3:4 image area
+  - thick white bottom border (the chemical band)
+  - border on all sides, bottom thicker
+  The 'a' sits in the image space.
+  The organisation name sits in the bottom border.
+*/
+
+.polaroid {
+  display: inline-flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 3px solid var(--bone);
+  border-bottom-width: 0;
+  position: relative;
+  box-shadow: 2px 3px 0 var(--dust);
+}
+.polaroid-image {
+  background: var(--ink);
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  flex: 1;
+}
+.polaroid-base {
+  background: var(--bone);
+  border: 3px solid var(--bone);
+  border-top: 1.5px solid var(--dust);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono);
+  font-size: 8px; letter-spacing: 0.12em;
+  color: var(--graphite);
+  text-transform: lowercase;
+}
+
+/* ── HERO SECTION ────────────────────────────────────── */
+.hero {
+  min-height: 88vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  align-items: stretch;
+  border-bottom: 1px solid var(--dust);
+}
+.hero-left {
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: calc(var(--u)*10) calc(var(--u)*6);
+  border-right: 1px solid var(--dust);
+}
+.hero-right {
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: calc(var(--u)*10) calc(var(--u)*6);
+  background: var(--ink);
+}
+
+/* THE WORDMARK
+   IBM Plex Sans 700, lowercase, tracked tight.
+   The 'f' is cut — red, the only colour.
+   The 'arte' and 'fakt' are fragments.
+*/
+.wordmark-xl {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: clamp(72px, 10vw, 144px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+.wordmark-xl .cut { color: var(--red); }
+.wordmark-xl.on-dark { color: var(--paper); }
+
+/* The split — arte | fakt
+   The red vertical bar IS the cut. The dismantled house.
+   The border crossing. The splice in the film.
+*/
+.wordmark-split {
+  display: flex; align-items: stretch; gap: 0;
+}
+.wordmark-split .before {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: clamp(72px, 10vw, 144px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+.wordmark-split .splice {
+  width: 4px;
+  background: var(--red);
+  margin: 0 10px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+.wordmark-split .after {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: clamp(72px, 10vw, 144px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+.wordmark-split.on-dark .before,
+.wordmark-split.on-dark .after { color: var(--paper); }
+
+.hero-tagline {
+  font-family: var(--mono);
+  font-size: 9px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--graphite);
+  margin-top: calc(var(--u)*3);
+}
+.hero-desc {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 18px; line-height: 1.6;
+  color: var(--graphite);
+  max-width: 440px;
+  border-left: 2px solid var(--red);
+  padding-left: calc(var(--u)*3);
+  margin-top: calc(var(--u)*4);
+}
+
+/* Vertical running text — Bauhaus rotation */
+.hero-vertical {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--mono);
+  font-size: 9px; letter-spacing: 0.25em;
+  text-transform: uppercase; color: #2a2825;
+  align-self: stretch;
+}
+.hero-vertical .r { color: var(--red); }
+
+/* ── LOGO SECTION ────────────────────────────────────── */
+
+/* The Polaroid mark at display scale */
+.mark-showcase {
+  display: flex; align-items: flex-end;
+  gap: calc(var(--u)*6); flex-wrap: wrap;
+}
+
+/* Polaroid proportions: image 3:4, base ~20% of height */
+.pm {
+  display: flex; flex-direction: column;
+  flex-shrink: 0;
+}
+.pm-img {
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  border: 3px solid var(--bone);
+  border-bottom: none;
+}
+.pm-img .a-letter {
+  font-family: var(--sans);
+  font-weight: 700;
+  color: var(--paper);
+  line-height: 1;
+}
+.pm-img .a-letter.red { color: var(--red); }
+/* slight blur overlay — memory */
+.pm-img::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 40% 35%,
+    rgba(244,241,234,0.06) 0%,
+    transparent 65%);
+  pointer-events: none;
+}
+.pm-base {
+  border: 3px solid var(--bone);
+  border-top: 1.5px solid var(--dust);
+  background: var(--bone);
+  display: flex; align-items: center; justify-content: center;
+}
+.pm-base span {
+  font-family: var(--mono); font-size: 7px;
+  letter-spacing: 0.15em; color: var(--graphite);
+  text-transform: lowercase;
+}
+
+/* ── LOCKUP GRID ─────────────────────────────────────── */
+.lockup-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.lk {
+  padding: calc(var(--u)*5) calc(var(--u)*4);
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px; position: relative;
+}
+.lk-w {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 36px;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+}
+.lk-t {
+  font-family: var(--mono);
+  font-size: 7.5px; letter-spacing: 0.22em;
+  text-transform: uppercase; margin-top: 10px;
+}
+.lk-id {
+  position: absolute; bottom: 10px; right: 12px;
+  font-family: var(--mono); font-size: 8px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--dust);
+}
+
+/* ── COLOUR SYSTEM ───────────────────────────────────── */
+.palette { display: grid; grid-template-columns: 3fr 2fr 1fr 1fr 1fr; gap: 2px; }
+.sw { padding: calc(var(--u)*3) calc(var(--u)*2); min-height: 140px;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; }
+.sw-n { font-family: var(--mono); font-size: 9px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase; }
+.sw-h { font-family: var(--mono); font-size: 8px; opacity: .5; letter-spacing: .1em; }
+.sw-u { font-family: var(--mono); font-size: 8px; opacity: .35; line-height: 1.6; }
+.sw-d { color: rgba(244,241,234,.9); }
+.sw-l { color: rgba(12,11,9,.7); }
+
+/* ── TYPE SYSTEM ─────────────────────────────────────── */
+.t-spec { margin-bottom: calc(var(--u)*6); }
+.t-meta {
+  font-family: var(--mono); font-size: 8px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--dust); margin-bottom: 10px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--dust);
+}
+.t-display {
+  font-family: var(--sans); font-weight: 700;
+  font-size: clamp(40px,7vw,104px);
+  line-height: 0.9; letter-spacing: -0.04em;
+}
+.t-display em {
+  font-style: italic; font-weight: 300;
+  color: var(--graphite);
+}
+.t-head {
+  font-family: var(--sans); font-weight: 300;
+  font-size: clamp(26px,4vw,52px);
+  line-height: 1.1; letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.t-cond {
+  font-family: var(--sans); font-weight: 700;
+  font-size: 14px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--graphite);
+}
+.t-body {
+  font-family: var(--serif); font-size: 18px;
+  line-height: 1.7; max-width: 560px; color: var(--asphalt);
+}
+.t-body em { font-style: italic; }
+.t-quote {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(18px,2.5vw,28px);
+  line-height: 1.5; max-width: 600px;
+  border-left: 2px solid var(--red);
+  padding-left: calc(var(--u)*3);
+}
+.t-mono-ex {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.12em; line-height: 2;
+  color: var(--graphite);
+}
+
+/* ── COLLATERAL ──────────────────────────────────────── */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--u)*4); }
+.card {
+  aspect-ratio: 1.75; position: relative; overflow: hidden;
+  box-shadow: 4px 4px 0 var(--asphalt);
+}
+.card-inner {
+  position: absolute; inset: 0;
+  padding: calc(var(--u)*3);
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+}
+.lh {
+  background: var(--paper); border: 1px solid var(--dust);
+  box-shadow: 4px 4px 0 var(--asphalt);
+  padding: calc(var(--u)*5) calc(var(--u)*5) calc(var(--u)*4);
+  position: relative;
+}
+.lh::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 5px;
+  background: var(--red);
+}
+.lh-head {
+  display: flex; justify-content: space-between;
+  align-items: flex-start;
+  padding-top: calc(var(--u)*2);
+  padding-bottom: calc(var(--u)*2.5);
+  border-bottom: 1px solid var(--dust);
+  margin-bottom: calc(var(--u)*3);
+}
+.lh-addr {
+  font-family: var(--mono); font-size: 9px;
+  color: var(--graphite); line-height: 2;
+  letter-spacing: 0.1em; text-align: right;
+}
+.lh-body {
+  font-family: var(--serif); font-size: 14px;
+  line-height: 1.8; color: var(--asphalt);
+}
+.lh-body p { margin-bottom: 12px; }
+.lh-foot {
+  margin-top: calc(var(--u)*3); padding-top: calc(var(--u)*2);
+  border-top: 1px solid var(--dust);
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+/* ── PILLARS ─────────────────────────────────────────── */
+.pillars { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; }
+.pillar {
+  padding: calc(var(--u)*4) calc(var(--u)*3);
+  border-right: 1px solid; position: relative;
+}
+.pillar:last-child { border-right: none; }
+.pn { font-family: var(--mono); font-size: 9px;
+  letter-spacing: 0.15em; color: var(--red);
+  margin-bottom: calc(var(--u)*2); }
+.pv { font-family: var(--sans); font-weight: 700;
+  font-size: 22px; letter-spacing: -0.01em;
+  text-transform: lowercase; line-height: 1;
+  margin-bottom: calc(var(--u)*2); }
+.pb { font-family: var(--serif); font-size: 13px;
+  line-height: 1.65; opacity: .7; }
+
+/* ── VOICE ───────────────────────────────────────────── */
+.voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--u)*4); }
+.vi {
+  padding: calc(var(--u)*2.5);
+  border: 1px solid var(--dust);
+  position: relative;
+}
+.vi::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; width: 2px; height: 100%;
+  background: var(--red);
+}
+.vk { font-family: var(--mono); font-size: 8px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--graphite); margin-bottom: 8px;
+  padding-left: 10px; }
+.vt { font-family: var(--serif); font-style: italic;
+  font-size: 16px; line-height: 1.55; padding-left: 10px; }
+
+/* ── USAGE ───────────────────────────────────────────── */
+.ug { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--u)*6); }
+.ui { display: flex; gap: calc(var(--u)*2); padding: calc(var(--u)*1.5) 0;
+  border-bottom: 1px solid var(--dust); align-items: flex-start; }
+.um { font-family: var(--mono); font-size: 11px; font-weight: 500;
+  flex-shrink: 0; width: 16px; padding-top: 2px; }
+.um-y { color: var(--red); }
+.um-n { color: var(--dust); }
+.ut { font-family: var(--serif); font-size: 15px; line-height: 1.6; }
+.ut-n { color: var(--graphite); text-decoration: line-through;
+  text-decoration-color: var(--dust); }
+
+/* ── INSPIRATION SECTION ─────────────────────────────── */
+/* The words behind the system, rendered visually */
+.inspiration {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.insp-cell {
+  padding: calc(var(--u)*4) calc(var(--u)*3);
+  display: flex; flex-direction: column;
+  justify-content: flex-end; gap: 8px;
+  min-height: 160px; position: relative;
+  overflow: hidden;
+}
+.insp-word {
+  font-family: var(--sans); font-weight: 700;
+  font-size: clamp(20px,3vw,32px);
+  letter-spacing: -0.02em; line-height: 1;
+  text-transform: lowercase;
+}
+.insp-note {
+  font-family: var(--mono); font-size: 8px;
+  letter-spacing: 0.15em; opacity: .5;
+  text-transform: uppercase; line-height: 1.6;
+}
+
+/* Polaroid tilt on inspiration cells */
+.insp-polaroid {
+  position: absolute; top: 12px; right: 16px;
+  transform: rotate(3deg);
+  opacity: 0.35;
+}
+
+/* ── ANIMATIONS ──────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.a1 { animation: fadeUp .7s cubic-bezier(.22,1,.36,1) both .05s; }
+.a2 { animation: fadeUp .7s cubic-bezier(.22,1,.36,1) both .2s; }
+.a3 { animation: fadeUp .7s cubic-bezier(.22,1,.36,1) both .35s; }
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 900px) {
+  .s { padding: calc(var(--u)*6) calc(var(--u)*3); }
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-right { display: none; }
+  .lockup-grid { grid-template-columns: 1fr 1fr; }
+  .pillars { grid-template-columns: 1fr 1fr; }
+  .card-grid { grid-template-columns: 1fr; }
+  .ug, .voice-grid { grid-template-columns: 1fr; }
+  .palette { grid-template-columns: 1fr 1fr 1fr; }
+  .inspiration { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ────────────────────────────────────────────── -->
+<nav class="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-polaroid"><span>a</span></div>
+    <span class="nav-wordmark">arte<span class="r">f</span>akt</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#concept">concept</a></li>
+    <li><a href="#mark">mark</a></li>
+    <li><a href="#colour">colour</a></li>
+    <li><a href="#type">type</a></li>
+    <li><a href="#collateral">collateral</a></li>
+    <li><a href="#pillars">pillars</a></li>
+    <li><a href="#rules">rules</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ════════════════════════════════════════════ -->
+<section class="hero">
+
+  <div class="hero-left">
+    <div class="a1">
+      <!-- THE PRIMARY WORDMARK: SPLIT FORM -->
+      <div class="wordmark-split">
+        <span class="before">arte</span>
+        <span class="splice"></span>
+        <span class="after">fakt</span>
+      </div>
+      <div class="hero-tagline" style="margin-top: 20px;">
+        witness · connect · educate · sustain
+      </div>
+    </div>
+
+    <div class="a2">
+      <div class="hero-desc">
+        A documentary photography, film, and archive institution built from the inside — from the demolished house, the discarded machine, the photograph that outlasts its subject.
+      </div>
+    </div>
+
+    <div class="a3" style="margin-top: calc(var(--u)*5);">
+      <div style="display:flex; gap: calc(var(--u)*3); flex-wrap: wrap;">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--graphite);letter-spacing:0.15em;line-height:2;">
+          Calgary · Alberta<br>Treaty 7 Territory
+        </div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--graphite);letter-spacing:0.15em;line-height:2;">
+          ——<br>
+          Chicago · Illinois<br>South Shore
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right a2">
+    <!-- THE POLAROID MARK — large, on black -->
+    <!-- This is the identity. The Polaroid of a place. -->
+    <div style="display:flex; justify-content:flex-end; align-items:flex-start;">
+      <div style="font-family:var(--mono);font-size:8px;color:#2a2825;letter-spacing:0.2em;text-transform:uppercase;">artefakt · brand identity · v3</div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; flex:1;">
+      <!-- Large Polaroid mark -->
+      <div style="display:flex;flex-direction:column;width:180px;">
+        <div style="
+          background: #0c0b09;
+          border: 5px solid #e8e3d8;
+          border-bottom: none;
+          height: 200px;
+          display:flex; align-items:center; justify-content:center;
+          position:relative; overflow:hidden;">
+          <!-- subtle light bloom — memory, not decoration -->
+          <div style="position:absolute;top:20%;left:20%;width:60%;height:60%;
+            background:radial-gradient(ellipse,rgba(244,241,234,0.04) 0%,transparent 70%);
+            pointer-events:none;"></div>
+          <span style="
+            font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;
+            font-weight:700; font-size:90px;
+            color:#f4f1ea; line-height:1;
+            position:relative; z-index:1;
+            letter-spacing:-0.04em;">a</span>
+        </div>
+        <!-- Polaroid base — thick bottom border -->
+        <div style="
+          background: #e8e3d8;
+          border: 5px solid #e8e3d8;
+          border-top: 1.5px solid #c4bfb4;
+          height: 52px;
+          display:flex; align-items:center; justify-content:center;">
+          <span style="font-family:'IBM Plex Mono','Courier New',monospace;
+            font-size:9px; letter-spacing:0.22em;
+            color:#6b6760; text-transform:lowercase;">artefakt</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Running vertical text -->
+    <div style="display:flex;align-items:flex-end;justify-content:flex-start;">
+      <div class="hero-vertical">
+        paris texas<span class="r"> · </span>polaroid<span class="r"> · </span>memory<span class="r"> · </span>witness<span class="r"> · </span>fractured &amp; rebuilt
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- Red rule — Bauhaus structural bar -->
+<div style="height:4px;background:var(--red);"></div>
+
+<!-- ══ 00 CONCEPT ═══════════════════════════════════════ -->
+<section class="s s--ink" id="concept">
+  <div class="section-label">00 — the concept</div>
+
+  <!-- Inspiration cells -->
+  <div class="inspiration">
+
+    <div class="insp-cell" style="background:#111;">
+      <!-- Paris Texas Polaroid simulation -->
+      <div class="insp-polaroid">
+        <div style="width:56px;display:flex;flex-direction:column;">
+          <div style="height:64px;background:#1a1714;border:2px solid #2a2825;"></div>
+          <div style="height:18px;background:#e8e3d8;border:2px solid #e8e3d8;border-top:1px solid #c4bfb4;"></div>
+        </div>
+      </div>
+      <div class="insp-word" style="color:#c4bfb4;">paris<br>texas</div>
+      <div class="insp-note" style="color:#444;">Wim Wenders 1984<br>distance · highway light · silence</div>
+    </div>
+
+    <div class="insp-cell" style="background:#1a1714;">
+      <div class="insp-polaroid">
+        <div style="width:56px;display:flex;flex-direction:column;">
+          <div style="height:64px;background:#222;border:2px solid #2a2825;display:flex;align-items:center;justify-content:center;">
+            <div style="width:28px;height:28px;background:rgba(244,241,234,0.12);border-radius:1px;"></div>
+          </div>
+          <div style="height:18px;background:#e8e3d8;border:2px solid #e8e3d8;border-top:1px solid #c4bfb4;"></div>
+        </div>
+      </div>
+      <div class="insp-word" style="color:#c4bfb4;">polaroid</div>
+      <div class="insp-note" style="color:#444;">the image developing<br>in your hand · slightly wrong</div>
+    </div>
+
+    <div class="insp-cell" style="background:#0c0b09;">
+      <div class="insp-word" style="color:var(--red);">memory</div>
+      <div class="insp-note" style="color:#333;">not nostalgia<br>the thing that still works differently</div>
+    </div>
+
+    <div class="insp-cell" style="background:#f4f1ea;border:1px solid #e8e3d8;">
+      <div class="insp-word" style="color:var(--ink);">witness</div>
+      <div class="insp-note" style="color:var(--graphite);">the primary act<br>to be present · to record · to hold</div>
+    </div>
+
+    <div class="insp-cell" style="background:#e8e3d8;">
+      <!-- Blur simulation — two overlapping elements -->
+      <div style="position:absolute;inset:0;overflow:hidden;opacity:0.15;">
+        <div style="font-family:'IBM Plex Sans',sans-serif;font-weight:700;font-size:80px;color:var(--ink);
+          position:absolute;top:10px;left:8px;letter-spacing:-0.04em;filter:blur(3px);">blurry</div>
+      </div>
+      <div class="insp-word" style="color:var(--ink);position:relative;z-index:1;">blurry</div>
+      <div class="insp-note" style="position:relative;z-index:1;color:var(--graphite);">the photograph before<br>it finishes developing</div>
+    </div>
+
+    <div class="insp-cell" style="background:#1e1c19;">
+      <!-- Fragment: two halves of a word, cut by red line -->
+      <div style="position:absolute;top:20px;left:24px;right:24px;height:2px;background:var(--red);transform:rotate(-2deg);"></div>
+      <div class="insp-word" style="color:#c4bfb4;">fractured<br><span style="color:var(--red);">&amp;</span> rebuilt</div>
+      <div class="insp-note" style="color:#444;">the demolished house<br>the cross-border exchange</div>
+    </div>
+
+    <div class="insp-cell" style="background:#0c0b09;grid-column:span 1;">
+      <div class="insp-word" style="color:var(--paper);font-size:clamp(20px,2.5vw,28px);">generational<br>trauma</div>
+      <div class="insp-note" style="color:#333;">held in the body<br>held in the house · held in the photograph</div>
+    </div>
+
+    <div class="insp-cell" style="background:var(--red);grid-column:span 1;">
+      <div class="insp-word" style="color:var(--paper);">resilience</div>
+      <div class="insp-note" style="color:rgba(244,241,234,0.5);">the thing that still<br>stands · the photograph that remains</div>
+    </div>
+
+    <div class="insp-cell" style="background:#111;border:1px solid #1e1c19;grid-column:span 1;">
+      <div class="insp-word" style="color:#c4bfb4;">bauhaus<br><span style="font-weight:300;font-size:0.7em;color:#444;">chicago</span></div>
+      <div class="insp-note" style="color:#333;">Moholy-Nagy · IIT 1937<br>structure holds memory</div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:calc(var(--u)*5);padding:calc(var(--u)*3);border-left:2px solid var(--red);max-width:640px;">
+    <p style="font-family:var(--serif);font-style:italic;font-size:18px;line-height:1.65;color:#555;">
+      The Polaroid is the brand's primary metaphor. Not the Instagram filter. The real chemical process — the image developing slowly in your hands, slightly imperfect, bounded by its white border, permanent in a way that digital cannot be. Artefakt makes the same claim about documentary photography: that what is recorded becomes irreversible evidence.
+    </p>
+  </div>
+</section>
+
+<!-- ══ 01 MARK SYSTEM ════════════════════════════════════ -->
+<section class="s s--bone" id="mark">
+  <div class="section-label">01 — the mark</div>
+
+  <div class="mark-showcase">
+
+    <!-- LARGE MARK -->
+    <div>
+      <div style="display:flex;flex-direction:column;width:160px;">
+        <div style="
+          background:var(--ink);
+          border:4px solid var(--bone);
+          border-bottom:none;
+          height:180px;
+          display:flex;align-items:center;justify-content:center;
+          position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 38% 32%,rgba(244,241,234,0.05) 0%,transparent 60%);pointer-events:none;"></div>
+          <span style="font-family:var(--sans);font-weight:700;font-size:82px;color:var(--paper);line-height:1;letter-spacing:-0.04em;position:relative;z-index:1;">a</span>
+        </div>
+        <div style="background:var(--bone);border:4px solid var(--bone);border-top:1.5px solid var(--dust);height:48px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:var(--mono);font-size:8px;letter-spacing:0.2em;color:var(--graphite);text-transform:lowercase;">artefakt</span>
+        </div>
+      </div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:0.15em;margin-top:10px;">Primary / 160px</div>
+    </div>
+
+    <!-- MEDIUM -->
+    <div>
+      <div style="display:flex;flex-direction:column;width:100px;">
+        <div style="background:var(--ink);border:3px solid var(--bone);border-bottom:none;height:112px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:var(--sans);font-weight:700;font-size:52px;color:var(--paper);line-height:1;letter-spacing:-0.04em;">a</span>
+        </div>
+        <div style="background:var(--bone);border:3px solid var(--bone);border-top:1px solid var(--dust);height:30px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:var(--mono);font-size:6.5px;letter-spacing:0.15em;color:var(--graphite);">artefakt</span>
+        </div>
+      </div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:0.15em;margin-top:10px;">Medium / 100px</div>
+    </div>
+
+    <!-- SMALL -->
+    <div>
+      <div style="display:flex;flex-direction:column;width:64px;">
+        <div style="background:var(--ink);border:2px solid var(--bone);border-bottom:none;height:72px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:var(--sans);font-weight:700;font-size:34px;color:var(--paper);line-height:1;letter-spacing:-0.03em;">a</span>
+        </div>
+        <div style="background:var(--bone);border:2px solid var(--bone);border-top:1px solid var(--dust);height:20px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:var(--mono);font-size:5.5px;letter-spacing:0.12em;color:var(--graphite);">artefakt</span>
+        </div>
+      </div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:0.15em;margin-top:10px;">Small / 64px</div>
+    </div>
+
+    <!-- ICON / AVATAR (square crop) -->
+    <div>
+      <div style="width:48px;height:48px;background:var(--ink);display:flex;align-items:center;justify-content:center;border:2px solid var(--bone);">
+        <span style="font-family:var(--sans);font-weight:700;font-size:28px;color:var(--paper);line-height:1;letter-spacing:-0.03em;">a</span>
+      </div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:0.15em;margin-top:10px;">Icon / 48px</div>
+    </div>
+
+    <!-- FAVICON -->
+    <div>
+      <div style="width:20px;height:20px;background:var(--ink);display:flex;align-items:center;justify-content:center;">
+        <span style="font-family:var(--sans);font-weight:700;font-size:12px;color:var(--paper);line-height:1;">a</span>
+      </div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:0.15em;margin-top:10px;">Favicon</div>
+    </div>
+
+    <!-- ON RED -->
+    <div style="margin-left:auto;">
+      <div style="display:flex;flex-direction:column;width:100px;">
+        <div style="background:var(--red);border:3px solid var(--red);border-bottom:none;height:112px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:var(--sans);font-weight:700;font-size:52px;color:var(--paper);line-height:1;letter-spacing:-0.04em;">a</span>
+        </div>
+        <div style="background:var(--paper);border:3px solid var(--paper);border-top:1px solid var(--dust);height:30px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:var(--mono);font-size:6.5px;letter-spacing:0.15em;color:var(--graphite);">artefakt</span>
+        </div>
+      </div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:0.15em;margin-top:10px;">Red / campaign</div>
+    </div>
+
+  </div>
+
+  <!-- Anatomy note -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:calc(var(--u)*4);margin-top:calc(var(--u)*6);">
+    <div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:8px;">image space</div>
+      <div style="font-family:var(--serif);font-size:14px;line-height:1.6;color:var(--asphalt);">The black field. Holds the light-sensitive surface. Never filled with photography in the mark itself — the void is active.</div>
+    </div>
+    <div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:8px;">the letterform</div>
+      <div style="font-family:var(--serif);font-size:14px;line-height:1.6;color:var(--asphalt);">IBM Plex Sans Bold, lowercase 'a'. Always lowercase — Bayer's principle. The capital asserts dominance that documentary practice doesn't earn through hierarchy.</div>
+    </div>
+    <div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:8px;">the base border</div>
+      <div style="font-family:var(--serif);font-size:14px;line-height:1.6;color:var(--asphalt);">The Polaroid's chemical band. Wider than the frame border — this asymmetry is load-bearing. It is where the name lives. Where the image is dated and signed.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 02 WORDMARK ════════════════════════════════════════ -->
+<section class="s">
+  <div class="section-label">02 — wordmark system</div>
+
+  <!-- Split form — primary -->
+  <div style="margin-bottom:calc(var(--u)*5);">
+    <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--dust);">Primary — split form / IBM Plex Sans 700</div>
+    <div class="wordmark-split" style="align-items:center;">
+      <span class="before" style="font-size:clamp(56px,9vw,128px);">arte</span>
+      <span class="splice" style="height:clamp(56px,9vw,128px);"></span>
+      <span class="after" style="font-size:clamp(56px,9vw,128px);">fakt</span>
+    </div>
+    <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.28em;color:var(--graphite);text-transform:uppercase;margin-top:16px;">witness · connect · educate · sustain</div>
+  </div>
+
+  <!-- Standard form -->
+  <div style="margin-bottom:calc(var(--u)*5);">
+    <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--dust);">Standard — f cut / for most applications</div>
+    <div style="font-family:var(--sans);font-weight:700;font-size:clamp(48px,8vw,108px);line-height:0.88;letter-spacing:-0.04em;">arte<span style="color:var(--red);">f</span>akt</div>
+  </div>
+
+  <!-- Lockup grid -->
+  <div class="lockup-grid" style="margin-top:calc(var(--u)*4);">
+
+    <div class="lk" style="background:var(--paper);border:1px solid var(--dust);">
+      <div><div style="width:28px;height:3px;background:var(--red);margin-bottom:14px;"></div>
+        <div class="lk-w">arte<span style="color:var(--red);">f</span>akt</div></div>
+      <div><div class="lk-t" style="color:var(--graphite);">witness · connect · educate · sustain</div></div>
+      <span class="lk-id">paper / primary</span>
+    </div>
+
+    <div class="lk" style="background:var(--ink);">
+      <div><div style="width:28px;height:3px;background:var(--red);margin-bottom:14px;"></div>
+        <div class="lk-w" style="color:var(--paper);">arte<span style="color:var(--red);">f</span>akt</div></div>
+      <div><div class="lk-t" style="color:#2a2825;">witness · connect · educate · sustain</div></div>
+      <span class="lk-id" style="color:#2a2825;">ink / dark</span>
+    </div>
+
+    <div class="lk" style="background:var(--red);">
+      <div><div style="width:28px;height:3px;background:var(--paper);margin-bottom:14px;"></div>
+        <div class="lk-w" style="color:var(--paper);">arte<span style="color:var(--ink);">f</span>akt</div></div>
+      <div><div class="lk-t" style="color:rgba(244,241,234,0.45);">witness · connect · educate · sustain</div></div>
+      <span class="lk-id" style="color:rgba(244,241,234,0.25);">red / campaign</span>
+    </div>
+
+    <!-- Split on dark -->
+    <div class="lk" style="background:var(--asphalt);">
+      <div class="wordmark-split on-dark" style="align-items:center;">
+        <span class="before" style="font-size:28px;">arte</span>
+        <span class="splice" style="height:32px;width:3px;"></span>
+        <span class="after" style="font-size:28px;">fakt</span>
+      </div>
+      <div><div class="lk-t" style="color:#2a2825;margin-top:10px;">calgary · chicago · treaty 7</div></div>
+      <span class="lk-id" style="color:#2a2825;">split / asphalt</span>
+    </div>
+
+    <!-- Mark + wordmark horizontal -->
+    <div class="lk" style="background:var(--bone);border:1px solid var(--dust);">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="flex-shrink:0;display:flex;flex-direction:column;width:44px;">
+          <div style="background:var(--ink);border:2px solid var(--bone);border-bottom:none;height:50px;display:flex;align-items:center;justify-content:center;">
+            <span style="font-family:var(--sans);font-weight:700;font-size:24px;color:var(--paper);line-height:1;letter-spacing:-0.03em;">a</span>
+          </div>
+          <div style="background:var(--bone);border:2px solid var(--bone);border-top:1px solid var(--dust);height:14px;"></div>
+        </div>
+        <div>
+          <div class="lk-w" style="font-size:28px;">arte<span style="color:var(--red);">f</span>akt</div>
+          <div class="lk-t" style="color:var(--graphite);font-size:6.5px;margin-top:7px;">witness · connect · educate · sustain</div>
+        </div>
+      </div>
+      <span class="lk-id">mark + wordmark</span>
+    </div>
+
+    <!-- Monochrome -->
+    <div class="lk" style="background:var(--paper);border:1px solid var(--dust);">
+      <div><div style="width:28px;height:3px;background:var(--ink);margin-bottom:14px;"></div>
+        <div class="lk-w">artefakt</div></div>
+      <div><div class="lk-t" style="color:var(--graphite);">witness · connect · educate · sustain</div></div>
+      <span class="lk-id">monochrome</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- Thick rule -->
+<div style="height:4px;background:var(--ink);"></div>
+
+<!-- ══ 03 COLOUR ══════════════════════════════════════════ -->
+<section class="s s--asphalt" id="colour">
+  <div class="section-label">04 — colour system</div>
+
+  <div class="palette">
+    <div class="sw sw-l" style="background:#f4f1ea;">
+      <div class="sw-n">paper</div>
+      <div class="sw-h">#F4F1EA</div>
+      <div class="sw-u">Primary ground.<br>Overexposed Polaroid.<br>Not white — warm.</div>
+    </div>
+    <div class="sw sw-d" style="background:#0c0b09;">
+      <div class="sw-n">ink</div>
+      <div class="sw-h">#0C0B09</div>
+      <div class="sw-u">Primary mark.<br>The darkroom.<br>Warm black always.</div>
+    </div>
+    <div class="sw sw-d" style="background:#c8522a;">
+      <div class="sw-n">safelight</div>
+      <div class="sw-h">#C8522A</div>
+      <div class="sw-u">One accent only.<br>The red that doesn't<br>expose the film.</div>
+    </div>
+    <div class="sw sw-d" style="background:#6b6760;">
+      <div class="sw-n">graphite</div>
+      <div class="sw-h">#6B6760</div>
+      <div class="sw-u">Secondary type.<br>Captions, mono,<br>metadata.</div>
+    </div>
+    <div class="sw sw-l" style="background:#e8e3d8;">
+      <div class="sw-n">bone</div>
+      <div class="sw-h">#E8E3D8</div>
+      <div class="sw-u">Polaroid border.<br>The chemical band.<br>Rules, surfaces.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:calc(var(--u)*3);padding:calc(var(--u)*2.5);border-left:2px solid var(--red);max-width:560px;">
+    <p style="font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.65;color:#555;">Five colours. Not because constraints are trendy — because Paris Texas was shot on bleached highway and the Polaroid only needs the image and the border. Every additional colour is a distraction from what the photograph is trying to say.</p>
+  </div>
+</section>
+
+<!-- ══ 04 TYPE ════════════════════════════════════════════ -->
+<section class="s" id="type">
+  <div class="section-label">05 — type system</div>
+
+  <div class="t-spec">
+    <div class="t-meta">display — IBM Plex Sans 700 — lowercase — primary</div>
+    <div class="t-display">
+      if you lived here<br>
+      <em>you'd be home by now</em>
+    </div>
+    <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:0.2em;margin-top:12px;">IBM PLEX SANS 700 · LOWERCASE · -0.04EM · 0.9 LINE-HEIGHT</div>
+  </div>
+
+  <div style="height:1px;background:var(--dust);margin:calc(var(--u)*4) 0;"></div>
+
+  <div style="display:grid;grid-template-columns:1fr 1px 1fr;gap:calc(var(--u)*4);margin-bottom:calc(var(--u)*4);">
+    <div class="t-spec" style="margin:0;">
+      <div class="t-meta">subhead — IBM Plex Sans 300 light</div>
+      <div class="t-head">Documentary as<br>Accountability</div>
+    </div>
+    <div style="background:var(--dust);"></div>
+    <div class="t-spec" style="margin:0;">
+      <div class="t-meta">label — IBM Plex Sans 700 / uppercase</div>
+      <div class="t-cond" style="font-size:16px;line-height:1.8;">
+        Calgary — Chicago<br>Treaty 7 Territory<br>Witness · Connect · Educate · Sustain
+      </div>
+    </div>
+  </div>
+
+  <div style="height:1px;background:var(--dust);margin:calc(var(--u)*4) 0;"></div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:calc(var(--u)*4);margin-bottom:calc(var(--u)*4);">
+    <div class="t-spec" style="margin:0;">
+      <div class="t-meta">body — EB Garamond 400 — long form only</div>
+      <div class="t-body">Artefakt is a placeless institution built on the weight of things that outlast their owners — the photograph, the demolished house, the discarded machine. <em>The archive is the argument. The record remains.</em></div>
+    </div>
+    <div class="t-spec" style="margin:0;">
+      <div class="t-meta">pullquote — EB Garamond italic</div>
+      <div class="t-quote">"We work with materials that have outlasted their intended lives. The discarded image still knows something."</div>
+    </div>
+  </div>
+
+  <div style="height:1px;background:var(--dust);margin:calc(var(--u)*4) 0;"></div>
+
+  <div class="t-spec" style="margin-bottom:0;">
+    <div class="t-meta">mono — IBM Plex Mono — metadata, captions, system</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:calc(var(--u)*3);">
+      <div class="t-mono-ex">© 2024 Artefakt<br>Calgary, AB<br>Treaty 7 Territory<br>artefakt.org</div>
+      <div class="t-mono-ex" style="color:var(--red);">Guggenheim Fellow<br>Nat Geo Explorer<br>TED Senior Fellow<br>NOOR Images</div>
+      <div class="t-mono-ex">Frame 001 / 036<br>35mm · Tri-X 400<br>South Shore · 2024<br>Chicago, IL</div>
+    </div>
+  </div>
+
+  <!-- Type scale table -->
+  <div style="height:1px;background:var(--dust);margin:calc(var(--u)*4) 0;"></div>
+  <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:calc(var(--u)*2);">scale reference</div>
+  <table style="width:100%;border-collapse:collapse;">
+    <tbody>
+      <tr style="border-bottom:1px solid var(--dust);">
+        <td style="padding:12px 0;width:80px;font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.15em;">display</td>
+        <td style="padding:12px 16px;"><span style="font-family:var(--sans);font-weight:700;font-size:48px;line-height:1;letter-spacing:-.04em;">Aa</span></td>
+        <td style="padding:12px 0;font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.1em;">IBM Plex Sans 700 · 48–144px · lowercase · -0.04em</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--dust);">
+        <td style="padding:12px 0;font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.15em;">subhead</td>
+        <td style="padding:12px 16px;"><span style="font-family:var(--sans);font-weight:300;font-size:32px;line-height:1;letter-spacing:-.02em;">Aa</span></td>
+        <td style="padding:12px 0;font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.1em;">IBM Plex Sans 300 · 24–52px · -0.02em</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--dust);">
+        <td style="padding:12px 0;font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.15em;">label</td>
+        <td style="padding:12px 16px;"><span style="font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;">Aa</span></td>
+        <td style="padding:12px 0;font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.1em;">IBM Plex Sans 700 · uppercase · 10–14px · 0.18em</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--dust);">
+        <td style="padding:12px 0;font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.15em;">body</td>
+        <td style="padding:12px 16px;"><span style="font-family:var(--serif);font-size:20px;">Aa</span></td>
+        <td style="padding:12px 0;font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.1em;">EB Garamond 400 · 16–20px · 1.7 lh · long form only</td>
+      </tr>
+      <tr>
+        <td style="padding:12px 0;font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.15em;">caption</td>
+        <td style="padding:12px 16px;"><span style="font-family:var(--mono);font-size:12px;letter-spacing:.12em;">Aa</span></td>
+        <td style="padding:12px 0;font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.1em;">IBM Plex Mono · 9–11px · 0.12–0.28em · metadata</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<div style="height:4px;background:var(--ink);"></div>
+
+<!-- ══ 05 COLLATERAL ══════════════════════════════════════ -->
+<section class="s s--bone" id="collateral">
+  <div class="section-label">06 — collateral</div>
+
+  <div class="card-grid">
+
+    <!-- Card front -->
+    <div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px;">business card — front</div>
+      <div class="card">
+        <div class="card-inner" style="background:var(--ink);">
+          <!-- Polaroid strip at top -->
+          <div style="display:flex;gap:3px;opacity:0.2;">
+            <div style="flex:1;height:6px;background:var(--paper);"></div>
+            <div style="width:12px;height:6px;background:var(--red);"></div>
+            <div style="flex:1;height:6px;background:var(--paper);"></div>
+            <div style="width:8px;height:6px;"></div>
+            <div style="flex:1;height:6px;background:var(--paper);"></div>
+          </div>
+          <div style="font-family:var(--sans);font-weight:700;font-size:32px;letter-spacing:-.03em;color:var(--paper);line-height:1;">
+            arte<span style="color:var(--red);">f</span>akt
+          </div>
+          <div style="font-family:var(--mono);font-size:7px;color:#2a2825;letter-spacing:.25em;text-transform:uppercase;">witness · connect · educate · sustain</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card back -->
+    <div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px;">business card — back</div>
+      <div class="card">
+        <div class="card-inner" style="background:var(--paper);border:1px solid var(--dust);">
+          <div style="width:2px;height:100%;position:absolute;left:0;top:0;background:var(--red);"></div>
+          <div style="padding-left:14px;">
+            <div style="font-family:var(--mono);font-size:8px;color:var(--red);letter-spacing:.2em;text-transform:uppercase;margin-bottom:5px;">Jonathan Lowenstein</div>
+            <div style="font-family:var(--sans);font-weight:300;font-size:12px;color:var(--ink);line-height:1.4;">Documentary Photographer<br>& Filmmaker</div>
+          </div>
+          <div style="padding-left:14px;">
+            <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.1em;line-height:2.2;">artefakt.org<br>4525 Monterey Ave NE<br>Calgary · AB · Treaty 7<br>Chicago · IL · South Shore</div>
+          </div>
+          <div style="padding-left:14px;">
+            <div style="font-family:var(--mono);font-size:7px;color:var(--red);letter-spacing:.1em;line-height:2;">Guggenheim · Nat Geo · TED · NOOR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Letterhead -->
+  <div style="margin-top:calc(var(--u)*5);">
+    <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px;">letterhead</div>
+    <div class="lh">
+      <div class="lh-head">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <!-- Polaroid mark small -->
+          <div style="display:flex;flex-direction:column;width:32px;">
+            <div style="background:var(--ink);border:2px solid var(--bone);border-bottom:none;height:36px;display:flex;align-items:center;justify-content:center;">
+              <span style="font-family:var(--sans);font-weight:700;font-size:18px;color:var(--paper);line-height:1;letter-spacing:-.03em;">a</span>
+            </div>
+            <div style="background:var(--bone);border:2px solid var(--bone);border-top:1px solid var(--dust);height:10px;"></div>
+          </div>
+          <div>
+            <div style="font-family:var(--sans);font-weight:700;font-size:22px;letter-spacing:-.03em;line-height:1;color:var(--ink);">arte<span style="color:var(--red);">f</span>akt</div>
+            <div style="font-family:var(--mono);font-size:7px;color:var(--graphite);letter-spacing:.22em;text-transform:uppercase;margin-top:4px;">witness · connect · educate · sustain</div>
+          </div>
+        </div>
+        <div class="lh-addr">4525 Monterey Ave NE<br>Calgary, Alberta — Treaty 7 Territory<br>artefakt.org · artefaktmedia.ca</div>
+      </div>
+      <div class="lh-body">
+        <p>Dear [Recipient],</p>
+        <p>Artefakt is a documentary photography, film, and visual storytelling organization operating across Canada and the United States. Founded on the premise that the archive is a form of argument, we use the photograph, the film, and the collected object as instruments of accountability.</p>
+        <p>Our work begins in the material world — in discarded electronics, demolished houses, and the lives recorded in both...</p>
+      </div>
+      <div class="lh-foot">
+        <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.15em;">witness · connect · educate · sustain</div>
+        <div style="width:24px;height:2px;background:var(--red);"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Email signature -->
+  <div style="margin-top:calc(var(--u)*5);">
+    <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px;">email signature</div>
+    <div style="background:var(--ink);padding:calc(var(--u)*3);max-width:420px;border-left:3px solid var(--red);">
+      <div style="font-family:var(--sans);font-weight:700;font-size:16px;letter-spacing:-.02em;color:var(--paper);margin-bottom:3px;">jonathan lowenstein</div>
+      <div style="font-family:var(--sans);font-weight:300;font-size:12px;color:#555;margin-bottom:12px;">Documentary Photographer & Filmmaker</div>
+      <div style="height:1px;background:#1e1c19;margin-bottom:12px;"></div>
+      <div style="font-family:var(--sans);font-weight:700;font-size:14px;letter-spacing:-.01em;color:var(--paper);margin-bottom:3px;">arte<span style="color:var(--red);">f</span>akt</div>
+      <div style="font-family:var(--mono);font-size:8px;color:#333;letter-spacing:.15em;margin-bottom:8px;">CALGARY · TREATY 7 · ARTEFAKT.ORG</div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--red);letter-spacing:.1em;line-height:2;">Guggenheim Fellow · Nat Geo Explorer · TED Senior Fellow · NOOR</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 06 PILLARS ══════════════════════════════════════════ -->
+<section class="s s--ink" id="pillars" style="padding-bottom:0;">
+  <div class="section-label">07 — the four pillars</div>
+  <div class="pillars" style="margin-top:calc(var(--u)*3);">
+    <div class="pillar" style="border-color:#1e1c19;">
+      <div class="pn">01</div>
+      <div class="pv" style="color:var(--paper);">witness</div>
+      <div class="pb" style="color:#555;">Long-form documentary photography, archive building, the photograph as evidence and argument.</div>
+    </div>
+    <div class="pillar" style="border-color:#1e1c19;">
+      <div class="pn">02</div>
+      <div class="pv" style="color:var(--paper);">connect</div>
+      <div class="pb" style="color:#555;">Community, platform, and cross-border storytelling between Calgary, Chicago, and beyond.</div>
+    </div>
+    <div class="pillar" style="border-color:#1e1c19;">
+      <div class="pn">03</div>
+      <div class="pv" style="color:var(--paper);">educate</div>
+      <div class="pb" style="color:#555;">Academy, workshops, fellowships, and public programming rooted in Treaty 7 Territory and South Shore.</div>
+    </div>
+    <div class="pillar" style="border-color:var(--red);background:var(--red);">
+      <div class="pn" style="color:rgba(244,241,234,0.5);">04</div>
+      <div class="pv" style="color:var(--paper);">sustain</div>
+      <div class="pb" style="color:rgba(244,241,234,0.65);">E-cycling, materials resale, archive licensing, the reclaimed object as cultural and financial infrastructure.</div>
+    </div>
+  </div>
+  <div style="padding:calc(var(--u)*3) 0;border-top:1px solid #1e1c19;margin-top:2px;display:flex;gap:calc(var(--u)*2);align-items:flex-start;">
+    <div style="width:2px;height:36px;background:var(--red);flex-shrink:0;margin-top:2px;"></div>
+    <p style="font-family:var(--serif);font-style:italic;font-size:14px;line-height:1.7;color:#444;max-width:560px;">Sustain is fourth because it is the infrastructure the other three depend on. Innovation will be demonstrated through the work, not announced.</p>
+  </div>
+</section>
+
+<!-- ══ 07 VOICE ════════════════════════════════════════════ -->
+<section class="s">
+  <div class="section-label">08 — voice & mission</div>
+
+  <div style="display:grid;grid-template-columns:2px 1fr;gap:calc(var(--u)*3);margin-bottom:calc(var(--u)*5);">
+    <div style="background:var(--red);"></div>
+    <div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.25em;text-transform:uppercase;margin-bottom:14px;">mission</div>
+      <div style="font-family:var(--sans);font-weight:300;font-size:clamp(22px,3.5vw,44px);line-height:1.15;letter-spacing:-.02em;max-width:700px;">artefakt holds the record. we document what is at stake, what has been lost, and what endures.</div>
+    </div>
+  </div>
+
+  <div style="height:1px;background:var(--dust);margin-bottom:calc(var(--u)*4);"></div>
+
+  <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.25em;text-transform:uppercase;margin-bottom:calc(var(--u)*2);">voice</div>
+  <div class="voice-grid">
+    <div class="vi"><div class="vk">direct</div><div class="vt">The financial argument and the ethical argument are the same argument. Make both.</div></div>
+    <div class="vi"><div class="vk">material first</div><div class="vt">Houses before housing. Objects before concepts. The specific before the general.</div></div>
+    <div class="vi"><div class="vk">no announcement</div><div class="vt">Innovation is demonstrated, not declared. The work is the proof.</div></div>
+    <div class="vi"><div class="vk">archive as infrastructure</div><div class="vt">Not nostalgia. Not heritage. An operating system for what comes next.</div></div>
+  </div>
+</section>
+
+<!-- ══ 08 RULES ════════════════════════════════════════════ -->
+<section class="s s--bone" id="rules">
+  <div class="section-label">09 — usage rules</div>
+  <div class="ug">
+    <div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.25em;text-transform:uppercase;margin-bottom:calc(var(--u)*2);">do</div>
+      <div class="ui"><div class="um um-y">+</div><div class="ut">Always lowercase. "artefakt" not "Artefakt" not "ARTEFAKT".</div></div>
+      <div class="ui"><div class="um um-y">+</div><div class="ut">The Polaroid mark's base border is always wider than the frame border. This asymmetry is structural.</div></div>
+      <div class="ui"><div class="um um-y">+</div><div class="ut">The red f — or the red vertical splice — is the only colour in the wordmark.</div></div>
+      <div class="ui"><div class="um um-y">+</div><div class="ut">Asymmetric grid layouts. Centred compositions are not the voice of this organisation.</div></div>
+      <div class="ui"><div class="um um-y">+</div><div class="ut">IBM Plex Sans for all primary text. EB Garamond only for body copy and quotations.</div></div>
+      <div class="ui" style="border-bottom:none"><div class="um um-y">+</div><div class="ut">Hard shadows: 4px 4px 0. Never soft or blurred.</div></div>
+    </div>
+    <div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--graphite);letter-spacing:.25em;text-transform:uppercase;margin-bottom:calc(var(--u)*2);">don't</div>
+      <div class="ui"><div class="um um-n">—</div><div class="ut ut-n">Don't capitalize artefakt under any circumstances.</div></div>
+      <div class="ui"><div class="um um-n">—</div><div class="ut ut-n">Don't add colours beyond the five-colour system.</div></div>
+      <div class="ui"><div class="um um-n">—</div><div class="ut ut-n">Don't use soft shadows, gradients, rounded corners, or glow.</div></div>
+      <div class="ui"><div class="um um-n">—</div><div class="ut ut-n">Don't shrink the Polaroid base border — it must always be thicker than the frame border.</div></div>
+      <div class="ui"><div class="um um-n">—</div><div class="ut ut-n">Don't announce innovation. Show it.</div></div>
+      <div class="ui" style="border-bottom:none"><div class="um um-n">—</div><div class="ut ut-n">Don't use the Instagram-Polaroid aesthetic. The reference is chemical, physical, archival.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--ink);padding:calc(var(--u)*3) calc(var(--u)*6);display:flex;justify-content:space-between;align-items:center;border-top:2px solid var(--red);">
+  <div style="display:flex;align-items:center;gap:14px;">
+    <div style="display:flex;flex-direction:column;width:24px;">
+      <div style="background:var(--paper);border:2px solid var(--bone);border-bottom:none;height:26px;display:flex;align-items:center;justify-content:center;">
+        <span style="font-family:var(--sans);font-weight:700;font-size:13px;color:var(--ink);line-height:1;letter-spacing:-.02em;">a</span>
+      </div>
+      <div style="background:var(--bone);border:2px solid var(--bone);border-top:1px solid var(--dust);height:8px;"></div>
+    </div>
+    <span style="font-family:var(--sans);font-weight:700;font-size:16px;color:var(--paper);letter-spacing:-.02em;">arte<span style="color:var(--red);">f</span>akt</span>
+  </div>
+  <div style="font-family:var(--mono);font-size:8px;color:#333;letter-spacing:.15em;text-align:right;line-height:2;">
+    BRAND IDENTITY SYSTEM — VERSION 3<br>
+    CALGARY · ALBERTA · TREATY 7 TERRITORY
+  </div>
+</footer>
+
+</body>
+</html>
