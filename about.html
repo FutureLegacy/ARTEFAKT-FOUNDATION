@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Artefakt Foundation</title>
+<meta name="description" content="Artefakt Foundation is an independent documentary photography, film, and arts organization founded by Jon Lowenstein. Based in Calgary and Chicago.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* Page-specific text-heavy layout */
+  .about-text {
+    position: absolute;
+    inset: 0;
+    padding: calc(var(--nav-height) + 64px) 32px calc(var(--meta-height) + 64px);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-content: start;
+    overflow-y: auto;
+  }
+  .about-text .top-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--graphite);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--dust);
+    padding-bottom: 16px;
+  }
+  .about-text h2.section-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+    max-width: 900px;
+  }
+  .about-text h2.section-title em { font-style: italic; }
+  .about-text .two-col {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    align-items: start;
+    max-width: 1100px;
+  }
+  .about-text .two-col .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--graphite);
+    padding-top: 6px;
+  }
+  .about-text .two-col .prose p {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: clamp(16px, 1.3vw, 18px);
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .about-text .two-col .prose p:last-child { margin-bottom: 0; }
+  .about-text .credentials {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 32px;
+    max-width: 900px;
+  }
+  .about-text .credentials li {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    padding: 8px 0;
+    border-top: 1px solid var(--dust);
+  }
+  @media (max-width: 720px) {
+    .about-text { padding-left: 20px; padding-right: 20px; }
+    .about-text .two-col { grid-template-columns: 1fr; gap: 16px; }
+    .about-text .credentials { grid-template-columns: 1fr; }
+  }
+
+  /* Allow scroll within the about-text panels (override scroll-snap inside the text section) */
+  .panel--about-text {
+    height: auto;
+    min-height: 100vh;
+    scroll-snap-align: start;
+    background: var(--paper);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" aria-label="Primary">
+  <a href="index.html" class="wordmark" aria-label="Artefakt Foundation home">arte<span class="splice" aria-hidden="true"></span>fakt</a>
+  <div class="nav-links">
+    <a href="witness.html">Witness</a>
+    <a href="connect.html">Connect</a>
+    <a href="legacy.html">Legacy</a>
+    <a href="sustain.html">Sustain</a>
+    <a href="about.html" class="active">About</a>
+    <a href="https://jonlowenstein.com" class="offsite" target="_blank" rel="noopener">Studio</a>
+  </div>
+</nav>
+
+<!-- META FOOTER -->
+<div class="meta" aria-hidden="true">
+  <span>Founded 2026</span>
+  <span>About</span>
+  <a href="mailto:studio@jonlowenstein.com">studio@jonlowenstein.com</a>
+</div>
+
+<main>
+
+  <!-- ================================================
+       PANEL 01 — MASTHEAD (paper)
+       ================================================ -->
+  <section class="panel panel--paper" id="masthead" aria-labelledby="about-title">
+    <div class="masthead">
+      <div class="top-meta">
+        <span>About</span>
+        <span>Artefakt Foundation</span>
+        <span>Est. 2026</span>
+      </div>
+      <div class="main">
+        <h1 class="display" id="about-title">Documentary, <em>from inside the practice.</em></h1>
+        <p class="lede">Artefakt is an independent documentary photography, film, and arts organization based in Calgary (Treaty 7 Territory) and Chicago. Built from inside documentary practice rather than alongside it, Artefakt supports long-form work, teaches the craft to the next practitioners, preserves the record in a permanent public archive, and sustains itself through an ethical materials-reuse operation.</p>
+      </div>
+      <div class="bottom-meta">
+        <span>Scroll ↓</span>
+        <span>05 Panels</span>
+        <span>01 / 06</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       PANEL 02 — CHICAGO (hat figure)
+       ================================================ -->
+  <section class="panel" aria-labelledby="panel-chicago">
+    <img src="images/chicago-hat-figure.jpg" alt="Figure in a hat against the Chicago skyline — long-standing documentary relationship with the city's South Side." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">ABT · 01</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Chicago</span>
+    </div>
+    <div class="overlay overlay--content">
+      <span class="label">Twenty-Five Years</span>
+      <h2 id="panel-chicago">Chicago, <em>continuously.</em></h2>
+      <p class="body">The work that seeded Artefakt has been made on Chicago's South Side since 2001 — long-form documentary practice held in place through three economic cycles, two pandemics, and one gradual transformation of the neighborhoods themselves. The photographs are the record. The relationships are the foundation.</p>
+      <p class="caption">South Side · Chicago · 2019</p>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>ABT / 01</div>
+      <div>Since 2001</div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       PANEL 03 — FOUNDER (TED stage)
+       ================================================ -->
+  <section class="panel" aria-labelledby="panel-founder">
+    <img src="images/ted-stage.jpg" alt="Jon Lowenstein on the TED stage delivering a talk — TED Senior Fellow." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">ABT · 02</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Founder</span>
+    </div>
+    <div class="overlay overlay--content">
+      <span class="label">The Founder</span>
+      <h2 id="panel-founder">Jon <em>Lowenstein.</em></h2>
+      <p class="body">Documentary photographer and filmmaker. Guggenheim Fellow. National Geographic Explorer. TED Senior Fellow. Founding member of NOOR Images. Three decades of long-form work across the Americas, anchored in Chicago's South Side and now extending to Calgary.</p>
+      <p class="caption">TED · 2019</p>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>ABT / 02</div>
+      <div>Founder · Artistic Director</div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       PANEL 04 — BIO (paper, text-led)
+       ================================================ -->
+  <section class="panel panel--about-text" id="bio" aria-labelledby="bio-title">
+    <div class="about-text">
+      <div class="top-meta">
+        <span>Biography</span>
+        <span>Jon Lowenstein</span>
+        <span>04 / 06</span>
+      </div>
+
+      <h2 class="section-title" id="bio-title">A thirty-year practice, <em>in two cities.</em></h2>
+
+      <div class="two-col">
+        <div class="label">Practice</div>
+        <div class="prose">
+          <p>Jon Lowenstein is a documentary photographer and filmmaker whose work sits at the intersection of long-form documentary, oral history, and cross-border storytelling. For over twenty-five years he has worked on the South Side of Chicago, and more recently in Calgary, making photographs and films that follow people and places across years rather than news cycles.</p>
+          <p>His long-term projects include <em>Shadow Lives USA</em>, a decade-plus documentation of migration from Central America and Mexico to the United States; sustained coverage of housing, displacement, and community life on the South Side; and <em>If You Lived Here You'd Be Home By Now</em>, a current multidisciplinary project involving the cross-border exchange of two demolition-slated houses — one in Calgary, one in Chicago — reconstructed as working studios and community spaces.</p>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="label">Recognition</div>
+        <div class="prose">
+          <p>Jon is a Guggenheim Fellow, a National Geographic Explorer, and a TED Senior Fellow. He is a founding member of the NOOR Images photo collective. His work has been published, exhibited, and collected internationally, and has been recognized with grants and honors from the Alicia Patterson Foundation, the Aaron Siskind Foundation, the Open Society Foundations' Documentary Photography Project, and others.</p>
+        </div>
+      </div>
+
+      <ul class="credentials" aria-label="Credentials">
+        <li>Guggenheim Fellowship</li>
+        <li>National Geographic Explorer</li>
+        <li>TED Senior Fellow</li>
+        <li>NOOR Images · Founding Member</li>
+        <li>Alicia Patterson Foundation</li>
+        <li>Aaron Siskind Foundation</li>
+        <li>Open Society Foundations · DPP</li>
+        <li>World Press Photo</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================================================
+       PANEL 05 — ORGANIZATION (paper, text-led)
+       ================================================ -->
+  <section class="panel panel--about-text" id="organization" aria-labelledby="org-title">
+    <div class="about-text">
+      <div class="top-meta">
+        <span>Organization</span>
+        <span>Artefakt Foundation</span>
+        <span>05 / 06</span>
+      </div>
+
+      <h2 class="section-title" id="org-title">Built from inside <em>the practice.</em></h2>
+
+      <div class="two-col">
+        <div class="label">Legal Entity</div>
+        <div class="prose">
+          <p>The Artefakt Foundation is incorporated as an Alberta Society. The organization operates from 4525 Monterey Avenue NW in Calgary, with programming and archival work also carried out in Chicago through partner institutions and Jon Lowenstein Studio.</p>
+          <p>Artefakt Foundation and Jon Lowenstein Studio are separate legal entities with separate visual identities, separate accounts, and separate financial operations. The Studio is Jon's commercial practice; the Foundation is the institution. They are connected by shared work and shared archive, not by shared money.</p>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="label">Four Pillars</div>
+        <div class="prose">
+          <p><strong>Witness</strong> — Long-form documentary practice grounded in community trust and ethical rigor.</p>
+          <p><strong>Connect</strong> — Fellowship for emerging practitioners and Academy of workshops and masterclasses taught by working documentarians.</p>
+          <p><strong>Legacy</strong> — A permanent, publicly accessible archive of the work and its sources.</p>
+          <p><strong>Sustain</strong> — An ethical materials-reuse operation whose revenue funds the programming.</p>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="label">Board</div>
+        <div class="prose">
+          <p>The Artefakt Foundation Board currently includes David Christenson, Angela Boehm, and Shovik Sengupta, with additional members confirming to complete the founding board. Jon Lowenstein serves as Founder and Artistic Director.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       PANEL 06 — CONTACT / COLOPHON
+       ================================================ -->
+  <section class="panel panel--colophon" id="contact" aria-labelledby="contact-title">
+    <div class="colophon-grid">
+      <div class="col-head">
+        <span>Contact</span>
+        <span>06 / 06</span>
+      </div>
+      <div class="col-block">
+        <h3>Foundation</h3>
+        <p>Artefakt Foundation<br>4525 Monterey Avenue NW<br>Calgary AB · Treaty 7 Territory</p>
+        <p style="margin-top:16px;"><a href="mailto:studio@jonlowenstein.com">studio@jonlowenstein.com</a></p>
+        <p><a href="https://artefakt.foundation">artefakt.foundation</a></p>
+      </div>
+      <div class="col-block">
+        <h3>Jon Lowenstein Studio</h3>
+        <p>Commercial and editorial practice, fine art prints, and licensing are handled through the studio directly.</p>
+        <p style="margin-top:16px;"><a href="https://jonlowenstein.com" target="_blank" rel="noopener">jonlowenstein.com →</a></p>
+      </div>
+      <div class="col-foot">
+        <span>← Sustain</span>
+        <span>Two entities. One archive. Shared work.</span>
+        <span id="contact-title">artefakt.foundation</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>

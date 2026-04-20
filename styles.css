@@ -1,0 +1,495 @@
+/* ============================================================
+   ARTEFAKT FOUNDATION — SHARED STYLESHEET
+   Bauhaus-inspired, archival, functional.
+   Typography carries hierarchy. Nothing decorative that doesn't earn its place.
+   ============================================================ */
+
+:root {
+  --paper: #f4f1ea;
+  --ink: #0c0b09;
+  --red: #c8522a;
+  --dust: #c4bfb4;
+  --graphite: #6b6760;
+
+  --nav-height: 72px;
+  --meta-height: 36px;
+
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --serif: "Playfair Display", Georgia, serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  background: var(--ink);
+}
+
+body {
+  font-family: var(--sans);
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* ------------------------------------------------------------
+   NAV — fixed, minimal, always present
+   ------------------------------------------------------------ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-height);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+  mix-blend-mode: difference;
+  color: var(--paper);
+}
+
+.wordmark {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  color: var(--paper);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.wordmark .splice {
+  display: inline-block;
+  width: 2px;
+  height: 16px;
+  background: var(--red);
+  margin: 0 4px;
+  /* splice stays red even under mix-blend-mode: difference on the nav */
+  mix-blend-mode: normal;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.nav-links a {
+  color: var(--paper);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 120ms ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  border-bottom-color: var(--paper);
+}
+
+.nav-links .offsite::after {
+  content: " →";
+}
+
+/* ------------------------------------------------------------
+   FOOTER META BAR — always visible, machine-like
+   ------------------------------------------------------------ */
+.meta {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: var(--meta-height);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+  mix-blend-mode: difference;
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.meta span { pointer-events: auto; }
+.meta a { color: var(--paper); text-decoration: none; pointer-events: auto; }
+
+/* ------------------------------------------------------------
+   PANELS — each is 100vh, scroll-snap, with full-bleed image
+   ------------------------------------------------------------ */
+.panel {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.panel-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  /* no filters on documentary photographs */
+}
+
+/* Text panels (no photograph). Use sparingly. */
+.panel--paper { background: var(--paper); }
+.panel--ink { background: var(--ink); color: var(--paper); }
+
+/* ------------------------------------------------------------
+   OVERLAY BLOCKS — type over photograph
+   ------------------------------------------------------------ */
+.overlay {
+  position: absolute;
+  color: var(--paper);
+  z-index: 2;
+}
+
+/* Top-left metadata block: pillar code + sequence */
+.overlay--meta {
+  top: calc(var(--nav-height) + 24px);
+  left: 32px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.8;
+}
+
+.overlay--meta .pillar-code {
+  color: var(--red);
+  mix-blend-mode: normal;
+}
+
+.overlay--meta .rule {
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--paper);
+  vertical-align: middle;
+  margin: 0 10px;
+}
+
+/* Bottom-left content block: headline + caption */
+.overlay--content {
+  bottom: calc(var(--meta-height) + 40px);
+  left: 32px;
+  max-width: 680px;
+}
+
+.overlay--content .label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--paper);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.overlay--content h1,
+.overlay--content h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(36px, 6vw, 84px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+}
+
+.overlay--content h1 em,
+.overlay--content h2 em {
+  font-style: italic;
+  color: inherit;
+}
+
+.overlay--content .body {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.55;
+  max-width: 520px;
+  color: var(--paper);
+}
+
+.overlay--content .caption {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--paper);
+  margin-top: 16px;
+  opacity: 0.75;
+}
+
+/* Bottom-right coordinate/index stamp */
+.overlay--stamp {
+  bottom: calc(var(--meta-height) + 40px);
+  right: 32px;
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--paper);
+  opacity: 0.75;
+  line-height: 1.8;
+}
+
+/* ------------------------------------------------------------
+   PAPER PANELS — text-led, no photograph
+   For masthead / intro / colophon panels
+   ------------------------------------------------------------ */
+.panel--paper .masthead {
+  position: absolute;
+  inset: 0;
+  padding: calc(var(--nav-height) + 64px) 32px calc(var(--meta-height) + 64px);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-content: space-between;
+}
+
+.panel--paper .masthead .top-meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--dust);
+  padding-bottom: 16px;
+}
+
+.panel--paper .masthead .main {
+  max-width: 1100px;
+}
+
+.panel--paper h1.display {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(56px, 10vw, 160px);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 32px;
+}
+
+.panel--paper h1.display em { font-style: italic; }
+
+.panel--paper .lede {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: clamp(18px, 1.8vw, 22px);
+  line-height: 1.45;
+  color: var(--ink);
+  max-width: 720px;
+}
+
+.panel--paper .bottom-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  border-top: 1px solid var(--dust);
+  padding-top: 16px;
+}
+
+/* ------------------------------------------------------------
+   INDEX PANEL — list of sections, like a plate index
+   ------------------------------------------------------------ */
+.panel--index {
+  background: var(--paper);
+}
+
+.panel--index .index-grid {
+  position: absolute;
+  inset: 0;
+  padding: calc(var(--nav-height) + 64px) 32px calc(var(--meta-height) + 64px);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 32px;
+}
+
+.panel--index .index-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  border-bottom: 1px solid var(--dust);
+  padding-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.panel--index ol.index-list {
+  list-style: none;
+  align-self: center;
+  max-width: 1100px;
+}
+
+.panel--index ol.index-list li {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 32px;
+  align-items: baseline;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--dust);
+  font-family: var(--serif);
+  font-size: clamp(28px, 4.5vw, 64px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.panel--index ol.index-list a {
+  display: contents;
+  color: inherit;
+  text-decoration: none;
+}
+
+.panel--index ol.index-list .num {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: var(--red);
+  align-self: center;
+}
+
+.panel--index ol.index-list .page-ref {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--graphite);
+  align-self: center;
+  text-transform: uppercase;
+}
+
+.panel--index ol.index-list a:hover .title { font-style: italic; }
+
+/* ------------------------------------------------------------
+   COLOPHON / CLOSING PANEL
+   ------------------------------------------------------------ */
+.panel--colophon {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.panel--colophon .colophon-grid {
+  position: absolute;
+  inset: 0;
+  padding: calc(var(--nav-height) + 64px) 32px calc(var(--meta-height) + 64px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-content: space-between;
+}
+
+.panel--colophon .col-head {
+  grid-column: 1 / -1;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dust);
+  border-bottom: 1px solid var(--graphite);
+  padding-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.panel--colophon .col-block h3 {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+
+.panel--colophon .col-block p,
+.panel--colophon .col-block a {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--paper);
+  text-decoration: none;
+  display: block;
+}
+
+.panel--colophon .col-block a:hover { border-bottom: 1px solid var(--paper); }
+
+.panel--colophon .col-foot {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dust);
+  border-top: 1px solid var(--graphite);
+  padding-top: 16px;
+}
+
+/* ------------------------------------------------------------
+   RESPONSIVE — keep discipline on small screens
+   ------------------------------------------------------------ */
+@media (max-width: 720px) {
+  .nav { padding: 0 20px; height: 60px; }
+  :root { --nav-height: 60px; --meta-height: 32px; }
+  .meta { padding: 0 20px; font-size: 9px; }
+  .nav-links { gap: 16px; font-size: 10px; }
+  .overlay--meta, .overlay--content, .overlay--stamp { left: 20px; right: 20px; }
+  .overlay--stamp { text-align: left; right: auto; }
+  .overlay--content { max-width: none; bottom: calc(var(--meta-height) + 28px); }
+  .overlay--content h1, .overlay--content h2 { font-size: clamp(32px, 9vw, 56px); }
+  .overlay--content .body { font-size: 15px; max-width: 100%; }
+  .panel--paper .masthead,
+  .panel--index .index-grid,
+  .panel--colophon .colophon-grid { padding-left: 20px; padding-right: 20px; }
+  .panel--colophon .colophon-grid { grid-template-columns: 1fr; gap: 32px; }
+  .panel--index ol.index-list li { grid-template-columns: 48px 1fr; }
+  .panel--index ol.index-list .page-ref { display: none; }
+}
+
+/* ------------------------------------------------------------
+   ACCESSIBILITY — visible focus
+   ------------------------------------------------------------ */
+a:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+
+/* Reduce motion: disable scroll-snap for those who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-snap-type: none; scroll-behavior: auto; }
+  .panel { scroll-snap-align: none; scroll-snap-stop: normal; }
+}
