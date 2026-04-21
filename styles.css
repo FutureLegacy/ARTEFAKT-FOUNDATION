@@ -184,11 +184,11 @@ body {
   margin: 0 10px;
 }
 
-/* Bottom-left content block — matches masthead layout logic */
+/* Bottom-left content block — body wraps to headline width */
 .overlay--content {
   bottom: calc(var(--meta-height) + 24px);
   left: 32px;
-  max-width: 560px;
+  max-width: 42%;
 }
 
 .overlay--content .label,
