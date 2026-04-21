@@ -1,8 +1,0 @@
-.vercel
-.env*.local
-*.key
-*.pdf
-*.zip
-*.js
-ARTEFAKT_FINANCIALS/
-ARTEFAKT_MISSION_PLANS/

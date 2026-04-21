@@ -3,169 +3,152 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Connect — Artefakt Foundation</title>
-<meta name="description" content="Artefakt Connect: Fellowship and Academy. Long-form documentary practice taught by working practitioners, grounded in community trust.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<title>Connect — artefakt foundation</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav" aria-label="Primary">
-  <a href="index.html" class="wordmark" aria-label="Artefakt Foundation home">arte<span class="splice" aria-hidden="true"></span>fakt</a>
-  <div class="nav-links">
-    <a href="witness.html">Witness</a>
-    <a href="connect.html" class="active">Connect</a>
-    <a href="legacy.html">Legacy</a>
-    <a href="sustain.html">Sustain</a>
-    <a href="about.html">About</a>
-    <a href="https://jonlowenstein.com" class="offsite" target="_blank" rel="noopener">Studio</a>
-  </div>
+<nav class="nav">
+  <a href="index.html" class="nav-mark" aria-label="artefakt home">
+    <div class="nav-mark-img"><span>a</span></div>
+    <div class="nav-mark-base"></div>
+  </a>
+  <a href="index.html" class="nav-wordmark">
+    <span class="nav-wordmark-before">arte</span>
+    <span class="nav-wordmark-splice"></span>
+    <span class="nav-wordmark-after">fakt</span>
+  </a>
+  <span class="nav-wordmark-sub">foundation</span>
+  <ul class="nav-links">
+    <li><a href="witness.html">Witness</a></li>
+    <li><a href="connect.html">Connect</a></li>
+    <li><a href="legacy.html">Legacy</a></li>
+    <li><a href="sustain.html">Sustain</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="https://jonlowenstein.com" class="studio">Studio ↗</a></li>
+  </ul>
+  <button class="nav-hamburger" aria-label="Open menu" onclick="toggleDrawer()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- META FOOTER -->
-<div class="meta" aria-hidden="true">
-  <span>Calgary AB · Treaty 7 Territory</span>
-  <span>Connect — Pillar 02 / 04</span>
-  <a href="mailto:studio@jonlowenstein.com">studio@jonlowenstein.com</a>
+<nav class="nav-drawer" id="nav-drawer">
+  <a href="witness.html">Witness</a>
+  <a href="connect.html">Connect</a>
+  <a href="legacy.html">Legacy</a>
+  <a href="sustain.html">Sustain</a>
+  <a href="about.html">About</a>
+  <a href="https://jonlowenstein.com">Studio ↗</a>
+</nav>
+
+<footer class="meta-footer">
+  <span class="loc">Calgary AB · Treaty 7 Territory</span>
+  <span class="red">Connect — Pillar 02 / 04</span>
+  <span><a href="mailto:studio@jonlowenstein.com">studio@jonlowenstein.com</a></span>
+</footer>
+
+<div class="snap-container">
+
+  <!-- LEDE -->
+  <section class="snap-panel panel--paper">
+    <div class="section-label">Pillar 02 / 04 — Connect — Fellowship · Academy</div>
+    <h1 class="panel-headline">We teach what<br>we <em>practice.</em></h1>
+    <p class="panel-lede">Working documentary photographers and filmmakers teach the craft to the next practitioners — not as theory, but as a working discipline. The Fellowship supports emerging artists with time, mentorship, and a platform. The Academy brings masters of the form to Calgary and Chicago for intensive workshops and public lectures.</p>
+  </section>
+
+  <!-- FELLOWSHIP -->
+  <section class="snap-panel" style="background: var(--ink);">
+    <div class="panel-image" style="background-image: url('images/zurich-workshop-01.jpg');"></div>
+    <div class="overlay-tl">
+      <div class="pillar-code">CNT · 01</div>
+      <div class="section-rule"></div>
+      <div class="section-name">Fellowship</div>
+    </div>
+    <div class="overlay-bl">
+      <div class="label">The Artefakt Fellowship</div>
+      <h2 class="headline">Time, mentorship,<br>and a <em>platform.</em></h2>
+      <p class="body">Each year, Artefakt selects documentary photographers and filmmakers working in Calgary and Chicago — practitioners with a project that requires sustained attention and community trust to realize.</p>
+      <a href="mailto:studio@jonlowenstein.com" class="cta">Apply — Spring Call <span class="arrow">→</span></a>
+    </div>
+    <div class="overlay-br">
+      <span>Workshop · Zürich · 2024</span>
+      <span>Open Call · Spring</span>
+    </div>
+  </section>
+
+  <!-- ACADEMY -->
+  <section class="snap-panel panel--bone">
+    <div class="section-label">CNT · 02 — Academy — Bearing Witness</div>
+    <div class="content-grid">
+      <div class="content-grid-label">
+        Masterclass · Zürich · 2024<br><br>Seasonal · Public
+      </div>
+      <div class="content-grid-body">
+        <h3>Masters of the form,<br><em>in the room.</em></h3>
+        <p>Bearing Witness is Artefakt's lecture and masterclass series. Each season we bring a small group of internationally significant documentary practitioners to Calgary and Chicago to teach, exhibit, and speak in public.</p>
+        <p>The programming is built from Jon's working relationships — thirty years of correspondence, fieldwork, and mutual regard. The 2026–27 season includes Darcy Padilla, Brenda Ann Kenneally, and Kitra Cahana.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIELDWORK -->
+  <section class="snap-panel" style="background: var(--ink);">
+    <div class="panel-image" style="background-image: url('images/canada-project-river.jpg');"></div>
+    <div class="overlay-tl">
+      <div class="pillar-code">CNT · 03</div>
+      <div class="section-rule"></div>
+      <div class="section-name">Fieldwork</div>
+    </div>
+    <div class="overlay-bl">
+      <div class="label">Field Intensives</div>
+      <h2 class="headline">The work happens<br><em>in place.</em></h2>
+      <p class="body">Fellows and Academy participants spend time in the field — on Treaty 7 land in southern Alberta, on Chicago's South Side, along the river corridors where documentary practice demands presence.</p>
+    </div>
+    <div class="overlay-br">
+      <span>Canada Project · Alberta</span>
+      <span>2023</span>
+    </div>
+  </section>
+
+  <!-- BRIDGE PROGRAMS -->
+  <section class="snap-panel panel--paper">
+    <div class="section-label">CNT · 04 — Bridge Programs — Next Practitioners</div>
+    <div class="content-grid">
+      <div class="content-grid-label">
+        Lincoln Challenge · Rantoul IL · 2002<br><br>Partners · Schools
+      </div>
+      <div class="content-grid-body">
+        <h3>The craft gets<br><em>passed on.</em></h3>
+        <p>Artefakt partners with youth-serving organizations in both cities to run bridge programs — short-form, photograph-led workshops for young people who haven't yet named themselves documentarians but are already looking closely.</p>
+        <p>The Lincoln Challenge partnership is the prototype. More will follow.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLY -->
+  <section class="snap-panel panel--paper" style="background: var(--ink);">
+    <div class="section-label" style="color: #333;">Connect — Next Steps</div>
+    <h2 class="panel-headline" style="color: var(--paper);"><em>Apply.</em> Enroll. Attend.</h2>
+    <p class="panel-lede" style="color: #555; max-width: 560px;">The Fellowship opens its next call for applications in Spring 2026. The Academy season runs Fall through Spring; workshops and lectures are announced as they are confirmed. To receive the call, the season schedule, or to propose a partnership:</p>
+    <a href="mailto:studio@jonlowenstein.com" style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper); text-decoration: none; border: 1px solid #333; padding: 10px 18px; margin-top: 8px;">studio@jonlowenstein.com <span style="color: var(--red);">→</span></a>
+    <div style="display: flex; justify-content: space-between; margin-top: 48px; padding-top: 16px; border-top: 1px solid #1a1a17;">
+      <a href="witness.html" style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--graphite); text-decoration: none;">← Witness</a>
+      <a href="legacy.html" style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--graphite); text-decoration: none;">Legacy →</a>
+    </div>
+  </section>
+
 </div>
 
-<main>
-
-  <!-- ================================================
-       PANEL 01 — MASTHEAD
-       ================================================ -->
-  <section class="panel panel--paper" id="masthead" aria-labelledby="connect-title">
-    <div class="masthead">
-      <div class="top-meta">
-        <span>Pillar 02 / 04</span>
-        <span>Connect</span>
-        <span>Fellowship · Academy</span>
-      </div>
-      <div class="main">
-        <h1 class="display" id="connect-title">We teach what we <em>practice.</em></h1>
-        <p class="lede">Connect is Artefakt's Fellowship and Academy. Working documentary photographers and filmmakers teach the craft to the next practitioners — not as theory, but as a working discipline. The Fellowship supports emerging artists with time, mentorship, and a platform. The Academy brings masters of the form to Calgary and Chicago for intensive workshops and public lectures.</p>
-      </div>
-      <div class="bottom-meta">
-        <span>Scroll ↓</span>
-        <span>04 Panels</span>
-        <span>01 / 05</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================================================
-       PANEL 02 — FELLOWSHIP (Zurich workshop 01)
-       ================================================ -->
-  <section class="panel" aria-labelledby="panel-fellowship">
-    <img src="images/zurich-workshop-01.jpg" alt="Documentary photography workshop in progress, Zurich — participants reviewing prints on a long table." class="panel-image">
-    <div class="overlay overlay--meta">
-      <span class="pillar-code">CNT · 01</span>
-      <span class="rule" aria-hidden="true"></span>
-      <span>Fellowship</span>
-    </div>
-    <div class="overlay overlay--content">
-      <span class="label">The Artefakt Fellowship</span>
-      <h2 id="panel-fellowship">Time, mentorship, and a <em>platform.</em></h2>
-      <p class="body">Each year, Artefakt selects documentary photographers and filmmakers working in Calgary and Chicago — practitioners with a project that requires sustained attention and community trust to realize. Fellows receive a stipend, a year of mentorship with established practitioners, exhibition at Monterey Avenue, and permanent placement in the Artefakt Archive.</p>
-      <p class="caption">Workshop · Zürich · 2024</p>
-    </div>
-    <div class="overlay overlay--stamp">
-      <div>CNT / 01</div>
-      <div>Open Call · Spring</div>
-    </div>
-  </section>
-
-  <!-- ================================================
-       PANEL 03 — ACADEMY (Zurich workshop 02)
-       ================================================ -->
-  <section class="panel" aria-labelledby="panel-academy">
-    <img src="images/zurich-workshop-02.jpg" alt="Close view of a workshop participant's contact sheets and marked prints at a Zurich masterclass." class="panel-image">
-    <div class="overlay overlay--meta">
-      <span class="pillar-code">CNT · 02</span>
-      <span class="rule" aria-hidden="true"></span>
-      <span>Academy</span>
-    </div>
-    <div class="overlay overlay--content">
-      <span class="label">The Artefakt Academy</span>
-      <h2 id="panel-academy">Masters of the form, <em>in the room.</em></h2>
-      <p class="body">Bearing Witness is Artefakt's lecture and masterclass series. Each season we bring a small group of internationally significant documentary practitioners to Calgary and Chicago to teach, exhibit, and speak in public. The programming is built from Jon's working relationships — thirty years of correspondence, fieldwork, and mutual regard. The 2026–27 season includes Darcy Padilla, Brenda Ann Kenneally, and Kitra Cahana.</p>
-      <p class="caption">Masterclass · Zürich · 2024</p>
-    </div>
-    <div class="overlay overlay--stamp">
-      <div>CNT / 02</div>
-      <div>Seasonal · Public</div>
-    </div>
-  </section>
-
-  <!-- ================================================
-       PANEL 04 — FIELDWORK (Canada Project, river)
-       ================================================ -->
-  <section class="panel" aria-labelledby="panel-fieldwork">
-    <img src="images/canada-project-river.jpg" alt="Landscape from the Canada Project — wide river corridor, documentary fieldwork in progress." class="panel-image">
-    <div class="overlay overlay--meta">
-      <span class="pillar-code">CNT · 03</span>
-      <span class="rule" aria-hidden="true"></span>
-      <span>Fieldwork</span>
-    </div>
-    <div class="overlay overlay--content">
-      <span class="label">Field Intensives</span>
-      <h2 id="panel-fieldwork">The work happens <em>in place.</em></h2>
-      <p class="body">Connect is not only a classroom. Fellows and Academy participants spend time in the field — on Treaty 7 land in southern Alberta, on Chicago's South Side, along the river corridors and post-industrial edges where documentary practice demands presence. The curriculum follows the work, not the other way around.</p>
-      <p class="caption">Canada Project · Alberta · 2023</p>
-    </div>
-    <div class="overlay overlay--stamp">
-      <div>CNT / 03</div>
-      <div>On Location</div>
-    </div>
-  </section>
-
-  <!-- ================================================
-       PANEL 05 — YOUTH PROGRAM (Lincoln Challenge)
-       ================================================ -->
-  <section class="panel" aria-labelledby="panel-youth">
-    <img src="images/lincoln-challenge.jpg" alt="Young participants from the Lincoln Challenge program in formation, documented in long-form project." class="panel-image">
-    <div class="overlay overlay--meta">
-      <span class="pillar-code">CNT · 04</span>
-      <span class="rule" aria-hidden="true"></span>
-      <span>Next Practitioners</span>
-    </div>
-    <div class="overlay overlay--content">
-      <span class="label">Bridge Programs</span>
-      <h2 id="panel-youth">The craft gets <em>passed on.</em></h2>
-      <p class="body">Artefakt partners with youth-serving organizations in both cities to run bridge programs — short-form, photograph-led workshops for young people who haven't yet named themselves documentarians but are already looking closely. The Lincoln Challenge partnership is the prototype. More will follow.</p>
-      <p class="caption">Lincoln Challenge · Rantoul IL · 2002</p>
-    </div>
-    <div class="overlay overlay--stamp">
-      <div>CNT / 04</div>
-      <div>Partners · Schools</div>
-    </div>
-  </section>
-
-  <!-- ================================================
-       PANEL 06 — APPLY (text panel, paper)
-       ================================================ -->
-  <section class="panel panel--paper" id="apply" aria-labelledby="apply-title">
-    <div class="masthead">
-      <div class="top-meta">
-        <span>Pillar 02 / 04</span>
-        <span>Connect — Next Steps</span>
-        <span>05 / 05</span>
-      </div>
-      <div class="main">
-        <h1 class="display" id="apply-title"><em>Apply.</em> Enroll. Attend.</h1>
-        <p class="lede">The Fellowship opens its next call for applications in Spring 2026. The Academy season runs Fall through Spring; workshops and lectures are announced as they are confirmed. To receive the call, the season schedule, or to propose a partnership, write to <a href="mailto:studio@jonlowenstein.com" style="color:var(--ink); border-bottom:1px solid var(--ink);">studio@jonlowenstein.com</a>.</p>
-      </div>
-      <div class="bottom-meta">
-        <span>← Witness</span>
-        <span>Legacy →</span>
-        <span>artefakt.foundation</span>
-      </div>
-    </div>
-  </section>
-
-</main>
+<script>
+function toggleDrawer() {
+  document.getElementById('nav-drawer').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  var drawer = document.getElementById('nav-drawer');
+  if (drawer.classList.contains('open') && !drawer.contains(e.target) && !e.target.closest('.nav-hamburger')) {
+    drawer.classList.remove('open');
+  }
+});
+</script>
 </body>
 </html>

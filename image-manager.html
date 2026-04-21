@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artefakt — Image Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4f1ea;
+    --ink: #0c0b09;
+    --red: #c8522a;
+    --dust: #c4bfb4;
+    --graphite: #6b6760;
+    --mono: "IBM Plex Mono", monospace;
+    --sans: "IBM Plex Sans", sans-serif;
+    --serif: "Playfair Display", Georgia, serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    font-weight: 300;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- HEADER ---- */
+  header {
+    position: sticky;
+    top: 0;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0 32px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+  }
+
+  .wordmark {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .wordmark .splice {
+    display: inline-block;
+    width: 2px;
+    height: 14px;
+    background: var(--red);
+    margin: 0 4px;
+  }
+
+  .header-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dust);
+  }
+
+  /* ---- INSTRUCTIONS ---- */
+  .instructions {
+    padding: 32px 32px 0;
+    max-width: 900px;
+  }
+  .instructions h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+  .instructions h1 em { font-style: italic; }
+  .instructions p {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--graphite);
+    max-width: 640px;
+  }
+  .instructions .step {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 6px;
+    margin-top: 24px;
+    display: block;
+  }
+
+  /* ---- SLOT GRID ---- */
+  .section-header {
+    padding: 40px 32px 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    border-bottom: 1px solid var(--dust);
+    margin: 0 32px;
+  }
+  .section-header h2 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--graphite);
+  }
+  .section-header .pillar {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+
+  .slot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    padding: 24px 32px;
+  }
+
+  /* ---- INDIVIDUAL SLOT ---- */
+  .slot {
+    position: relative;
+    aspect-ratio: 3/2;
+    border: 1px solid var(--dust);
+    background: white;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 120ms;
+  }
+
+  .slot:hover { border-color: var(--ink); }
+  .slot.drag-over { border-color: var(--red); border-style: dashed; }
+  .slot.filled { border-color: var(--ink); }
+
+  .slot input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+
+  .slot-empty {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    pointer-events: none;
+  }
+
+  .slot-empty .plus {
+    font-size: 24px;
+    color: var(--dust);
+    line-height: 1;
+  }
+
+  .slot-empty .slot-name {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--graphite);
+    text-align: center;
+    padding: 0 8px;
+  }
+
+  .slot-empty .slot-desc {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--dust);
+    text-align: center;
+    padding: 0 12px;
+    line-height: 1.4;
+  }
+
+  .slot-preview {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    pointer-events: none;
+  }
+
+  .slot.filled .slot-preview { display: block; }
+  .slot.filled .slot-empty { display: none; }
+
+  /* filled label overlay */
+  .slot-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(12,11,9,0.75);
+    padding: 6px 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper);
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .slot.filled .slot-label { display: flex; }
+
+  .slot-clear {
+    position: absolute;
+    top: 6px; right: 6px;
+    width: 20px; height: 20px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 4;
+    line-height: 1;
+  }
+  .slot.filled .slot-clear { display: flex; }
+  .slot-clear:hover { background: var(--red); }
+
+  /* ---- EXPORT PANEL ---- */
+  .export-panel {
+    margin: 40px 32px;
+    padding: 32px;
+    border: 1px solid var(--dust);
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .export-panel h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+  .export-panel h2 em { font-style: italic; }
+
+  .export-panel p {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 14px;
+    color: var(--dust);
+    margin-bottom: 24px;
+    line-height: 1.6;
+    max-width: 560px;
+  }
+
+  .export-panel .terminal {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: #1a1917;
+    color: #a8c49a;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    line-height: 1.8;
+    letter-spacing: 0.04em;
+  }
+
+  .export-panel .terminal .prompt { color: var(--red); }
+
+  .btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    transition: background 120ms;
+  }
+
+  .btn-primary {
+    background: var(--red);
+    color: var(--paper);
+  }
+  .btn-primary:hover { background: #a8431f; }
+  .btn-primary:disabled { background: var(--graphite); cursor: not-allowed; }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--dust);
+    border: 1px solid var(--graphite);
+    margin-left: 12px;
+  }
+  .btn-secondary:hover { border-color: var(--paper); color: var(--paper); }
+
+  /* ---- STATUS BAR ---- */
+  .status-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 36px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    z-index: 100;
+  }
+
+  .status-bar .count { color: var(--red); }
+  .status-bar .ready { color: #a8c49a; }
+
+  /* ---- PROGRESS OVERLAY ---- */
+  #progress-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(12,11,9,0.85);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+  }
+  #progress-overlay.visible { display: flex; }
+  #progress-overlay p {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--paper);
+  }
+  #progress-overlay .prog-file {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--dust);
+    letter-spacing: 0.1em;
+  }
+  #progress-bar-wrap {
+    width: 320px;
+    height: 2px;
+    background: var(--graphite);
+  }
+  #progress-bar {
+    height: 2px;
+    background: var(--red);
+    width: 0%;
+    transition: width 200ms;
+  }
+
+  /* bottom padding for status bar */
+  .bottom-pad { height: 60px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wordmark">arte<span class="splice"></span>fakt</div>
+  <div class="header-meta">Image Manager · artefakt.foundation</div>
+</header>
+
+<div class="instructions">
+  <h1>Place your <em>photographs.</em></h1>
+  <p>Drag an image file onto any slot below, or click a slot to browse. When you're done, click <strong>Save All to Repo</strong> — it writes directly into your ARTEFAKT-FOUNDATION/images folder. Then push to GitHub as usual.</p>
+  <span class="step">How it works</span>
+  <p>Each slot corresponds to an image filename the site already expects. Drop the right photograph onto the right slot. You can replace an image at any time by dropping a new one. Nothing is saved until you click the Save button.</p>
+</div>
+
+<!-- ================================================
+     HOMEPAGE
+     ================================================ -->
+<div class="section-header">
+  <span class="pillar">Homepage</span>
+  <h2>index.html — Four pillar panels</h2>
+</div>
+<div class="slot-grid">
+  <div class="slot" data-filename="witness.jpg" data-desc="Witness panel hero">
+    <input type="file" accept="image/*">
+    <div class="slot-empty">
+      <span class="plus">+</span>
+      <span class="slot-name">witness.jpg</span>
+      <span class="slot-desc">Witness panel hero</span>
+    </div>
+    <img class="slot-preview" alt="">
+    <div class="slot-label"><span>witness.jpg</span><span>✓</span></div>
+    <button class="slot-clear" title="Remove">×</button>
+  </div>
+  <div class="slot" data-filename="connect.jpg" data-desc="Connect panel hero">
+    <input type="file" accept="image/*">
+    <div class="slot-empty">
+      <span class="plus">+</span>
+      <span class="slot-name">connect.jpg</span>
+      <span class="slot-desc">Connect panel hero</span>
+    </div>
+    <img class="slot-preview" alt="">
+    <div class="slot-label"><span>connect.jpg</span><span>✓</span></div>
+    <button class="slot-clear" title="Remove">×</button>
+  </div>
+  <div class="slot" data-filename="legacy.jpg" data-desc="Legacy panel hero">
+    <input type="file" accept="image/*">
+    <div class="slot-empty">
+      <span class="plus">+</span>
+      <span class="slot-name">legacy.jpg</span>
+      <span class="slot-desc">Legacy panel hero</span>
+    </div>
+    <img class="slot-preview" alt="">
+    <div class="slot-label"><span>legacy.jpg</span><span>✓</span></div>
+    <button class="slot-clear" title="Remove">×</button>
+  </div>
+  <div class="slot" data-filename="sustain.jpg" data-desc="Sustain panel hero">
+    <input type="file" accept="image/*">
+    <div class="slot-empty">
+      <span class="plus">+</span>
+      <span class="slot-name">sustain.jpg</span>
+      <span class="slot-desc">Sustain panel hero</span>
+    </div>
+    <img class="slot-preview" alt="">
+    <div class="slot-label"><span>sustain.jpg</span><span>✓</span></div>
+    <button class="slot-clear" title="Remove">×</button>
+  </div>
+</div>
+
+<!-- ================================================
+     WITNESS PAGE
+     ================================================ -->
+<div class="section-header">
+  <span class="pillar">Witness</span>
+  <h2>witness.html — 13 documentary plates</h2>
+</div>
+<div class="slot-grid" id="witness-plates">
+</div>
+
+<!-- ================================================
+     CONNECT PAGE
+     ================================================ -->
+<div class="section-header">
+  <span class="pillar">Connect</span>
+  <h2>connect.html — Fellowship &amp; Academy</h2>
+</div>
+<div class="slot-grid">
+  <div class="slot" data-filename="zurich-workshop-01.jpg" data-desc="Zurich workshop 01">
+    <input type="file" accept="image/*">
+    <div class="slot-empty"><span class="plus">+</span><span class="slot-name">zurich-workshop-01.jpg</span><span class="slot-desc">Zurich workshop 01</span></div>
+    <img class="slot-preview" alt=""><div class="slot-label"><span>zurich-workshop-01.jpg</span><span>✓</span></div><button class="slot-clear">×</button>
+  </div>
+  <div class="slot" data-filename="zurich-workshop-02.jpg" data-desc="Zurich workshop 02">
+    <input type="file" accept="image/*">
+    <div class="slot-empty"><span class="plus">+</span><span class="slot-name">zurich-workshop-02.jpg</span><span class="slot-desc">Zurich workshop 02</span></div>
+    <img class="slot-preview" alt=""><div class="slot-label"><span>zurich-workshop-02.jpg</span><span>✓</span></div><button class="slot-clear">×</button>
+  </div>
+  <div class="slot" data-filename="canada-project-river.jpg" data-desc="Canada Project — river">
+    <input type="file" accept="image/*">
+    <div class="slot-empty"><span class="plus">+</span><span class="slot-name">canada-project-river.jpg</span><span class="slot-desc">Canada Project · river</span></div>
+    <img class="slot-preview" alt=""><div class="slot-label"><span>canada-project-river.jpg</span><span>✓</span></div><button class="slot-clear">×</button>
+  </div>
+  <div class="slot" data-filename="lincoln-challenge.jpg" data-desc="Lincoln Challenge youth">
+    <input type="file" accept="image/*">
+    <div class="slot-empty"><span class="plus">+</span><span class="slot-name">lincoln-challenge.jpg</span><span class="slot-desc">Lincoln Challenge youth</span></div>
+    <img class="slot-preview" alt=""><div class="slot-label"><span>lincoln-challenge.jpg</span><span>✓</span></div><button class="slot-clear">×</button>
+  </div>
+</div>
+
+<!-- ================================================
+     LEGACY PAGE
+     ================================================ -->
+<div class="section-header">
+  <span class="pillar">Legacy</span>
+  <h2>legacy.html — The Archive</h2>
+</div>
+<div class="slot-grid">
+  <div class="slot" data-filename="tent-city-01.jpg" data-desc="Tent city 01">
+    <input type="file" accept="image/*">
+    <div class="slot-empty"><span class="plus">+</span><span class="slot-name">tent-city-01.jpg</span><span class="slot-desc">Tent city 01</span></div>
+    <img class="slot-preview" alt=""><div class="slot-label"><span>tent-city-01.jpg</span><span>✓</span></div><button class="slot-clear">×</button>
+  </div>
+  <div class="slot" data-filename="tent-city-02.jpg" data-desc="Tent city 02">
+    <input type="file" accept="image/*">
+    <div class="slot-empty"><span class="plus">+</span><span class="slot-name">tent-city-02.jpg</span><span class="slot-desc">Tent city 02</span></div>
+    <img class="slot-preview" alt=""><div class="slot-label"><span>tent-city-02.jpg</span><span>✓</span></div><button class="slot-clear">×</button>
+  </div>
+  <div class="slot" data-filename="apples-in-snow.jpg" data-desc="Apples in snow">
+    <input type="file" accept="image/*">
+    <div class="slot-empty"><span class="plus">+</span><span class="slot-name">apples-in-snow.jpg</span><span class="slot-desc">Apples in snow</span></div>
+    <img class="slot-preview" alt=""><div class="slot-label"><span>apples-in-snow.jpg</span><span>✓</span></div><button class="slot-clear">×</button>
+  </div>
+  <div class="slot" data-filename="calgary-construction.jpg" data-desc="Calgary construction">
+    <input type="file" accept="image/*">
+    <div class="slot-empty"><span class="plus">+</span><span class="slot-name">calgary-construction.jpg</span><span class="slot-desc">Calgary construction</span></div>
+    <img class="slot-preview" alt=""><div class="slot-label"><span>calgary-construction.jpg</span><span>✓</span></div><button class="slot-clear">×</button>
+  </div>
+  <div class="slot" data-filename="north-korea.jpg" data-desc="North Korea">
+    <input type="file" accept="image/*">
+    <div class="slot-empty"><span class="plus">+</span><span class="slot-name">north-korea.jpg</span><span class="slot-desc">North Korea</span></div>
+    <img class="slot-preview" alt=""><div class="slot-label"><span>north-korea.jpg</span><span>✓</span></div><button class="slot-clear">×</button>
+  </div>
+</div>
+
+<!-- ================================================
+     SUSTAIN PAGE
+     ================================================ -->
+<div class="section-header">
+  <span class="pillar">Sustain</span>
+  <h2>sustain.html — Materials Reuse</h2>
+</div>
+<div class="slot-grid">
+  <div class="slot" data-filename="red-dress-gravel.jpg" data-desc="Red dress on gravel">
+    <input type="file" accept="image/*">
+    <div class="slot-empty"><span class="plus">+</span><span class="slot-name">red-dress-gravel.jpg</span><span class="slot-desc">Red dress on gravel</span></div>
+    <img class="slot-preview" alt=""><div class="slot-label"><span>red-dress-gravel.jpg</span><span>✓</span></div><button class="slot-clear">×</button>
+  </div>
+  <div class="slot" data-filename="pink-handcuffs.jpg" data-desc="Pink handcuffs">
+    <input type="file" accept="image/*">
+    <div class="slot-empty"><span class="plus">+</span><span class="slot-name">pink-handcuffs.jpg</span><span class="slot-desc">Pink handcuffs</span></div>
+    <img class="slot-preview" alt=""><div class="slot-label"><span>pink-handcuffs.jpg</span><span>✓</span></div><button class="slot-clear">×</button>
+  </div>
+  <div class="slot" data-filename="pink-shoes.jpg" data-desc="Pink shoes">
+    <input type="file" accept="image/*">
+    <div class="slot-empty"><span class="plus">+</span><span class="slot-name">pink-shoes.jpg</span><span class="slot-desc">Pink shoes</span></div>
+    <img class="slot-preview" alt=""><div class="slot-label"><span>pink-shoes.jpg</span><span>✓</span></div><button class="slot-clear">×</button>
+  </div>
+  <div class="slot" data-filename="taco-stand.jpg" data-desc="Taco stand">
+    <input type="file" accept="image/*">
+    <div class="slot-empty"><span class="plus">+</span><span class="slot-name">taco-stand.jpg</span><span class="slot-desc">Taco stand</span></div>
+    <img class="slot-preview" alt=""><div class="slot-label"><span>taco-stand.jpg</span><span>✓</span></div><button class="slot-clear">×</button>
+  </div>
+</div>
+
+<!-- ================================================
+     ABOUT PAGE
+     ================================================ -->
+<div class="section-header">
+  <span class="pillar">About</span>
+  <h2>about.html — Founder &amp; Organization</h2>
+</div>
+<div class="slot-grid">
+  <div class="slot" data-filename="chicago-hat-figure.jpg" data-desc="Chicago skyline / hat figure">
+    <input type="file" accept="image/*">
+    <div class="slot-empty"><span class="plus">+</span><span class="slot-name">chicago-hat-figure.jpg</span><span class="slot-desc">Chicago · hat figure</span></div>
+    <img class="slot-preview" alt=""><div class="slot-label"><span>chicago-hat-figure.jpg</span><span>✓</span></div><button class="slot-clear">×</button>
+  </div>
+  <div class="slot" data-filename="ted-stage.jpg" data-desc="TED stage">
+    <input type="file" accept="image/*">
+    <div class="slot-empty"><span class="plus">+</span><span class="slot-name">ted-stage.jpg</span><span class="slot-desc">TED stage</span></div>
+    <img class="slot-preview" alt=""><div class="slot-label"><span>ted-stage.jpg</span><span>✓</span></div><button class="slot-clear">×</button>
+  </div>
+</div>
+
+<!-- ================================================
+     EXPORT
+     ================================================ -->
+<div class="export-panel">
+  <h2>Save &amp; <em>deploy.</em></h2>
+  <p>Click Save All to write your images into the repo's images folder. Then push to GitHub and Vercel deploys automatically. You can also drag a whole folder of images onto any slot — it'll pick the first image in the folder.</p>
+  <div class="terminal">
+    <div><span class="prompt">$</span> cd /Users/jonlowenstein/ARTEFAKT-FOUNDATION</div>
+    <div><span class="prompt">$</span> git add images/</div>
+    <div><span class="prompt">$</span> git commit -m "Update photographs"</div>
+    <div><span class="prompt">$</span> git push</div>
+  </div>
+  <button class="btn btn-primary" id="save-btn" disabled>Save All to Repo</button>
+  <button class="btn btn-secondary" id="clear-all-btn">Clear All</button>
+  <p id="save-status" style="margin-top:16px; font-family:var(--mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--dust);"></p>
+</div>
+
+<div class="bottom-pad"></div>
+
+<!-- STATUS BAR -->
+<div class="status-bar">
+  <span>artefakt image manager · local tool</span>
+  <span><span class="count" id="filled-count">0</span> / <span id="total-count">0</span> slots filled</span>
+  <span id="save-ready" class="ready" style="display:none;">Ready to save</span>
+</div>
+
+<!-- PROGRESS OVERLAY -->
+<div id="progress-overlay">
+  <p>Saving images to repo…</p>
+  <div id="progress-bar-wrap"><div id="progress-bar"></div></div>
+  <div class="prog-file" id="prog-file"></div>
+</div>
+
+<script>
+// ============================================================
+// Build witness plates dynamically
+// ============================================================
+const witnessGrid = document.getElementById('witness-plates');
+for (let i = 1; i <= 13; i++) {
+  const n = String(i).padStart(2, '0');
+  const filename = `witness-${n}.jpg`;
+  witnessGrid.innerHTML += `
+    <div class="slot" data-filename="${filename}" data-desc="Witness plate ${i} of 13">
+      <input type="file" accept="image/*">
+      <div class="slot-empty">
+        <span class="plus">+</span>
+        <span class="slot-name">${filename}</span>
+        <span class="slot-desc">Plate ${i} of 13</span>
+      </div>
+      <img class="slot-preview" alt="">
+      <div class="slot-label"><span>${filename}</span><span>✓</span></div>
+      <button class="slot-clear">×</button>
+    </div>`;
+}
+
+// ============================================================
+// Slot logic
+// ============================================================
+const imageStore = {}; // filename -> File object
+
+function updateStatus() {
+  const slots = document.querySelectorAll('.slot');
+  const filled = document.querySelectorAll('.slot.filled').length;
+  document.getElementById('filled-count').textContent = filled;
+  document.getElementById('total-count').textContent = slots.length;
+  const saveBtn = document.getElementById('save-btn');
+  const saveReady = document.getElementById('save-ready');
+  if (filled > 0) {
+    saveBtn.disabled = false;
+    saveReady.style.display = 'inline';
+  } else {
+    saveBtn.disabled = true;
+    saveReady.style.display = 'none';
+  }
+}
+
+function fillSlot(slot, file) {
+  const filename = slot.dataset.filename;
+  imageStore[filename] = file;
+  const preview = slot.querySelector('.slot-preview');
+  const reader = new FileReader();
+  reader.onload = e => {
+    preview.src = e.target.result;
+    slot.classList.add('filled');
+    updateStatus();
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearSlot(slot) {
+  const filename = slot.dataset.filename;
+  delete imageStore[filename];
+  const preview = slot.querySelector('.slot-preview');
+  preview.src = '';
+  slot.classList.remove('filled');
+  updateStatus();
+}
+
+// Wire up all slots
+document.addEventListener('DOMContentLoaded', () => {
+  updateStatus();
+
+  document.querySelectorAll('.slot').forEach(slot => {
+    const input = slot.querySelector('input[type="file"]');
+    const clearBtn = slot.querySelector('.slot-clear');
+
+    // File input change
+    input.addEventListener('change', e => {
+      if (e.target.files[0]) fillSlot(slot, e.target.files[0]);
+      input.value = ''; // reset so same file can be re-selected
+    });
+
+    // Clear button
+    clearBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      clearSlot(slot);
+    });
+
+    // Drag and drop
+    slot.addEventListener('dragover', e => {
+      e.preventDefault();
+      slot.classList.add('drag-over');
+    });
+    slot.addEventListener('dragleave', () => slot.classList.remove('drag-over'));
+    slot.addEventListener('drop', e => {
+      e.preventDefault();
+      slot.classList.remove('drag-over');
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) fillSlot(slot, file);
+    });
+  });
+
+  // Clear all
+  document.getElementById('clear-all-btn').addEventListener('click', () => {
+    document.querySelectorAll('.slot.filled').forEach(slot => clearSlot(slot));
+  });
+
+  // Save all — uses File System Access API (Chrome/Edge, works locally)
+  document.getElementById('save-btn').addEventListener('click', async () => {
+    const files = Object.entries(imageStore);
+    if (files.length === 0) return;
+
+    // Check if File System Access API is available
+    if (!window.showDirectoryPicker) {
+      // Fallback: download each file with correct name
+      fallbackDownload(files);
+      return;
+    }
+
+    try {
+      const dirHandle = await window.showDirectoryPicker({
+        mode: 'readwrite',
+        startIn: 'documents',
+        id: 'artefakt-images'
+      });
+
+      const overlay = document.getElementById('progress-overlay');
+      const bar = document.getElementById('progress-bar');
+      const progFile = document.getElementById('prog-file');
+      overlay.classList.add('visible');
+
+      for (let i = 0; i < files.length; i++) {
+        const [filename, file] = files[i];
+        progFile.textContent = filename;
+        bar.style.width = ((i / files.length) * 100) + '%';
+
+        const fileHandle = await dirHandle.getFileHandle(filename, { create: true });
+        const writable = await fileHandle.createWritable();
+        await writable.write(file);
+        await writable.close();
+      }
+
+      bar.style.width = '100%';
+      setTimeout(() => {
+        overlay.classList.remove('visible');
+        document.getElementById('save-status').textContent =
+          `✓ ${files.length} image${files.length > 1 ? 's' : ''} saved. Now run git add images/ && git commit && git push.`;
+      }, 400);
+
+    } catch (err) {
+      document.getElementById('progress-overlay').classList.remove('visible');
+      if (err.name !== 'AbortError') {
+        // User cancelled — fall back to downloads
+        fallbackDownload(files);
+      }
+    }
+  });
+});
+
+// Fallback: download files one by one with correct names
+function fallbackDownload(files) {
+  const status = document.getElementById('save-status');
+  status.textContent = `Downloading ${files.length} files — move them into your ARTEFAKT-FOUNDATION/images/ folder.`;
+  files.forEach(([filename, file], i) => {
+    setTimeout(() => {
+      const url = URL.createObjectURL(file);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }, i * 300);
+  });
+}
+</script>
+</body>
+</html>

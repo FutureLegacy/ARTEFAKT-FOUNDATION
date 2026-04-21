@@ -3,173 +3,159 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sustain — Artefakt Foundation</title>
-<meta name="description" content="Artefakt Sustain: an ethical materials reuse operation that funds the foundation's programming. Nothing of value should be thrown away.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<title>Sustain — artefakt foundation</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav" aria-label="Primary">
-  <a href="index.html" class="wordmark" aria-label="Artefakt Foundation home">arte<span class="splice" aria-hidden="true"></span>fakt</a>
-  <div class="nav-links">
-    <a href="witness.html">Witness</a>
-    <a href="connect.html">Connect</a>
-    <a href="legacy.html">Legacy</a>
-    <a href="sustain.html" class="active">Sustain</a>
-    <a href="about.html">About</a>
-    <a href="https://jonlowenstein.com" class="offsite" target="_blank" rel="noopener">Studio</a>
-  </div>
+<nav class="nav">
+  <a href="index.html" class="nav-mark" aria-label="artefakt home">
+    <div class="nav-mark-img"><span>a</span></div>
+    <div class="nav-mark-base"></div>
+  </a>
+  <a href="index.html" class="nav-wordmark">
+    <span class="nav-wordmark-before">arte</span>
+    <span class="nav-wordmark-splice"></span>
+    <span class="nav-wordmark-after">fakt</span>
+  </a>
+  <span class="nav-wordmark-sub">foundation</span>
+  <ul class="nav-links">
+    <li><a href="witness.html">Witness</a></li>
+    <li><a href="connect.html">Connect</a></li>
+    <li><a href="legacy.html">Legacy</a></li>
+    <li><a href="sustain.html">Sustain</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="https://jonlowenstein.com" class="studio">Studio ↗</a></li>
+  </ul>
+  <button class="nav-hamburger" aria-label="Open menu" onclick="toggleDrawer()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- META FOOTER -->
-<div class="meta" aria-hidden="true">
-  <span>Monterey Ave NW · Calgary</span>
-  <span>Sustain — Pillar 04 / 04</span>
-  <a href="mailto:studio@jonlowenstein.com">studio@jonlowenstein.com</a>
-</div>
+<nav class="nav-drawer" id="nav-drawer">
+  <a href="witness.html">Witness</a>
+  <a href="connect.html">Connect</a>
+  <a href="legacy.html">Legacy</a>
+  <a href="sustain.html">Sustain</a>
+  <a href="about.html">About</a>
+  <a href="https://jonlowenstein.com">Studio ↗</a>
+</nav>
 
-<main>
+<footer class="meta-footer">
+  <span class="loc">Monterey Ave NW · Calgary</span>
+  <span class="red">Sustain — Pillar 04 / 04</span>
+  <span><a href="mailto:studio@jonlowenstein.com">studio@jonlowenstein.com</a></span>
+</footer>
 
-  <!-- ================================================
-       PANEL 01 — MASTHEAD
-       ================================================ -->
-  <section class="panel panel--paper" id="masthead" aria-labelledby="sustain-title">
-    <div class="masthead">
-      <div class="top-meta">
-        <span>Pillar 04 / 04</span>
-        <span>Sustain</span>
-        <span>Materials Reuse · Funding Model</span>
+<div class="snap-container">
+
+  <!-- LEDE -->
+  <section class="snap-panel panel--paper">
+    <div class="section-label">Pillar 04 / 04 — Sustain — Materials Reuse · Funding Model</div>
+    <h1 class="panel-headline">Nothing of value<br><em>gets thrown away.</em></h1>
+    <p class="panel-lede">Sustain is Artefakt's funding engine and its clearest philosophical statement. A working materials-reuse and electronics-recycling operation runs out of the gallery's back room in Calgary. Revenue funds the Fellowship, the Academy, and the archive. Nothing of value should be thrown away — materials, memories, communities, or truth.</p>
+  </section>
+
+  <!-- RED DRESS — image panel -->
+  <section class="snap-panel" style="background: var(--ink);">
+    <div class="panel-image" style="background-image: url('images/red-dress-gravel.jpg');"></div>
+    <div class="overlay-tl">
+      <div class="pillar-code">SST · 01</div>
+      <div class="section-rule"></div>
+      <div class="section-name">Stewardship</div>
+    </div>
+    <div class="overlay-bl">
+      <div class="label">What Gets Left</div>
+      <h2 class="headline">Stewardship,<br><em>not charity.</em></h2>
+      <p class="body">IT asset disposal from regional partners, estate-sale acquisitions, end-of-lease cleanouts. Materials triaged, restored, resold at fair value. Margins go directly to programming.</p>
+    </div>
+    <div class="overlay-br">
+      <span>Working Collection</span>
+      <span>Alberta · 2023</span>
+    </div>
+  </section>
+
+  <!-- MATERIALS — light panel -->
+  <section class="snap-panel panel--bone">
+    <div class="section-label">SST · 02 — Materials</div>
+    <div class="content-grid">
+      <div class="content-grid-label">
+        Working Collection · 2023<br><br>Triage · Resale
       </div>
-      <div class="main">
-        <h1 class="display" id="sustain-title">Nothing of value <em>gets thrown away.</em></h1>
-        <p class="lede">Sustain is Artefakt's funding engine and its clearest philosophical statement. A working materials-reuse and electronics-recycling operation runs out of the gallery's back room in Calgary. Revenue funds the Fellowship, the Academy, and the archive. The logic extends in both directions: nothing of value should be thrown away — materials, memories, communities, or truth.</p>
-      </div>
-      <div class="bottom-meta">
-        <span>Scroll ↓</span>
-        <span>04 Panels</span>
-        <span>01 / 05</span>
+      <div class="content-grid-body">
+        <h3>Objects carry <em>consequence.</em></h3>
+        <p>A laser printer. A film camera. A Steelcase chair. A Dyson motor. Every object that passes through Sustain has a history — an office closed, an estate settled, a contract finished.</p>
+        <p>The operation treats each one with the same care documentary practice brings to its subjects: look closely, describe accurately, find the next right place for it.</p>
       </div>
     </div>
   </section>
 
-  <!-- ================================================
-       PANEL 02 — RED DRESS
-       ================================================ -->
-  <section class="panel" aria-labelledby="panel-reddress">
-    <img src="images/red-dress-gravel.jpg" alt="Red dress photographed on gravel ground — documentary frame on displacement and what is left behind." class="panel-image">
-    <div class="overlay overlay--meta">
-      <span class="pillar-code">SST · 01</span>
-      <span class="rule" aria-hidden="true"></span>
-      <span>What Gets Left</span>
+  <!-- PINK SHOES — image panel -->
+  <section class="snap-panel" style="background: var(--ink);">
+    <div class="panel-image" style="background-image: url('images/pink-shoes.jpg');"></div>
+    <div class="overlay-tl">
+      <div class="pillar-code">SST · 03</div>
+      <div class="section-rule"></div>
+      <div class="section-name">The Funding Model</div>
     </div>
-    <div class="overlay overlay--content">
-      <span class="label">Stewardship</span>
-      <h2 id="panel-reddress">Stewardship, <em>not charity.</em></h2>
-      <p class="body">Sustain is not a donation drop-off. It is a disciplined operation — IT asset disposal from regional partners, estate-sale acquisitions, end-of-lease cleanouts from property managers. The materials are triaged, restored where they can be, and resold through marketplace channels at fair value. Margins go directly to programming.</p>
-      <p class="caption">Working Collection · Alberta · 2023</p>
+    <div class="overlay-bl">
+      <div class="label">Revenue · Programming</div>
+      <h2 class="headline">Margins become<br><em>fellowships.</em></h2>
+      <p class="body">Every dollar of margin from Sustain is ring-fenced for programming. A reconditioned printer pays for a Fellow's stipend week. An office clearance funds a masterclass honorarium.</p>
     </div>
-    <div class="overlay overlay--stamp">
-      <div>SST / 01</div>
-      <div>Operations · Live</div>
+    <div class="overlay-br">
+      <span>Transparent · Audited</span>
+      <span>Working Collection · 2023</span>
     </div>
   </section>
 
-  <!-- ================================================
-       PANEL 03 — PINK HANDCUFFS
-       ================================================ -->
-  <section class="panel" aria-labelledby="panel-handcuffs">
-    <img src="images/pink-handcuffs.jpg" alt="Pink plastic handcuffs photographed as still life — frame from documentary work on consumer culture and disposal." class="panel-image">
-    <div class="overlay overlay--meta">
-      <span class="pillar-code">SST · 02</span>
-      <span class="rule" aria-hidden="true"></span>
-      <span>Objects &amp; Consequence</span>
-    </div>
-    <div class="overlay overlay--content">
-      <span class="label">Materials</span>
-      <h2 id="panel-handcuffs">Objects <em>carry consequence.</em></h2>
-      <p class="body">A laser printer. A film camera. A Steelcase chair. A Dyson motor. Every object that passes through Sustain has a history — an office closed, an estate settled, a contract finished. The operation treats each one with the same care documentary practice brings to its subjects: look closely, describe accurately, find the next right place for it.</p>
-      <p class="caption">Working Collection · 2023</p>
-    </div>
-    <div class="overlay overlay--stamp">
-      <div>SST / 02</div>
-      <div>Triage · Resale</div>
-    </div>
-  </section>
-
-  <!-- ================================================
-       PANEL 04 — PINK SHOES
-       ================================================ -->
-  <section class="panel" aria-labelledby="panel-shoes">
-    <img src="images/pink-shoes.jpg" alt="Pink shoes — documentary still life, part of Sustain's philosophical framing of materials and memory." class="panel-image">
-    <div class="overlay overlay--meta">
-      <span class="pillar-code">SST · 03</span>
-      <span class="rule" aria-hidden="true"></span>
-      <span>Revenue · Programming</span>
-    </div>
-    <div class="overlay overlay--content">
-      <span class="label">The Funding Model</span>
-      <h2 id="panel-shoes">Margins become <em>fellowships.</em></h2>
-      <p class="body">Every dollar of margin from Sustain is ring-fenced for programming. A reconditioned printer pays for a Fellow's stipend week. An office clearance funds a masterclass honorarium. The accounting is transparent, and the logic is deliberate: the work of documentary should not depend on the goodwill of funders alone. It should have its own legs.</p>
-      <p class="caption">Working Collection · 2023</p>
-    </div>
-    <div class="overlay overlay--stamp">
-      <div>SST / 03</div>
-      <div>Transparent · Audited</div>
-    </div>
-  </section>
-
-  <!-- ================================================
-       PANEL 05 — TACO STAND
-       ================================================ -->
-  <section class="panel" aria-labelledby="panel-taco">
-    <img src="images/taco-stand.jpg" alt="Taco stand at night — street documentary frame of small-business life in the neighborhood." class="panel-image">
-    <div class="overlay overlay--meta">
-      <span class="pillar-code">SST · 04</span>
-      <span class="rule" aria-hidden="true"></span>
-      <span>Neighborhood Economy</span>
-    </div>
-    <div class="overlay overlay--content">
-      <span class="label">In The Neighborhood</span>
-      <h2 id="panel-taco">Work that <em>stays local.</em></h2>
-      <p class="body">Sustain is physical. It happens at 4525 Monterey Avenue NW in Calgary — in the same storage room that holds the archival prints. The operation supports local freight, local repair, local buyers. It is the opposite of extractive. It is, plainly, a small business at the service of a cultural mission — and over time, a template that other documentary organizations can copy.</p>
-      <p class="caption">Taco Stand · Chicago · 2018</p>
-    </div>
-    <div class="overlay overlay--stamp">
-      <div>SST / 04</div>
-      <div>4525 Monterey NW</div>
-    </div>
-  </section>
-
-  <!-- ================================================
-       PANEL 06 — PARTNERS / CLOSE
-       ================================================ -->
-  <section class="panel panel--colophon" id="partners" aria-labelledby="partners-title">
-    <div class="colophon-grid">
-      <div class="col-head">
-        <span>Sustain — Partners</span>
-        <span>05 / 05</span>
+  <!-- LOCAL — light panel -->
+  <section class="snap-panel panel--paper">
+    <div class="section-label">SST · 04 — In the Neighbourhood</div>
+    <div class="content-grid">
+      <div class="content-grid-label">
+        4525 Monterey NW<br>Calgary AB<br><br>Operations · Live
       </div>
-      <div class="col-block">
-        <h3>IT Asset Disposal</h3>
+      <div class="content-grid-body">
+        <h3>Work that<br><em>stays local.</em></h3>
+        <p>Sustain is physical. It happens at 4525 Monterey Avenue NW in Calgary — in the same storage room that holds the archival prints. The operation supports local freight, local repair, local buyers.</p>
+        <p>It is the opposite of extractive. It is, plainly, a small business at the service of a cultural mission — and over time, a template that other documentary organizations can copy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="snap-panel panel--paper">
+    <div class="section-label">Sustain — Partners</div>
+    <div class="partner-grid">
+      <div class="partner-cell">
+        <h4>IT Asset Disposal</h4>
         <p>We work with regional IT asset disposal companies, property managers handling end-of-lease cleanouts, and estate sale companies in the Calgary area. If your organization has equipment leaving service, we'd like to hear from you.</p>
       </div>
-      <div class="col-block">
-        <h3>Donate · Consign · Refer</h3>
-        <p>Office furniture in good condition, working electronics, photographic equipment, archival materials. Tax-receipt-eligible donations can be arranged. For inventory currently available for sale, contact the studio directly.</p>
-        <p style="margin-top:16px;"><a href="mailto:studio@jonlowenstein.com">studio@jonlowenstein.com →</a></p>
+      <div class="partner-cell">
+        <h4>Donate · Consign · Refer</h4>
+        <p>Office furniture in good condition, working electronics, photographic equipment, archival materials. Tax-receipt-eligible donations can be arranged. For inventory currently available for sale:</p>
+        <p style="margin-top: 12px;"><a href="mailto:studio@jonlowenstein.com">studio@jonlowenstein.com →</a></p>
       </div>
-      <div class="col-foot">
-        <span>← Legacy</span>
-        <span>Nothing of value should be thrown away.</span>
-        <span>About →</span>
-      </div>
+    </div>
+    <div style="display: flex; justify-content: space-between; margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--dust);">
+      <a href="legacy.html" style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--graphite); text-decoration: none;">← Legacy</a>
+      <a href="about.html" style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--graphite); text-decoration: none;">About →</a>
     </div>
   </section>
 
-</main>
+</div>
+
+<script>
+function toggleDrawer() {
+  document.getElementById('nav-drawer').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  var drawer = document.getElementById('nav-drawer');
+  if (drawer.classList.contains('open') && !drawer.contains(e.target) && !e.target.closest('.nav-hamburger')) {
+    drawer.classList.remove('open');
+  }
+});
+</script>
 </body>
 </html>
