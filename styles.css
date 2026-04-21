@@ -225,6 +225,11 @@ body {
   font-size: 14px;
   line-height: 1.5;
   color: var(--paper);
+  max-width: 420px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .overlay--content .caption {
