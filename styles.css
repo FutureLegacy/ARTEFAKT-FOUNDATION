@@ -22,6 +22,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
+  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   background: var(--ink);
 }
@@ -126,32 +127,34 @@ body {
 .meta a { color: var(--paper); text-decoration: none; pointer-events: auto; }
 
 /* ------------------------------------------------------------
-   PANELS — full-width image, natural height, normal scroll
+   PANELS — each is 100vh, scroll-snap, with full-bleed image
    ------------------------------------------------------------ */
 .panel {
   position: relative;
-  width: 100%;
-  background: var(--ink);
+  width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   overflow: hidden;
+  background: var(--ink);
 }
 
 .panel-image {
-  display: block;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  /* no filters on documentary photographs */
 }
 
 /* Text panels (no photograph). Use sparingly. */
-.panel--paper {
-  background: var(--paper);
-  min-height: 100vh;
-}
-.panel--ink { background: var(--ink); color: var(--paper); min-height: 100vh; }
+.panel--paper { background: var(--paper); }
+.panel--ink { background: var(--ink); color: var(--paper); }
 
 /* ------------------------------------------------------------
    OVERLAY BLOCKS — type over photograph
-   Panels are now natural height; overlays sit absolute
-   within the relative-positioned panel, over the image.
    ------------------------------------------------------------ */
 .overlay {
   position: absolute;
@@ -161,7 +164,7 @@ body {
 
 /* Top-left metadata block: pillar code + sequence */
 .overlay--meta {
-  top: 24px;
+  top: calc(var(--nav-height) + 24px);
   left: 32px;
   font-family: var(--mono);
   font-size: 11px;
@@ -184,10 +187,11 @@ body {
   margin: 0 10px;
 }
 
-/* Bottom-left content block */
+/* Bottom-left content block: headline + caption */
 .overlay--content {
-  bottom: calc(var(--meta-height) + 24px);
+  bottom: calc(var(--meta-height) + 40px);
   left: 32px;
+  max-width: 680px;
 }
 
 .overlay--content .label {
@@ -196,7 +200,7 @@ body {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--paper);
-  margin-bottom: 10px;
+  margin-bottom: 16px;
   display: block;
 }
 
@@ -204,11 +208,10 @@ body {
 .overlay--content h2 {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(36px, 5vw, 72px);
+  font-size: clamp(36px, 6vw, 84px);
   line-height: 1.02;
   letter-spacing: -0.01em;
-  margin-bottom: 16px;
-  width: fit-content;
+  margin-bottom: 20px;
 }
 
 .overlay--content h1 em,
@@ -220,10 +223,10 @@ body {
 .overlay--content .body {
   font-family: var(--sans);
   font-weight: 300;
-  font-size: clamp(16px, 1.6vw, 20px);
-  line-height: 1.45;
+  font-size: 16px;
+  line-height: 1.55;
+  max-width: 520px;
   color: var(--paper);
-  width: 500px;
 }
 
 .overlay--content .caption {
@@ -232,14 +235,13 @@ body {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--paper);
-  margin-top: 10px;
+  margin-top: 16px;
   opacity: 0.75;
-  max-width: 500px;
 }
 
-/* Top-right stamp — out of the way of bottom content */
+/* Bottom-right coordinate/index stamp */
 .overlay--stamp {
-  top: 24px;
+  bottom: calc(var(--meta-height) + 40px);
   right: 32px;
   text-align: right;
   font-family: var(--mono);
@@ -249,7 +251,6 @@ body {
   color: var(--paper);
   opacity: 0.75;
   line-height: 1.8;
-  white-space: nowrap;
 }
 
 /* ------------------------------------------------------------
@@ -257,7 +258,8 @@ body {
    For masthead / intro / colophon panels
    ------------------------------------------------------------ */
 .panel--paper .masthead {
-  min-height: 100vh;
+  position: absolute;
+  inset: 0;
   padding: calc(var(--nav-height) + 64px) 32px calc(var(--meta-height) + 64px);
   display: grid;
   grid-template-columns: 1fr;
@@ -323,7 +325,8 @@ body {
 }
 
 .panel--index .index-grid {
-  min-height: 100vh;
+  position: absolute;
+  inset: 0;
   padding: calc(var(--nav-height) + 64px) 32px calc(var(--meta-height) + 64px);
   display: grid;
   grid-template-rows: auto 1fr auto;
@@ -397,7 +400,8 @@ body {
 }
 
 .panel--colophon .colophon-grid {
-  min-height: 100vh;
+  position: absolute;
+  inset: 0;
   padding: calc(var(--nav-height) + 64px) 32px calc(var(--meta-height) + 64px);
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -455,25 +459,10 @@ body {
   padding-top: 16px;
 }
 
-/* Gradient scrim — ensures text overlays are readable
-   regardless of image content near the bottom */
-.panel:not(.panel--paper):not(.panel--ink):not(.panel--colophon):not(.panel--index)::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.18) 0%,
-    rgba(0,0,0,0) 35%,
-    rgba(0,0,0,0) 50%,
-    rgba(0,0,0,0.55) 100%
-  );
-  pointer-events: none;
-  z-index: 1;
-}
 /* ------------------------------------------------------------
    RESPONSIVE — keep discipline on small screens
    ------------------------------------------------------------ */
+@media (max-width: 720px) {
   .nav { padding: 0 20px; height: 60px; }
   :root { --nav-height: 60px; --meta-height: 32px; }
   .meta { padding: 0 20px; font-size: 9px; }
@@ -499,7 +488,8 @@ a:focus-visible {
   outline-offset: 3px;
 }
 
-/* Reduce motion */
+/* Reduce motion: disable scroll-snap for those who prefer it */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  html { scroll-snap-type: none; scroll-behavior: auto; }
+  .panel { scroll-snap-align: none; scroll-snap-stop: normal; }
 }
