@@ -132,14 +132,13 @@ body {
   position: relative;
   width: 100%;
   background: var(--ink);
-  /* No fixed height — panel grows to fit the image */
+  overflow: hidden;
 }
 
 .panel-image {
   display: block;
   width: 100%;
   height: auto;
-  /* Full width, natural proportions. No cropping. */
 }
 
 /* Text panels (no photograph). Use sparingly. */
@@ -187,9 +186,9 @@ body {
 
 /* Bottom-left content block: headline + caption */
 .overlay--content {
-  bottom: 40px;
+  bottom: calc(var(--meta-height) + 24px);
   left: 32px;
-  max-width: 680px;
+  max-width: 640px;
 }
 
 .overlay--content .label {
@@ -239,7 +238,7 @@ body {
 
 /* Bottom-right coordinate/index stamp */
 .overlay--stamp {
-  bottom: 40px;
+  bottom: calc(var(--meta-height) + 24px);
   right: 32px;
   text-align: right;
   font-family: var(--mono);
