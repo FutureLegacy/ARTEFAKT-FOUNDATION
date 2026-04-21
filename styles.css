@@ -188,7 +188,7 @@ body {
 .overlay--content {
   bottom: calc(var(--meta-height) + 24px);
   left: 32px;
-  max-width: 640px;
+  max-width: min(580px, 55vw);
 }
 
 .overlay--content .label {
@@ -205,10 +205,10 @@ body {
 .overlay--content h2 {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(36px, 6vw, 84px);
+  font-size: clamp(32px, 5vw, 72px);
   line-height: 1.02;
   letter-spacing: -0.01em;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .overlay--content h1 em,
@@ -220,9 +220,9 @@ body {
 .overlay--content .body {
   font-family: var(--sans);
   font-weight: 300;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.55;
-  max-width: 520px;
+  width: min(520px, 45vw);
   color: var(--paper);
 }
 
