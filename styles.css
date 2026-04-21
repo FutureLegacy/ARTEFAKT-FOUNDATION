@@ -223,7 +223,7 @@ body {
   font-size: clamp(16px, 1.6vw, 20px);
   line-height: 1.45;
   color: var(--paper);
-  max-width: 500px;
+  width: 500px;
 }
 
 .overlay--content .caption {
