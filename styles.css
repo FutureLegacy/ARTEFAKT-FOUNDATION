@@ -184,11 +184,13 @@ body {
   margin: 0 10px;
 }
 
-/* Bottom-left content block: headline + caption */
+/* Bottom-left content block: headline + body + caption
+   Constrained to left ~50% so it never reaches the stamp */
 .overlay--content {
   bottom: calc(var(--meta-height) + 24px);
   left: 32px;
-  max-width: min(580px, 55vw);
+  width: 50%;
+  max-width: 540px;
 }
 
 .overlay--content .label {
@@ -197,7 +199,7 @@ body {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--paper);
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   display: block;
 }
 
@@ -205,10 +207,10 @@ body {
 .overlay--content h2 {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(32px, 5vw, 72px);
+  font-size: clamp(28px, 3.5vw, 60px);
   line-height: 1.02;
   letter-spacing: -0.01em;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .overlay--content h1 em,
@@ -220,9 +222,8 @@ body {
 .overlay--content .body {
   font-family: var(--sans);
   font-weight: 300;
-  font-size: 15px;
-  line-height: 1.55;
-  width: min(520px, 45vw);
+  font-size: 14px;
+  line-height: 1.5;
   color: var(--paper);
 }
 
@@ -232,11 +233,11 @@ body {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--paper);
-  margin-top: 16px;
+  margin-top: 10px;
   opacity: 0.75;
 }
 
-/* Bottom-right coordinate/index stamp */
+/* Bottom-right stamp — always far right, never overlaps left content */
 .overlay--stamp {
   bottom: calc(var(--meta-height) + 24px);
   right: 32px;
@@ -248,6 +249,7 @@ body {
   color: var(--paper);
   opacity: 0.75;
   line-height: 1.8;
+  white-space: nowrap;
 }
 
 /* ------------------------------------------------------------
