@@ -193,6 +193,14 @@ body {
   max-width: 540px;
 }
 
+.overlay--content .label,
+.overlay--content h1,
+.overlay--content h2,
+.overlay--content .body,
+.overlay--content .caption {
+  width: 100%;
+}
+
 .overlay--content .label {
   font-family: var(--mono);
   font-size: 11px;
@@ -225,7 +233,6 @@ body {
   font-size: clamp(16px, 1.6vw, 20px);
   line-height: 1.45;
   color: var(--paper);
-  max-width: 560px;
 }
 
 .overlay--content .caption {
