@@ -222,14 +222,10 @@ body {
 .overlay--content .body {
   font-family: var(--sans);
   font-weight: 300;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: clamp(16px, 1.6vw, 20px);
+  line-height: 1.45;
   color: var(--paper);
-  max-width: 420px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  max-width: 560px;
 }
 
 .overlay--content .caption {
@@ -242,9 +238,9 @@ body {
   opacity: 0.75;
 }
 
-/* Bottom-right stamp — always far right, never overlaps left content */
+/* Top-right stamp — out of the way of bottom content */
 .overlay--stamp {
-  bottom: calc(var(--meta-height) + 24px);
+  top: 24px;
   right: 32px;
   text-align: right;
   font-family: var(--mono);
