@@ -184,19 +184,10 @@ body {
   margin: 0 10px;
 }
 
-/* Bottom-left content block — body wraps to headline width */
+/* Bottom-left content block */
 .overlay--content {
   bottom: calc(var(--meta-height) + 24px);
   left: 32px;
-  max-width: 42%;
-}
-
-.overlay--content .label,
-.overlay--content h1,
-.overlay--content h2,
-.overlay--content .body,
-.overlay--content .caption {
-  width: 100%;
 }
 
 .overlay--content .label {
@@ -217,6 +208,7 @@ body {
   line-height: 1.02;
   letter-spacing: -0.01em;
   margin-bottom: 16px;
+  width: fit-content;
 }
 
 .overlay--content h1 em,
@@ -231,6 +223,7 @@ body {
   font-size: clamp(16px, 1.6vw, 20px);
   line-height: 1.45;
   color: var(--paper);
+  max-width: 500px;
 }
 
 .overlay--content .caption {
@@ -241,6 +234,7 @@ body {
   color: var(--paper);
   margin-top: 10px;
   opacity: 0.75;
+  max-width: 500px;
 }
 
 /* Top-right stamp — out of the way of bottom content */
