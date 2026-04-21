@@ -184,13 +184,11 @@ body {
   margin: 0 10px;
 }
 
-/* Bottom-left content block: headline + body + caption
-   Constrained to left ~50% so it never reaches the stamp */
+/* Bottom-left content block — matches masthead layout logic */
 .overlay--content {
   bottom: calc(var(--meta-height) + 24px);
   left: 32px;
-  width: 50%;
-  max-width: 540px;
+  max-width: 560px;
 }
 
 .overlay--content .label,
@@ -215,10 +213,10 @@ body {
 .overlay--content h2 {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(28px, 3.5vw, 60px);
+  font-size: clamp(36px, 5vw, 72px);
   line-height: 1.02;
   letter-spacing: -0.01em;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 }
 
 .overlay--content h1 em,
