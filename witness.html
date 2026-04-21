@@ -3,214 +3,259 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Witness — artefakt foundation</title>
+<title>Witness — Artefakt Foundation</title>
+<meta name="description" content="Artefakt Witness: long-form documentary photography grounded in community trust and ethical rigor. Thirty years of work in two cities and across borders.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<nav class="nav">
-  <a href="index.html" class="nav-mark" aria-label="artefakt home">
-    <div class="nav-mark-img"><span>a</span></div>
-    <div class="nav-mark-base"></div>
-  </a>
-  <a href="index.html" class="nav-wordmark">
-    <span class="nav-wordmark-before">arte</span>
-    <span class="nav-wordmark-splice"></span>
-    <span class="nav-wordmark-after">fakt</span>
-  </a>
-  <span class="nav-wordmark-sub">foundation</span>
-  <ul class="nav-links">
-    <li><a href="witness.html">Witness</a></li>
-    <li><a href="connect.html">Connect</a></li>
-    <li><a href="legacy.html">Legacy</a></li>
-    <li><a href="sustain.html">Sustain</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="https://jonlowenstein.com" class="studio">Studio ↗</a></li>
-  </ul>
-  <button class="nav-hamburger" aria-label="Open menu" onclick="toggleDrawer()">
-    <span></span><span></span><span></span>
-  </button>
+<!-- NAV -->
+<nav class="nav" aria-label="Primary">
+  <a href="index.html" class="wordmark" aria-label="Artefakt Foundation home">arte<span class="splice" aria-hidden="true"></span>fakt</a>
+  <div class="nav-links">
+    <a href="witness.html" class="active">Witness</a>
+    <a href="connect.html">Connect</a>
+    <a href="legacy.html">Legacy</a>
+    <a href="sustain.html">Sustain</a>
+    <a href="about.html">About</a>
+    <a href="https://jonlowenstein.com" class="offsite" target="_blank" rel="noopener">Studio</a>
+  </div>
 </nav>
 
-<nav class="nav-drawer" id="nav-drawer">
-  <a href="witness.html">Witness</a>
-  <a href="connect.html">Connect</a>
-  <a href="legacy.html">Legacy</a>
-  <a href="sustain.html">Sustain</a>
-  <a href="about.html">About</a>
-  <a href="https://jonlowenstein.com">Studio ↗</a>
-</nav>
-
-<footer class="meta-footer">
-  <span class="loc">Calgary · Chicago · The Americas</span>
-  <span class="red">Witness — Pillar 01 / 04</span>
-  <span><a href="mailto:studio@jonlowenstein.com">studio@jonlowenstein.com</a></span>
-</footer>
-
-<div class="snap-container">
-
-  <!-- LEDE -->
-  <section class="snap-panel panel--paper text-panel">
-    <div class="section-label">Pillar 01 / 04 — Witness — Long-Form Documentary</div>
-    <h1 class="panel-headline">To witness<br>is to <em>stay.</em></h1>
-    <p class="panel-lede">Long-form documentary photography and film grounded in community trust, earned access, and ethical rigor. Years rather than weeks. Return visits rather than parachute coverage. The photographs that follow are drawn from a practice that has continued, without interruption, for over two decades across Chicago, Calgary, and the broader Americas.</p>
-    <div class="overlay-br" style="position: relative; bottom: auto; right: auto; text-align: left; margin-top: 24px;">
-      <span style="display: inline-block; font-family: var(--mono); font-size: 8px; letter-spacing: 0.14em; color: var(--graphite); text-transform: uppercase;">7 Plates · Scroll ↓</span>
-    </div>
-  </section>
-
-  <!-- PLATE 01 -->
-  <section class="plate-panel snap-panel">
-    <div class="plate-image" style="background-image: url('images/witness-01.jpg');"></div>
-    <div class="overlay-tl">
-      <div class="pillar-code">WTN · 01</div>
-      <div class="section-rule"></div>
-      <div class="section-name">Plate 01</div>
-    </div>
-    <div class="plate-meta">
-      <div class="plate-code">WTN · 01</div>
-      <div class="plate-title">Chicago · South Side</div>
-      <div class="plate-location">2019</div>
-    </div>
-    <div class="overlay-br">
-      <span>02 / 09</span>
-    </div>
-  </section>
-
-  <!-- PLATE 02 -->
-  <section class="plate-panel snap-panel">
-    <div class="plate-image" style="background-image: url('images/witness-02.jpg');"></div>
-    <div class="overlay-tl">
-      <div class="pillar-code">WTN · 02</div>
-      <div class="section-rule"></div>
-      <div class="section-name">Plate 02</div>
-    </div>
-    <div class="plate-meta">
-      <div class="plate-code">WTN · 02</div>
-      <div class="plate-title">Chicago</div>
-      <div class="plate-location">2018</div>
-    </div>
-    <div class="overlay-br"><span>03 / 09</span></div>
-  </section>
-
-  <!-- PLATE 03 -->
-  <section class="plate-panel snap-panel">
-    <div class="plate-image" style="background-image: url('images/witness-03.jpg');"></div>
-    <div class="overlay-tl">
-      <div class="pillar-code">WTN · 03</div>
-      <div class="section-rule"></div>
-      <div class="section-name">Plate 03</div>
-    </div>
-    <div class="plate-meta">
-      <div class="plate-code">WTN · 03</div>
-      <div class="plate-title">Shadow Lives · US–Mexico</div>
-      <div class="plate-location">2010</div>
-    </div>
-    <div class="overlay-br"><span>04 / 09</span></div>
-  </section>
-
-  <!-- PLATE 04 -->
-  <section class="plate-panel snap-panel">
-    <div class="plate-image" style="background-image: url('images/witness-04.jpg');"></div>
-    <div class="overlay-tl">
-      <div class="pillar-code">WTN · 04</div>
-      <div class="section-rule"></div>
-      <div class="section-name">Plate 04</div>
-    </div>
-    <div class="plate-meta">
-      <div class="plate-code">WTN · 04</div>
-      <div class="plate-title">Shadow Lives · Central America</div>
-      <div class="plate-location">2012</div>
-    </div>
-    <div class="overlay-br"><span>05 / 09</span></div>
-  </section>
-
-  <!-- PLATE 05 -->
-  <section class="plate-panel snap-panel">
-    <div class="plate-image" style="background-image: url('images/witness-05.jpg');"></div>
-    <div class="overlay-tl">
-      <div class="pillar-code">WTN · 05</div>
-      <div class="section-rule"></div>
-      <div class="section-name">Plate 05</div>
-    </div>
-    <div class="plate-meta">
-      <div class="plate-code">WTN · 05</div>
-      <div class="plate-title">Chicago · South Side</div>
-      <div class="plate-location">2015</div>
-    </div>
-    <div class="overlay-br"><span>06 / 09</span></div>
-  </section>
-
-  <!-- PLATE 06 -->
-  <section class="plate-panel snap-panel">
-    <div class="plate-image" style="background-image: url('images/witness-06.jpg');"></div>
-    <div class="overlay-tl">
-      <div class="pillar-code">WTN · 06</div>
-      <div class="section-rule"></div>
-      <div class="section-name">Plate 06</div>
-    </div>
-    <div class="plate-meta">
-      <div class="plate-code">WTN · 06</div>
-      <div class="plate-title">Calgary · Alberta</div>
-      <div class="plate-location">2023</div>
-    </div>
-    <div class="overlay-br"><span>07 / 09</span></div>
-  </section>
-
-  <!-- PLATE 07 -->
-  <section class="plate-panel snap-panel">
-    <div class="plate-image" style="background-image: url('images/witness-07.jpg');"></div>
-    <div class="overlay-tl">
-      <div class="pillar-code">WTN · 07</div>
-      <div class="section-rule"></div>
-      <div class="section-name">Plate 07</div>
-    </div>
-    <div class="plate-meta">
-      <div class="plate-code">WTN · 07</div>
-      <div class="plate-title">Calgary · Alberta</div>
-      <div class="plate-location">2024</div>
-    </div>
-    <div class="overlay-br"><span>08 / 09</span></div>
-  </section>
-
-  <!-- ARCHIVE & LICENSING -->
-  <section class="snap-panel panel--paper text-panel">
-    <div class="section-label">Witness — Archive · Licensing</div>
-    <div class="content-grid">
-      <div class="content-grid-label">The Archive</div>
-      <div class="content-grid-body">
-        <h3>Every frame <em>held.</em></h3>
-        <p>Every frame in Witness is accessioned to the permanent Artefakt Archive — catalogued, held with consent, and available to researchers, curators, and community partners by appointment.</p>
-        <a href="legacy.html" style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--dust);">Enter Legacy →</a>
-      </div>
-    </div>
-    <div class="hr"></div>
-    <div class="content-grid">
-      <div class="content-grid-label">Editorial &amp; Fine Art</div>
-      <div class="content-grid-body">
-        <h3>Licensing &amp; <em>prints.</em></h3>
-        <p>Fine art prints and editorial licensing are handled through Jon Lowenstein Studio. Revenue from licensing returns directly to the archive and to Artefakt's programming.</p>
-        <a href="https://jonlowenstein.com" style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--dust);">jonlowenstein.com ↗</a>
-      </div>
-    </div>
-    <div style="display: flex; justify-content: space-between; margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--dust);">
-      <a href="index.html" style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--graphite); text-decoration: none;">← Home</a>
-      <a href="connect.html" style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--graphite); text-decoration: none;">Connect →</a>
-    </div>
-  </section>
-
+<!-- META FOOTER -->
+<div class="meta" aria-hidden="true">
+  <span>Calgary · Chicago · The Americas</span>
+  <span>Witness — Pillar 01 / 04</span>
+  <a href="mailto:studio@jonlowenstein.com">studio@jonlowenstein.com</a>
 </div>
 
-<script>
-function toggleDrawer() {
-  document.getElementById('nav-drawer').classList.toggle('open');
-}
-document.addEventListener('click', function(e) {
-  var drawer = document.getElementById('nav-drawer');
-  if (drawer.classList.contains('open') && !drawer.contains(e.target) && !e.target.closest('.nav-hamburger')) {
-    drawer.classList.remove('open');
-  }
-});
-</script>
+<main>
+
+  <!-- ================================================
+       PANEL 01 — MASTHEAD
+       ================================================ -->
+  <section class="panel panel--paper" id="masthead" aria-labelledby="witness-title">
+    <div class="masthead">
+      <div class="top-meta">
+        <span>Pillar 01 / 04</span>
+        <span>Witness</span>
+        <span>Long-Form Documentary</span>
+      </div>
+      <div class="main">
+        <h1 class="display" id="witness-title">To witness is to <em>stay.</em></h1>
+        <p class="lede">Witness is Artefakt's founding pillar — long-form documentary photography and film grounded in community trust, earned access, and ethical rigor. Years rather than weeks. Return visits rather than parachute coverage. The photographs that follow are drawn from a practice that has continued, without interruption, for over two decades across Chicago, Calgary, and the broader Americas.</p>
+      </div>
+      <div class="bottom-meta">
+        <span>Scroll ↓</span>
+        <span>13 Plates</span>
+        <span>01 / 14</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       PLATES — 13 documentary frames
+       ================================================ -->
+
+  <section class="panel" aria-label="Plate 01">
+    <img src="images/witness-01.jpg" alt="Documentary photograph — Plate 01." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">WTN · 01</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Plate 01</span>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>Chicago · South Side</div>
+      <div>2019</div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Plate 02">
+    <img src="images/witness-02.jpg" alt="Documentary photograph — Plate 02." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">WTN · 02</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Plate 02</span>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>Chicago</div>
+      <div>2018</div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Plate 03">
+    <img src="images/witness-03.jpg" alt="Documentary photograph — Plate 03." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">WTN · 03</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Plate 03</span>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>Shadow Lives · US–Mexico</div>
+      <div>2010</div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Plate 04">
+    <img src="images/witness-04.jpg" alt="Documentary photograph — Plate 04." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">WTN · 04</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Plate 04</span>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>Shadow Lives · Central America</div>
+      <div>2012</div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Plate 05">
+    <img src="images/witness-05.jpg" alt="Documentary photograph — Plate 05." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">WTN · 05</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Plate 05</span>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>Chicago · South Side</div>
+      <div>2015</div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Plate 06">
+    <img src="images/witness-06.jpg" alt="Documentary photograph — Plate 06." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">WTN · 06</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Plate 06</span>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>Calgary · Alberta</div>
+      <div>2023</div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Plate 07">
+    <img src="images/witness-07.jpg" alt="Documentary photograph — Plate 07." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">WTN · 07</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Plate 07</span>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>Calgary · Alberta</div>
+      <div>2024</div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Plate 08">
+    <img src="images/witness-08.jpg" alt="Documentary photograph — Plate 08." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">WTN · 08</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Plate 08</span>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>Tent City · Chicago</div>
+      <div>2019</div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Plate 09">
+    <img src="images/witness-09.jpg" alt="Documentary photograph — Plate 09." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">WTN · 09</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Plate 09</span>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>North Korea</div>
+      <div>2015</div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Plate 10">
+    <img src="images/witness-10.jpg" alt="Documentary photograph — Plate 10." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">WTN · 10</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Plate 10</span>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>Chicago · South Side</div>
+      <div>2020</div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Plate 11">
+    <img src="images/witness-11.jpg" alt="Documentary photograph — Plate 11." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">WTN · 11</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Plate 11</span>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>Calgary · Treaty 7</div>
+      <div>2024</div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Plate 12">
+    <img src="images/witness-12.jpg" alt="Documentary photograph — Plate 12." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">WTN · 12</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Plate 12</span>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>Chicago</div>
+      <div>2022</div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Plate 13">
+    <img src="images/witness-13.jpg" alt="Documentary photograph — Plate 13." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">WTN · 13</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Plate 13</span>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>Calgary · Alberta</div>
+      <div>2025</div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       CLOSING PANEL — Licensing / Next
+       ================================================ -->
+  <section class="panel panel--colophon" id="close" aria-labelledby="witness-close">
+    <div class="colophon-grid">
+      <div class="col-head">
+        <span>Witness — Archive · Licensing</span>
+        <span>14 / 14</span>
+      </div>
+      <div class="col-block">
+        <h3 id="witness-close">The Archive</h3>
+        <p>Every frame in Witness is accessioned to the permanent Artefakt Archive — catalogued, held with consent, and available to researchers, curators, and community partners by appointment.</p>
+        <p style="margin-top:16px;"><a href="legacy.html">Enter Legacy →</a></p>
+      </div>
+      <div class="col-block">
+        <h3>Editorial &amp; Fine Art</h3>
+        <p>Fine art prints and editorial licensing are handled through Jon Lowenstein Studio. Revenue from licensing returns directly to the archive and to Artefakt's programming.</p>
+        <p style="margin-top:16px;"><a href="https://jonlowenstein.com" target="_blank" rel="noopener">jonlowenstein.com →</a></p>
+      </div>
+      <div class="col-foot">
+        <span>← Home</span>
+        <span>To witness is to stay.</span>
+        <span>Connect →</span>
+      </div>
+    </div>
+  </section>
+
+</main>
 </body>
 </html>

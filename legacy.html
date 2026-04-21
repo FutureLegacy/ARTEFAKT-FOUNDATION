@@ -3,183 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Legacy — artefakt foundation</title>
+<title>Legacy — Artefakt Foundation</title>
+<meta name="description" content="Artefakt Legacy: the archive. A permanent, publicly accessible record of documentary work made over decades across Chicago, Calgary, and beyond.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<nav class="nav">
-  <a href="index.html" class="nav-mark" aria-label="artefakt home">
-    <div class="nav-mark-img"><span>a</span></div>
-    <div class="nav-mark-base"></div>
-  </a>
-  <a href="index.html" class="nav-wordmark">
-    <span class="nav-wordmark-before">arte</span>
-    <span class="nav-wordmark-splice"></span>
-    <span class="nav-wordmark-after">fakt</span>
-  </a>
-  <span class="nav-wordmark-sub">foundation</span>
-  <ul class="nav-links">
-    <li><a href="witness.html">Witness</a></li>
-    <li><a href="connect.html">Connect</a></li>
-    <li><a href="legacy.html">Legacy</a></li>
-    <li><a href="sustain.html">Sustain</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="https://jonlowenstein.com" class="studio">Studio ↗</a></li>
-  </ul>
-  <button class="nav-hamburger" aria-label="Open menu" onclick="toggleDrawer()">
-    <span></span><span></span><span></span>
-  </button>
+<!-- NAV -->
+<nav class="nav" aria-label="Primary">
+  <a href="index.html" class="wordmark" aria-label="Artefakt Foundation home">arte<span class="splice" aria-hidden="true"></span>fakt</a>
+  <div class="nav-links">
+    <a href="witness.html">Witness</a>
+    <a href="connect.html">Connect</a>
+    <a href="legacy.html" class="active">Legacy</a>
+    <a href="sustain.html">Sustain</a>
+    <a href="about.html">About</a>
+    <a href="https://jonlowenstein.com" class="offsite" target="_blank" rel="noopener">Studio</a>
+  </div>
 </nav>
 
-<nav class="nav-drawer" id="nav-drawer">
-  <a href="witness.html">Witness</a>
-  <a href="connect.html">Connect</a>
-  <a href="legacy.html">Legacy</a>
-  <a href="sustain.html">Sustain</a>
-  <a href="about.html">About</a>
-  <a href="https://jonlowenstein.com">Studio ↗</a>
-</nav>
-
-<footer class="meta-footer">
-  <span class="loc">Calgary AB · Chicago IL</span>
-  <span class="red">Legacy — Pillar 03 / 04</span>
-  <span><a href="mailto:studio@jonlowenstein.com">studio@jonlowenstein.com</a></span>
-</footer>
-
-<div class="snap-container">
-
-  <!-- LEDE -->
-  <section class="snap-panel panel--paper text-panel">
-    <div class="section-label">Pillar 03 / 04 — Legacy — The Archive</div>
-    <h1 class="panel-headline">What the<br>photograph <em>keeps.</em></h1>
-    <p class="panel-lede">A publicly accessible record of documentary photography and film made over three decades in Chicago, Calgary, across the Americas, and beyond. Every frame is accessioned, catalogued, and held in trust for the communities who appear in it.</p>
-  </section>
-
-  <!-- TENT CITY — image panel -->
-  <section class="snap-panel" style="background: var(--ink);">
-    <div class="panel-image" style="background-image: url('images/tent-city-01.jpg');"></div>
-    <div class="overlay-tl">
-      <div class="pillar-code">LGY · 01</div>
-      <div class="section-rule"></div>
-      <div class="section-name">Long-Form</div>
-    </div>
-    <div class="overlay-bl">
-      <div class="label">Accession · Housing &amp; Displacement</div>
-      <h2 class="headline">Work that<br>took <em>years.</em></h2>
-      <p class="body">The archive holds long-form projects that no editorial deadline would have allowed. Years of return visits, of earned access, of staying when the news cycle moved on.</p>
-    </div>
-    <div class="overlay-br">
-      <span>Tent City · Chicago</span>
-      <span>2019 · Ongoing</span>
-    </div>
-  </section>
-
-  <!-- COMMUNITY TRUST — light panel -->
-  <section class="snap-panel panel--bone text-panel">
-    <div class="section-label">LGY · 02 — Community Trust</div>
-    <div class="content-grid">
-      <div class="content-grid-label">
-        Tent City · Chicago · 2019<br><br>Consent · On File
-      </div>
-      <div class="content-grid-body">
-        <h3>Held in <em>trust.</em></h3>
-        <p>Every accession in the archive is attached to a consent record. The communities and individuals photographed have say in how their images are used, circulated, and licensed. This is documentary practice that doesn't end when the shutter closes — it continues for as long as the photograph exists.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- APPLES — image panel -->
-  <section class="snap-panel" style="background: var(--ink);">
-    <div class="panel-image" style="background-image: url('images/apples-in-snow.jpg'); background-position: center 40%;"></div>
-    <div class="overlay-tl">
-      <div class="pillar-code">LGY · 03</div>
-      <div class="section-rule"></div>
-      <div class="section-name">Still Life · Landscape</div>
-    </div>
-    <div class="overlay-bl">
-      <div class="label">Accession · Working Collection</div>
-      <h2 class="headline">Not only <em>people.</em></h2>
-      <p class="body">Documentary is a discipline of attention. The archive holds landscapes, still lifes, objects left behind, the weather of a place. These frames carry the texture that makes the people-pictures legible.</p>
-    </div>
-    <div class="overlay-br">
-      <span>Apples · Alberta</span>
-      <span>2023</span>
-    </div>
-  </section>
-
-  <!-- CITIES — light panel -->
-  <section class="snap-panel panel--paper text-panel">
-    <div class="section-label">LGY · 04 — Cities in Transition</div>
-    <div class="content-grid">
-      <div class="content-grid-label">
-        Construction · Calgary · 2024<br><br>Calgary · Chicago
-      </div>
-      <div class="content-grid-body">
-        <h3>Cities get <em>rewritten.</em></h3>
-        <p>The archive watches Calgary and Chicago both — two cities on very different trajectories, bound together by Jon's practice and by the working project <em>If You Lived Here You'd Be Home By Now.</em></p>
-        <p>The archive is the only place where both cities are held in one record, frame by frame, block by block.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- NORTH KOREA — image panel -->
-  <section class="snap-panel" style="background: var(--ink);">
-    <div class="panel-image" style="background-image: url('images/north-korea.jpg');"></div>
-    <div class="overlay-tl">
-      <div class="pillar-code">LGY · 05</div>
-      <div class="section-rule"></div>
-      <div class="section-name">Restricted Access</div>
-    </div>
-    <div class="overlay-bl">
-      <div class="label">Accession · International</div>
-      <h2 class="headline">What the world<br><em>rarely shows.</em></h2>
-      <p class="body">The archive holds reportage from places that don't let photographers in easily, or at all. Held with extra care — part of the record precisely because they are rare.</p>
-    </div>
-    <div class="overlay-br">
-      <span>North Korea</span>
-      <span>2015 · Protected</span>
-    </div>
-  </section>
-
-  <!-- ACCESS -->
-  <section class="snap-panel panel--paper text-panel">
-    <div class="section-label">Legacy — Access</div>
-    <div class="content-grid">
-      <div class="content-grid-label">Researchers</div>
-      <div class="content-grid-body">
-        <h3>Open to <em>researchers.</em></h3>
-        <p>The archive is accessible by appointment for journalists, scholars, curators, and community researchers. Licensing is available for editorial and institutional use. Write for a catalogue of available accessions.</p>
-        <a href="mailto:studio@jonlowenstein.com" style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--dust);">studio@jonlowenstein.com →</a>
-      </div>
-    </div>
-    <div class="hr"></div>
-    <div class="content-grid">
-      <div class="content-grid-label">Licensing</div>
-      <div class="content-grid-body">
-        <h3>Fine art &amp; <em>editorial.</em></h3>
-        <p>Fine art prints and editorial licensing are handled through Jon Lowenstein Studio. Revenue from licensing supports the archive's preservation and expansion.</p>
-        <a href="https://jonlowenstein.com" style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--dust);">jonlowenstein.com ↗</a>
-      </div>
-    </div>
-    <div style="display: flex; justify-content: space-between; margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--dust);">
-      <a href="connect.html" style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--graphite); text-decoration: none;">← Connect</a>
-      <a href="sustain.html" style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--graphite); text-decoration: none;">Sustain →</a>
-    </div>
-  </section>
-
+<!-- META FOOTER -->
+<div class="meta" aria-hidden="true">
+  <span>Calgary AB · Chicago IL</span>
+  <span>Legacy — Pillar 03 / 04</span>
+  <a href="mailto:studio@jonlowenstein.com">studio@jonlowenstein.com</a>
 </div>
 
-<script>
-function toggleDrawer() {
-  document.getElementById('nav-drawer').classList.toggle('open');
-}
-document.addEventListener('click', function(e) {
-  var drawer = document.getElementById('nav-drawer');
-  if (drawer.classList.contains('open') && !drawer.contains(e.target) && !e.target.closest('.nav-hamburger')) {
-    drawer.classList.remove('open');
-  }
-});
-</script>
+<main>
+
+  <!-- ================================================
+       PANEL 01 — MASTHEAD
+       ================================================ -->
+  <section class="panel panel--paper" id="masthead" aria-labelledby="legacy-title">
+    <div class="masthead">
+      <div class="top-meta">
+        <span>Pillar 03 / 04</span>
+        <span>Legacy</span>
+        <span>The Archive</span>
+      </div>
+      <div class="main">
+        <h1 class="display" id="legacy-title">What the photograph <em>keeps.</em></h1>
+        <p class="lede">Legacy is the permanent Artefakt Archive — a publicly accessible record of documentary photography and film made over three decades in Chicago, Calgary, across the Americas, and beyond. The archive is both a reference for researchers and a working collection: every frame is accessioned, catalogued, and held in trust for the communities who appear in it.</p>
+      </div>
+      <div class="bottom-meta">
+        <span>Scroll ↓</span>
+        <span>05 Panels</span>
+        <span>01 / 06</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       PANEL 02 — TENT CITY 01
+       ================================================ -->
+  <section class="panel" aria-labelledby="panel-tentcity-01">
+    <img src="images/tent-city-01.jpg" alt="Tent city encampment, long-term documentary project — shelters and personal effects at ground level." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">LGY · 01</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Long-Form</span>
+    </div>
+    <div class="overlay overlay--content">
+      <span class="label">Accession · Housing &amp; Displacement</span>
+      <h2 id="panel-tentcity-01">Work that took <em>years.</em></h2>
+      <p class="body">The archive holds long-form projects that no editorial deadline would have allowed. Years of return visits, of earned access, of staying when the news cycle moved on. These are the photographs that only exist because someone stayed.</p>
+      <p class="caption">Tent City · Chicago · 2019</p>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>LGY / 01</div>
+      <div>Ongoing · 2015–</div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       PANEL 03 — TENT CITY 02
+       ================================================ -->
+  <section class="panel" aria-labelledby="panel-tentcity-02">
+    <img src="images/tent-city-02.jpg" alt="Second frame from the tent city documentary project — interior of a shelter." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">LGY · 02</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Community Trust</span>
+    </div>
+    <div class="overlay overlay--content">
+      <span class="label">Accession · Community Trust</span>
+      <h2 id="panel-tentcity-02">Held in <em>trust.</em></h2>
+      <p class="body">Every accession in the archive is attached to a consent record. The communities and individuals photographed have say in how their images are used, circulated, and licensed. This is documentary practice that doesn't end when the shutter closes — it continues for as long as the photograph exists.</p>
+      <p class="caption">Tent City · Chicago · 2019</p>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>LGY / 02</div>
+      <div>Consent · On File</div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       PANEL 04 — APPLES IN SNOW
+       ================================================ -->
+  <section class="panel" aria-labelledby="panel-apples">
+    <img src="images/apples-in-snow.jpg" alt="Fallen apples preserved under fresh snow — still life from northern documentary work." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">LGY · 03</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Still Life · Landscape</span>
+    </div>
+    <div class="overlay overlay--content">
+      <span class="label">Accession · Working Collection</span>
+      <h2 id="panel-apples">Not only <em>people.</em></h2>
+      <p class="body">Documentary is a discipline of attention. The archive holds landscapes, still lifes, objects left behind, the weather of a place. These frames are not decoration — they carry the texture that makes the people-pictures legible. They belong in the record.</p>
+      <p class="caption">Apples · Alberta · 2023</p>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>LGY / 03</div>
+      <div>Working Collection</div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       PANEL 05 — CALGARY CONSTRUCTION
+       ================================================ -->
+  <section class="panel" aria-labelledby="panel-calgary">
+    <img src="images/calgary-construction.jpg" alt="Calgary construction site — urban documentary frame of change in progress." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">LGY · 04</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Cities in Transition</span>
+    </div>
+    <div class="overlay overlay--content">
+      <span class="label">Accession · Place</span>
+      <h2 id="panel-calgary">Cities get <em>rewritten.</em></h2>
+      <p class="body">The archive watches Calgary and Chicago both — two cities on very different trajectories, bound together by Jon's practice and by the working project <em>If You Lived Here You'd Be Home By Now.</em> The archive is the only place where both cities are held in one record, frame by frame, block by block.</p>
+      <p class="caption">Construction · Calgary · 2024</p>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>LGY / 04</div>
+      <div>Calgary · Chicago</div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       PANEL 06 — NORTH KOREA
+       ================================================ -->
+  <section class="panel" aria-labelledby="panel-nk">
+    <img src="images/north-korea.jpg" alt="Frame from documentary work in North Korea — restricted-access reportage." class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">LGY · 05</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Restricted Access</span>
+    </div>
+    <div class="overlay overlay--content">
+      <span class="label">Accession · International</span>
+      <h2 id="panel-nk">What the world <em>rarely shows.</em></h2>
+      <p class="body">The archive also holds reportage from places that don't let photographers in easily, or at all. These accessions are held with extra care — with respect to the people who appear in them and the conditions under which the work was made. They are part of the record precisely because they are rare.</p>
+      <p class="caption">North Korea · 2015</p>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>LGY / 05</div>
+      <div>Protected Access</div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       PANEL 07 — COLOPHON / ACCESS
+       ================================================ -->
+  <section class="panel panel--colophon" id="access" aria-labelledby="access-title">
+    <div class="colophon-grid">
+      <div class="col-head">
+        <span>Legacy — Access</span>
+        <span>06 / 06</span>
+      </div>
+      <div class="col-block">
+        <h3>Researchers</h3>
+        <p>The archive is accessible by appointment for journalists, scholars, curators, and community researchers. Licensing is available for editorial and institutional use. Write for a catalogue of available accessions.</p>
+      </div>
+      <div class="col-block">
+        <h3>Licensing</h3>
+        <p>Fine art prints and editorial licensing are handled through Jon Lowenstein Studio. Revenue from licensing supports the archive's preservation and expansion.</p>
+        <p style="margin-top:16px;"><a href="https://jonlowenstein.com" target="_blank" rel="noopener">jonlowenstein.com →</a></p>
+      </div>
+      <div class="col-foot">
+        <span>← Connect</span>
+        <span>Contact · studio@jonlowenstein.com</span>
+        <span>Sustain →</span>
+      </div>
+    </div>
+  </section>
+
+</main>
 </body>
 </html>
