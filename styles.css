@@ -47,9 +47,17 @@ body {
   scroll-padding-top: var(--nav-h);
 }
 
+/* Image panels = snap targets, full viewport */
 .snap-panel {
   scroll-snap-align: start;
   min-height: 100vh;
+  position: relative;
+}
+
+/* Text panels = NOT snap targets, auto height, no min-height */
+.snap-panel.text-panel {
+  scroll-snap-align: none;
+  min-height: auto;
   position: relative;
 }
 
@@ -353,22 +361,26 @@ body {
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(12, 11, 9, 0.72) 0%,
-    rgba(12, 11, 9, 0.18) 55%,
-    rgba(12, 11, 9, 0.08) 100%
+    rgba(12, 11, 9, 0.75) 0%,
+    rgba(12, 11, 9, 0.20) 50%,
+    rgba(12, 11, 9, 0.05) 100%
   );
 }
 
-/* ── PAPER PANELS (light bg) ─────────────────── */
+/* ── PAPER PANELS (light bg) — NOT snap targets, auto height ── */
 .panel--paper {
   background: var(--paper);
   color: var(--ink);
-  padding: calc(var(--nav-h) + 48px) calc(var(--u) * 6) calc(var(--footer-h) + 48px);
+  min-height: auto;
+  scroll-snap-align: none;
+  padding: 56px calc(var(--u) * 6) 64px;
 }
 .panel--bone {
   background: var(--bone);
   color: var(--ink);
-  padding: calc(var(--nav-h) + 48px) calc(var(--u) * 6) calc(var(--footer-h) + 48px);
+  min-height: auto;
+  scroll-snap-align: none;
+  padding: 56px calc(var(--u) * 6) 64px;
 }
 
 /* Section label for light panels */
@@ -473,8 +485,9 @@ body {
 .plate-image {
   position: absolute;
   inset: 0;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
 }
 .plate-image::after {
   content: '';
@@ -655,14 +668,12 @@ body {
 
 /* ── COLOPHON (homepage bottom) ──────────────── */
 .colophon {
-  scroll-snap-align: start;
-  min-height: 100vh;
   background: var(--ink);
   color: var(--paper);
-  padding: calc(var(--nav-h) + 48px) calc(var(--u) * 6) calc(var(--footer-h) + 48px);
+  padding: 64px calc(var(--u) * 6) 80px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 48px;
 }
 .colophon-top h2 {
   font-family: var(--sans);
@@ -766,7 +777,7 @@ body {
 
   .panel--paper,
   .panel--bone {
-    padding: calc(var(--nav-h) + 32px) calc(var(--u) * 3) calc(var(--footer-h) + 32px);
+    padding: 40px calc(var(--u) * 3) 48px;
   }
 
   .content-grid {
