@@ -1,7 +1,6 @@
 /* ============================================================
    ARTEFAKT FOUNDATION — SHARED STYLESHEET
-   Bauhaus-inspired, archival, functional.
-   Typography carries hierarchy. Nothing decorative that doesn't earn its place.
+   Full-frame panel system
    ============================================================ */
 
 :root {
@@ -14,12 +13,21 @@
   --nav-height: 72px;
   --meta-height: 36px;
 
+  --page-pad: 32px;
+  --page-pad-mobile: 20px;
+
   --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
   --serif: "Playfair Display", Georgia, serif;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 html {
   scroll-snap-type: y mandatory;
@@ -37,17 +45,27 @@ body {
   overflow-x: hidden;
 }
 
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
 /* ------------------------------------------------------------
-   NAV — fixed, minimal, always present
+   NAV
    ------------------------------------------------------------ */
 .nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  inset: 0 0 auto 0;
   height: var(--nav-height);
-  padding: 0 32px;
+  padding: 0 var(--page-pad);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 24px;
   z-index: 100;
   mix-blend-mode: difference;
   color: var(--paper);
@@ -63,6 +81,7 @@ body {
   display: inline-flex;
   align-items: center;
   line-height: 1;
+  flex-shrink: 0;
 }
 
 .wordmark .splice {
@@ -71,18 +90,19 @@ body {
   height: 16px;
   background: var(--red);
   margin: 0 4px;
-  /* splice stays red even under mix-blend-mode: difference on the nav */
   mix-blend-mode: normal;
 }
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 28px;
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 400;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .nav-links a {
@@ -103,16 +123,17 @@ body {
 }
 
 /* ------------------------------------------------------------
-   FOOTER META BAR — always visible, machine-like
+   META BAR
    ------------------------------------------------------------ */
 .meta {
   position: fixed;
-  bottom: 0; left: 0; right: 0;
+  inset: auto 0 0 0;
   height: var(--meta-height);
-  padding: 0 32px;
+  padding: 0 var(--page-pad);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
   z-index: 100;
   mix-blend-mode: difference;
   color: var(--paper);
@@ -123,49 +144,101 @@ body {
   pointer-events: none;
 }
 
-.meta span { pointer-events: auto; }
-.meta a { color: var(--paper); text-decoration: none; pointer-events: auto; }
+.meta span,
+.meta a {
+  pointer-events: auto;
+}
+
+.meta a {
+  color: var(--paper);
+  text-decoration: none;
+}
 
 /* ------------------------------------------------------------
-   PANELS — each is 100vh, scroll-snap, with full-bleed image
+   PANELS
    ------------------------------------------------------------ */
 .panel {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
+  height: 100svh;
+  min-height: 100vh;
+  min-height: 100svh;
   scroll-snap-align: start;
   scroll-snap-stop: always;
   overflow: hidden;
   background: var(--ink);
+  isolation: isolate;
 }
 
+/* Full-frame image behavior */
 .panel-image {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: center;
-  /* no filters on documentary photographs */
+  object-fit: cover;
+  object-position: center center;
+  z-index: 1;
 }
 
-/* Text panels (no photograph). Use sparingly. */
-.panel--paper { background: var(--paper); }
-.panel--ink { background: var(--ink); color: var(--paper); }
+/* Optional per-image helpers */
+.panel-image--top {
+  object-position: center top;
+}
+
+.panel-image--bottom {
+  object-position: center bottom;
+}
+
+.panel-image--left {
+  object-position: left center;
+}
+
+.panel-image--right {
+  object-position: right center;
+}
+
+.panel-image--top-left {
+  object-position: left top;
+}
+
+.panel-image--top-right {
+  object-position: right top;
+}
+
+.panel-image--bottom-left {
+  object-position: left bottom;
+}
+
+.panel-image--bottom-right {
+  object-position: right bottom;
+}
+
+/* Text panels */
+.panel--paper {
+  background: var(--paper);
+}
+
+.panel--ink {
+  background: var(--ink);
+  color: var(--paper);
+}
 
 /* ------------------------------------------------------------
-   OVERLAY BLOCKS — type over photograph
+   OVERLAYS
    ------------------------------------------------------------ */
 .overlay {
   position: absolute;
-  color: var(--paper);
   z-index: 2;
+  color: var(--paper);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
-/* Top-left metadata block: pillar code + sequence */
 .overlay--meta {
   top: calc(var(--nav-height) + 24px);
-  left: 32px;
+  left: var(--page-pad);
+  right: var(--page-pad);
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.14em;
@@ -187,31 +260,30 @@ body {
   margin: 0 10px;
 }
 
-/* Bottom-left content block: headline + caption */
 .overlay--content {
+  left: var(--page-pad);
   bottom: calc(var(--meta-height) + 40px);
-  left: 32px;
-  max-width: 680px;
+  max-width: min(680px, calc(100% - (var(--page-pad) * 2)));
 }
 
 .overlay--content .label {
+  display: block;
+  margin-bottom: 16px;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--paper);
-  margin-bottom: 16px;
-  display: block;
 }
 
 .overlay--content h1,
 .overlay--content h2 {
+  margin-bottom: 20px;
   font-family: var(--serif);
   font-weight: 400;
   font-size: clamp(36px, 6vw, 84px);
   line-height: 1.02;
   letter-spacing: -0.01em;
-  margin-bottom: 20px;
 }
 
 .overlay--content h1 em,
@@ -221,28 +293,27 @@ body {
 }
 
 .overlay--content .body {
+  max-width: 520px;
   font-family: var(--sans);
   font-weight: 300;
   font-size: 16px;
   line-height: 1.55;
-  max-width: 520px;
   color: var(--paper);
 }
 
 .overlay--content .caption {
+  margin-top: 16px;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--paper);
-  margin-top: 16px;
   opacity: 0.75;
 }
 
-/* Bottom-right coordinate/index stamp */
 .overlay--stamp {
+  right: var(--page-pad);
   bottom: calc(var(--meta-height) + 40px);
-  right: 32px;
   text-align: right;
   font-family: var(--mono);
   font-size: 10px;
@@ -254,13 +325,12 @@ body {
 }
 
 /* ------------------------------------------------------------
-   PAPER PANELS — text-led, no photograph
-   For masthead / intro / colophon panels
+   PAPER PANELS
    ------------------------------------------------------------ */
 .panel--paper .masthead {
   position: absolute;
   inset: 0;
-  padding: calc(var(--nav-height) + 64px) 32px calc(var(--meta-height) + 64px);
+  padding: calc(var(--nav-height) + 64px) var(--page-pad) calc(var(--meta-height) + 64px);
   display: grid;
   grid-template-columns: 1fr;
   gap: 40px;
@@ -268,15 +338,15 @@ body {
 }
 
 .panel--paper .masthead .top-meta {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--dust);
+  padding-bottom: 16px;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--graphite);
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--dust);
-  padding-bottom: 16px;
 }
 
 .panel--paper .masthead .main {
@@ -284,41 +354,43 @@ body {
 }
 
 .panel--paper h1.display {
+  margin-bottom: 32px;
   font-family: var(--serif);
   font-weight: 400;
   font-size: clamp(56px, 10vw, 160px);
   line-height: 0.92;
   letter-spacing: -0.02em;
   color: var(--ink);
-  margin-bottom: 32px;
 }
 
-.panel--paper h1.display em { font-style: italic; }
+.panel--paper h1.display em {
+  font-style: italic;
+}
 
 .panel--paper .lede {
+  max-width: 720px;
   font-family: var(--sans);
   font-weight: 300;
   font-size: clamp(18px, 1.8vw, 22px);
   line-height: 1.45;
   color: var(--ink);
-  max-width: 720px;
 }
 
 .panel--paper .bottom-meta {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  border-top: 1px solid var(--dust);
+  padding-top: 16px;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--graphite);
-  border-top: 1px solid var(--dust);
-  padding-top: 16px;
 }
 
 /* ------------------------------------------------------------
-   INDEX PANEL — list of sections, like a plate index
+   INDEX PANEL
    ------------------------------------------------------------ */
 .panel--index {
   background: var(--paper);
@@ -327,22 +399,22 @@ body {
 .panel--index .index-grid {
   position: absolute;
   inset: 0;
-  padding: calc(var(--nav-height) + 64px) 32px calc(var(--meta-height) + 64px);
+  padding: calc(var(--nav-height) + 64px) var(--page-pad) calc(var(--meta-height) + 64px);
   display: grid;
   grid-template-rows: auto 1fr auto;
   gap: 32px;
 }
 
 .panel--index .index-label {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--dust);
+  padding-bottom: 16px;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--graphite);
-  border-bottom: 1px solid var(--dust);
-  padding-bottom: 16px;
-  display: flex;
-  justify-content: space-between;
 }
 
 .panel--index ol.index-list {
@@ -363,7 +435,6 @@ body {
   font-weight: 400;
   line-height: 1;
   color: var(--ink);
-  text-decoration: none;
 }
 
 .panel--index ol.index-list a {
@@ -373,26 +444,28 @@ body {
 }
 
 .panel--index ol.index-list .num {
+  align-self: center;
   font-family: var(--mono);
   font-size: 13px;
   letter-spacing: 0.14em;
   color: var(--red);
-  align-self: center;
 }
 
 .panel--index ol.index-list .page-ref {
+  align-self: center;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.14em;
-  color: var(--graphite);
-  align-self: center;
   text-transform: uppercase;
+  color: var(--graphite);
 }
 
-.panel--index ol.index-list a:hover .title { font-style: italic; }
+.panel--index ol.index-list a:hover .title {
+  font-style: italic;
+}
 
 /* ------------------------------------------------------------
-   COLOPHON / CLOSING PANEL
+   COLOPHON
    ------------------------------------------------------------ */
 .panel--colophon {
   background: var(--ink);
@@ -402,7 +475,7 @@ body {
 .panel--colophon .colophon-grid {
   position: absolute;
   inset: 0;
-  padding: calc(var(--nav-height) + 64px) 32px calc(var(--meta-height) + 64px);
+  padding: calc(var(--nav-height) + 64px) var(--page-pad) calc(var(--meta-height) + 64px);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
@@ -411,85 +484,180 @@ body {
 
 .panel--colophon .col-head {
   grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--graphite);
+  padding-bottom: 16px;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--dust);
-  border-bottom: 1px solid var(--graphite);
-  padding-bottom: 16px;
-  display: flex;
-  justify-content: space-between;
 }
 
 .panel--colophon .col-block h3 {
+  margin-bottom: 16px;
   font-family: var(--mono);
   font-size: 11px;
+  font-weight: 400;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--red);
-  margin-bottom: 16px;
-  font-weight: 400;
 }
 
 .panel--colophon .col-block p,
 .panel--colophon .col-block a {
+  display: block;
   font-family: var(--sans);
   font-weight: 300;
   font-size: 15px;
   line-height: 1.55;
   color: var(--paper);
   text-decoration: none;
-  display: block;
 }
 
-.panel--colophon .col-block a:hover { border-bottom: 1px solid var(--paper); }
+.panel--colophon .col-block a:hover {
+  border-bottom: 1px solid var(--paper);
+}
 
 .panel--colophon .col-foot {
   grid-column: 1 / -1;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  border-top: 1px solid var(--graphite);
+  padding-top: 16px;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--dust);
-  border-top: 1px solid var(--graphite);
-  padding-top: 16px;
 }
 
 /* ------------------------------------------------------------
-   RESPONSIVE — keep discipline on small screens
+   RESPONSIVE
    ------------------------------------------------------------ */
+@media (max-width: 960px) {
+  .overlay--content {
+    max-width: min(640px, calc(100% - (var(--page-pad) * 2)));
+  }
+
+  .overlay--stamp {
+    left: var(--page-pad);
+    right: auto;
+    text-align: left;
+    bottom: calc(var(--meta-height) + 18px);
+  }
+
+  .overlay--content {
+    bottom: calc(var(--meta-height) + 68px);
+  }
+}
+
 @media (max-width: 720px) {
-  .nav { padding: 0 20px; height: 60px; }
-  :root { --nav-height: 60px; --meta-height: 32px; }
-  .meta { padding: 0 20px; font-size: 9px; }
-  .nav-links { gap: 16px; font-size: 10px; }
-  .overlay--meta, .overlay--content, .overlay--stamp { left: 20px; right: 20px; }
-  .overlay--stamp { text-align: left; right: auto; }
-  .overlay--content { max-width: none; bottom: calc(var(--meta-height) + 28px); }
-  .overlay--content h1, .overlay--content h2 { font-size: clamp(32px, 9vw, 56px); }
-  .overlay--content .body { font-size: 15px; max-width: 100%; }
+  :root {
+    --nav-height: 60px;
+    --meta-height: 32px;
+  }
+
+  .nav {
+    padding: 0 var(--page-pad-mobile);
+    height: var(--nav-height);
+  }
+
+  .meta {
+    padding: 0 var(--page-pad-mobile);
+    font-size: 9px;
+  }
+
+  .nav-links {
+    gap: 16px;
+    font-size: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .overlay--meta {
+    top: calc(var(--nav-height) + 18px);
+    left: var(--page-pad-mobile);
+    right: var(--page-pad-mobile);
+    font-size: 10px;
+  }
+
+  .overlay--meta .rule {
+    width: 18px;
+    margin: 0 8px;
+  }
+
+  .overlay--content {
+    left: var(--page-pad-mobile);
+    right: var(--page-pad-mobile);
+    bottom: calc(var(--meta-height) + 58px);
+    max-width: none;
+  }
+
+  .overlay--content h1,
+  .overlay--content h2 {
+    font-size: clamp(32px, 9vw, 56px);
+    margin-bottom: 16px;
+  }
+
+  .overlay--content .body {
+    max-width: none;
+    font-size: 15px;
+  }
+
+  .overlay--stamp {
+    left: var(--page-pad-mobile);
+    right: auto;
+    bottom: calc(var(--meta-height) + 18px);
+    text-align: left;
+  }
+
   .panel--paper .masthead,
   .panel--index .index-grid,
-  .panel--colophon .colophon-grid { padding-left: 20px; padding-right: 20px; }
-  .panel--colophon .colophon-grid { grid-template-columns: 1fr; gap: 32px; }
-  .panel--index ol.index-list li { grid-template-columns: 48px 1fr; }
-  .panel--index ol.index-list .page-ref { display: none; }
+  .panel--colophon .colophon-grid {
+    padding-left: var(--page-pad-mobile);
+    padding-right: var(--page-pad-mobile);
+  }
+
+  .panel--colophon .colophon-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .panel--index ol.index-list li {
+    grid-template-columns: 48px 1fr;
+  }
+
+  .panel--index ol.index-list .page-ref {
+    display: none;
+  }
 }
 
 /* ------------------------------------------------------------
-   ACCESSIBILITY — visible focus
+   ACCESSIBILITY
    ------------------------------------------------------------ */
 a:focus-visible {
   outline: 2px solid var(--red);
   outline-offset: 3px;
 }
 
-/* Reduce motion: disable scroll-snap for those who prefer it */
+/* ------------------------------------------------------------
+   REDUCED MOTION
+   ------------------------------------------------------------ */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-snap-type: none; scroll-behavior: auto; }
-  .panel { scroll-snap-align: none; scroll-snap-stop: normal; }
+  html {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+
+  .panel {
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+  }
 }
