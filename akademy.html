@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akademy — Artefakt Foundation</title>
+<meta name="description" content="The Artefakt Akademy — Fellowship, workshops, and the transmission of documentary practice. Calgary (Treaty 7 Territory) and Chicago.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+
+/* ─────────────────────────────────────────────────────────────
+   INNER-SCROLL PATTERN
+   panel--paper stays full-viewport in the snap system.
+   .panel-inner-scroll fills it absolutely and scrolls inside.
+   ───────────────────────────────────────────────────────────── */
+.panel-inner-scroll {
+  position: absolute;
+  inset: 0;
+  padding: calc(var(--nav-height) + 52px) var(--page-pad) calc(var(--meta-height) + 52px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Panel top rule row */
+.ak-top-meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--dust);
+  padding-bottom: 16px;
+  margin-bottom: 40px;
+}
+
+/* Section label + extending rule */
+.ak-label {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  margin-bottom: 24px;
+  margin-top: 52px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 1100px;
+}
+.ak-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--dust);
+}
+.ak-label.first { margin-top: 0; }
+
+/* Headings */
+.ak-heading {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(28px, 3vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 20px;
+  max-width: 820px;
+}
+.ak-heading em { font-style: italic; }
+
+/* Body prose */
+.ak-body {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.75;
+  color: #3A342C;
+  max-width: 680px;
+}
+.ak-body p { margin-bottom: 14px; }
+.ak-body p:last-child { margin-bottom: 0; }
+
+/* ─────────────────────────────────────────────────────────────
+   OPEN CALL BANNER
+   ───────────────────────────────────────────────────────────── */
+.open-call-banner {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 40px 44px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+  margin: 36px 0;
+  max-width: 1100px;
+}
+.ocb-eyebrow {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--dust);
+  margin-bottom: 10px;
+}
+.ocb-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--paper);
+  margin-bottom: 10px;
+}
+.ocb-body {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(244,241,234,0.7);
+  line-height: 1.7;
+  max-width: 500px;
+}
+.ocb-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.btn-announce {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--dust);
+  padding: 11px 22px;
+  white-space: nowrap;
+  opacity: 0.8;
+  display: inline-block;
+}
+.btn-notify {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dust);
+  text-decoration: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   FELLOWSHIP CARDS
+   ───────────────────────────────────────────────────────────── */
+.fellowship-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 2px;
+  max-width: 1100px;
+}
+.fh-card {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 36px 40px;
+}
+.fh-card.light {
+  background: #E8E2D8;
+  color: var(--ink);
+}
+.fh-num {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dust);
+  margin-bottom: 12px;
+}
+.fh-card.light .fh-num { color: var(--graphite); }
+.fh-name {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.fh-desc {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(244,241,234,0.72);
+}
+.fh-card.light .fh-desc { color: #3A342C; }
+.fh-status {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.fh-card.light .fh-status { border-top-color: var(--dust); }
+.status-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--dust);
+  flex-shrink: 0;
+}
+.status-text {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--dust);
+}
+.fh-card.light .status-text { color: var(--graphite); }
+
+/* Spec tables */
+.spec-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  max-width: 1100px;
+}
+.spec-panel {
+  background: #1A1815;
+  padding: 28px 40px;
+}
+.spec-panel.light { background: #DDD5C8; }
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.spec-panel.light .spec-row { border-bottom-color: rgba(0,0,0,0.08); }
+.spec-row:last-child { border-bottom: none; }
+.spec-key {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--graphite);
+}
+.spec-val {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: rgba(244,241,234,0.8);
+  text-align: right;
+}
+.spec-panel.light .spec-val { color: #3A342C; }
+
+/* ─────────────────────────────────────────────────────────────
+   STRUCTURE TABLE
+   ───────────────────────────────────────────────────────────── */
+.structure-table {
+  border-top: 2px solid var(--ink);
+  max-width: 1100px;
+}
+.st-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  border-bottom: 1px solid var(--dust);
+}
+.st-key {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  padding: 16px 20px 16px 0;
+  line-height: 1.5;
+}
+.st-val {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 300;
+  padding: 16px 0;
+  line-height: 1.7;
+  color: #2A2420;
+}
+.st-val a {
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+  text-decoration: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SEASON LISTING + WORKSHOPS — shared row style
+   ───────────────────────────────────────────────────────────── */
+.content-list { max-width: 1100px; }
+.content-item {
+  display: grid;
+  grid-template-columns: 32px 1fr 120px;
+  gap: 20px;
+  align-items: start;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--dust);
+}
+.content-item:first-child { border-top: 1px solid var(--dust); }
+.ci-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--graphite);
+  padding-top: 2px;
+}
+.ci-title {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 400;
+  margin-bottom: 6px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.ci-desc {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: #5A4F44;
+  line-height: 1.7;
+}
+.ci-tag {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--ink);
+  padding: 4px 8px;
+  white-space: nowrap;
+  align-self: start;
+  justify-self: end;
+  text-align: right;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   FOUR PRINCIPLES
+   ───────────────────────────────────────────────────────────── */
+.principles-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--dust);
+  max-width: 1100px;
+  margin-bottom: 48px;
+}
+.principle {
+  background: var(--paper);
+  padding: 28px;
+}
+.p-num {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--graphite);
+  margin-bottom: 10px;
+}
+.p-text {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: #2A2420;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   NOTIFY STRIP
+   ───────────────────────────────────────────────────────────── */
+.notify-strip {
+  background: #E8E2D8;
+  padding: 36px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1100px;
+}
+.notify-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  margin-bottom: 8px;
+}
+.notify-heading {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+.notify-sub {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: #5A4F44;
+}
+.notify-form { display: flex; flex-shrink: 0; }
+.notify-input {
+  font-family: var(--sans);
+  font-size: 13px;
+  padding: 11px 16px;
+  border: 1px solid var(--graphite);
+  border-right: none;
+  background: var(--paper);
+  color: var(--ink);
+  width: 240px;
+  outline: none;
+}
+.notify-input::placeholder { color: var(--graphite); }
+.notify-btn {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  padding: 11px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   RESPONSIVE
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .fellowship-grid,
+  .spec-grid,
+  .principles-grid { grid-template-columns: 1fr; }
+  .open-call-banner { grid-template-columns: 1fr; }
+  .ocb-cta { align-items: flex-start; }
+}
+@media (max-width: 720px) {
+  .panel-inner-scroll {
+    padding-left: var(--page-pad-mobile);
+    padding-right: var(--page-pad-mobile);
+  }
+  .ak-top-meta { flex-direction: column; gap: 4px; }
+  .content-item { grid-template-columns: 28px 1fr; }
+  .ci-tag { display: none; }
+  .st-row { grid-template-columns: 1fr; }
+  .st-key { padding-bottom: 0; }
+  .notify-strip { flex-direction: column; padding: 32px var(--page-pad-mobile); }
+  .notify-form { flex-direction: column; width: 100%; }
+  .notify-input { border-right: 1px solid var(--graphite); width: 100%; }
+  .open-call-banner { padding: 28px 24px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" aria-label="Primary">
+  <a href="index.html" class="wordmark" aria-label="Artefakt Foundation home">arte<span class="splice" aria-hidden="true"></span>fakt</a>
+  <div class="nav-links">
+    <a href="witness.html">Witness</a>
+    <a href="akademy.html" class="active">Akademy</a>
+    <a href="preserve.html">Preserve</a>
+    <a href="sustain.html">Sustain</a>
+    <a href="about.html">About</a>
+  </div>
+</nav>
+
+<!-- META FOOTER -->
+<div class="meta" aria-hidden="true">
+  <span>Calgary AB · Treaty 7 Territory</span>
+  <span>Akademy — Pillar 02 / 04</span>
+  <a href="mailto:jon@artefakt.foundation">jon@artefakt.foundation</a>
+</div>
+
+<main>
+
+  <!-- ═══════════════════════════════════════════════════
+       PANEL 01 — MASTHEAD (paper)
+       ═══════════════════════════════════════════════════ -->
+  <section class="panel panel--paper" id="masthead" aria-labelledby="akademy-title">
+    <div class="masthead">
+      <div class="top-meta">
+        <span>Pillar 02 / 04</span>
+        <span>Akademy</span>
+        <span>Fellowship · Workshops · Practice</span>
+      </div>
+      <div class="main">
+        <h1 class="display" id="akademy-title">Education, Fellowship, <em>Practice.</em></h1>
+        <p class="lede">The Akademy is where documentary practice is taught, challenged, and passed forward. It houses all of Artefakt's workshops, masterclasses, and fellowship programs — built on a single conviction that the photograph is a document, and that the person who makes it is responsible for what it says.</p>
+      </div>
+      <div class="bottom-meta">
+        <span>Scroll ↓</span>
+        <span>09 Panels</span>
+        <span>01 / 10</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PANEL 02 — PHOTO: Fellowship
+       ═══════════════════════════════════════════════════ -->
+  <section class="panel" aria-labelledby="panel-fellowship-photo">
+    <img src="images/zurich-workshop-01.jpg"
+         alt="Documentary photography workshop in progress, Zurich — participants reviewing prints on a long table."
+         class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">AKD · 01</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Fellowship</span>
+    </div>
+    <div class="overlay overlay--content">
+      <span class="label">The Artefakt Fellowship</span>
+      <h2 id="panel-fellowship-photo">Time, mentorship, and a <em>platform.</em></h2>
+      <p class="body">Two Fellowship programs in the inaugural year — staggered so each cohort receives the full attention of the organization. The Documentary Fellowship opens Fall 2026. The Sustainability Documentary/Arts Fellowship follows Spring/Summer 2027. Each accepts two fellows.</p>
+      <p class="caption">Workshop · Zürich · 2024</p>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>AKD / 01</div>
+      <div>Open Call · Summer 2026</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PANEL 03 — CONTENT: Fellowship detail
+       ═══════════════════════════════════════════════════ -->
+  <section class="panel panel--paper" id="fellowships" aria-labelledby="fellowship-title">
+    <div class="panel-inner-scroll">
+
+      <div class="ak-top-meta">
+        <span>Fellowships — Inaugural Year</span>
+        <span>Akademy</span>
+        <span>03 / 10</span>
+      </div>
+
+      <div class="ak-label first">Two Fellowships. One Mandate.</div>
+      <h2 class="ak-heading" id="fellowship-title">The work and the commitment <em>are the criteria.</em></h2>
+      <p class="ak-body">In its inaugural year, the Artefakt Akademy launches two Fellowship programs — staggered intentionally so each cohort receives the full attention of the organization. The Documentary Fellowship opens in Fall 2026. The Sustainability Documentary/Arts Fellowship follows in Spring/Summer 2027. Each accepts two fellows.</p>
+
+      <!-- OPEN CALL BANNER -->
+      <div class="open-call-banner">
+        <div>
+          <div class="ocb-eyebrow">Open Call — Now Accepting Interest</div>
+          <div class="ocb-title">Documentary Fellowship — Fall 2026</div>
+          <p class="ocb-body">The open call for the inaugural Documentary Fellowship cohort will be announced in Summer 2026. Two positions available. No formal education requirement — the work and the commitment are the criteria. Write to register your interest.</p>
+        </div>
+        <div class="ocb-cta">
+          <span class="btn-announce">Applications Open Summer 2026</span>
+          <a href="mailto:jon@artefakt.foundation" class="btn-notify">↓ Write to register interest</a>
+        </div>
+      </div>
+
+      <!-- FELLOWSHIP I + II CARDS -->
+      <div class="fellowship-grid">
+        <div class="fh-card">
+          <div class="fh-num">Fellowship I — Fall 2026</div>
+          <div class="fh-name">Documentary Fellowship</div>
+          <div class="fh-desc">For emerging documentary photographers and filmmakers working on long-form projects rooted in community, accountability, or social consequence. Fellows receive sustained mentorship from Jon Lowenstein and invited practitioners, access to the Artefakt archive, and a structured framework for developing their projects over twelve months.<br><br>This is not a workshop series. It is a committed working relationship. Fellows arrive with a project in progress and leave with it materially advanced — photographically, editorially, and ethically. Fellows present their work publicly at the close of the fellowship year as part of the Bearing Witness series.</div>
+          <div class="fh-status">
+            <div class="status-dot"></div>
+            <div class="status-text">Open Call — Summer 2026</div>
+          </div>
+        </div>
+        <div class="fh-card light">
+          <div class="fh-num">Fellowship II — Spring/Summer 2027</div>
+          <div class="fh-name">Sustainability Documentary/Arts Fellowship</div>
+          <div class="fh-desc">For practitioners and organizers working at the intersection of documentary practice, art, and material sustainability — the ethical disposal and redistribution of technology, the circular economies of creative production, and the environmental responsibilities of institutions that make culture.<br><br>Fellows work alongside Artefakt's Sustain program, developing frameworks that other organizations can adopt. The Sustainability Fellowship reflects a core conviction: the organizations building culture must themselves be accountable to the world they're documenting.</div>
+          <div class="fh-status">
+            <div class="status-dot"></div>
+            <div class="status-text">Open Call — Winter 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SPEC TABLES -->
+      <div class="spec-grid">
+        <div class="spec-panel">
+          <div class="spec-row"><span class="spec-key">Fellows</span><span class="spec-val">2</span></div>
+          <div class="spec-row"><span class="spec-key">Duration</span><span class="spec-val">12 months</span></div>
+          <div class="spec-row"><span class="spec-key">Location</span><span class="spec-val">Calgary + Chicago</span></div>
+          <div class="spec-row"><span class="spec-key">Cohort begins</span><span class="spec-val">Fall 2026</span></div>
+          <div class="spec-row"><span class="spec-key">Pillars</span><span class="spec-val">Witness / Akademy</span></div>
+          <div class="spec-row"><span class="spec-key">Applications</span><span class="spec-val">Summer 2026</span></div>
+        </div>
+        <div class="spec-panel light">
+          <div class="spec-row"><span class="spec-key">Fellows</span><span class="spec-val">2</span></div>
+          <div class="spec-row"><span class="spec-key">Duration</span><span class="spec-val">6–9 months</span></div>
+          <div class="spec-row"><span class="spec-key">Location</span><span class="spec-val">Calgary (Treaty 7)</span></div>
+          <div class="spec-row"><span class="spec-key">Cohort begins</span><span class="spec-val">Spring/Summer 2027</span></div>
+          <div class="spec-row"><span class="spec-key">Pillars</span><span class="spec-val">Sustain / Akademy</span></div>
+          <div class="spec-row"><span class="spec-key">Applications</span><span class="spec-val">Winter 2026</span></div>
+        </div>
+      </div>
+
+      <!-- STRUCTURE TABLE -->
+      <div class="ak-label">Fellowship Structure — Both Programs</div>
+      <div class="structure-table">
+        <div class="st-row">
+          <div class="st-key">Eligibility</div>
+          <div class="st-val">Open to emerging and mid-career practitioners in Calgary and Chicago. No formal education requirement. Work and commitment are the criteria.</div>
+        </div>
+        <div class="st-row">
+          <div class="st-key">Selection</div>
+          <div class="st-val">Applications reviewed by Jon Lowenstein and a rotating panel of practicing documentary artists and educators. Selection is based on project strength, community relationship, and demonstrated seriousness of purpose.</div>
+        </div>
+        <div class="st-row">
+          <div class="st-key">What Fellows Receive</div>
+          <div class="st-val">Mentorship, access to Artefakt archive and studio resources, participation in all Akademy programming, and public presentation at year's end. Stipend details confirmed with each cohort's open call.</div>
+        </div>
+        <div class="st-row">
+          <div class="st-key">Fellow Obligations</div>
+          <div class="st-val">Monthly cohort sessions, a mid-term project review, and contribution to one Akademy public event. The fellowship is a commitment, not a credential.</div>
+        </div>
+        <div class="st-row">
+          <div class="st-key">How to Apply</div>
+          <div class="st-val">Full application guidelines published with each open call. Write to <a href="mailto:jon@artefakt.foundation">jon@artefakt.foundation</a> to register interest and receive notification when applications open.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PANEL 04 — PHOTO: Bearing Witness
+       ═══════════════════════════════════════════════════ -->
+  <section class="panel" aria-labelledby="panel-bw-photo">
+    <img src="images/zurich-workshop-02.jpg"
+         alt="Close view of a workshop participant's contact sheets and marked prints at a Zurich masterclass."
+         class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">AKD · 02</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Bearing Witness</span>
+    </div>
+    <div class="overlay overlay--content">
+      <span class="label">Lecture &amp; Exhibition Series · 2026–27</span>
+      <h2 id="panel-bw-photo">Masters of the form, <em>in the room.</em></h2>
+      <p class="body">The 2026–27 season opens with Kiana Hayeri in September 2026, followed by Amber Bracken in February 2027 — aligned with the Exposure Photography Festival. Kitra Cahana in May 2027. Closing with Carlos Javier Ortiz and Darcy Padilla in a joint exhibition, September/October 2027. All public lectures are free.</p>
+      <p class="caption">Masterclass · Zürich · 2024</p>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>AKD / 02</div>
+      <div>Seasonal · Public · Free</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PANEL 05 — CONTENT: Full season detail
+       ═══════════════════════════════════════════════════ -->
+  <section class="panel panel--paper" id="bearing-witness" aria-labelledby="bw-title">
+    <div class="panel-inner-scroll">
+
+      <div class="ak-top-meta">
+        <span>Bearing Witness — Lecture &amp; Exhibition Series</span>
+        <span>Akademy</span>
+        <span>05 / 10</span>
+      </div>
+
+      <div class="ak-label first">2026–27 Season</div>
+      <h2 class="ak-heading" id="bw-title">Four presentations. <em>One year.</em></h2>
+      <p class="ak-body">Bearing Witness is Artefakt's annual lecture and exhibition series — internationally significant documentary practitioners brought to Calgary to teach, exhibit, and speak in public. Programming is built from Jon Lowenstein's working relationships. All public lectures are free and open to the public.</p>
+
+      <div class="content-list" style="margin-top: 28px;">
+
+        <div class="content-item">
+          <div class="ci-num">01</div>
+          <div>
+            <div class="ci-title">Kiana Hayeri</div>
+            <div class="ci-desc">Iranian-Canadian documentary photographer whose practice has been rooted in Afghanistan for more than a decade. Her sustained documentation of Afghan women and girls — through the US withdrawal and into Taliban resurgence — is among the most significant bodies of documentary work produced in recent years. Published in The New York Times, National Geographic, and Time.</div>
+          </div>
+          <div class="ci-tag">Sept / Oct 2026</div>
+        </div>
+
+        <div class="content-item">
+          <div class="ci-num">02</div>
+          <div>
+            <div class="ci-title">Amber Bracken</div>
+            <div class="ci-desc">One of Canada's most significant working documentary photographers. Her coverage of the Wet'suwet'en pipeline resistance — made on the frontlines alongside land defenders at Gidimt'en checkpoint — earned the World Press Photo of the Year in 2022. Presentation aligned with the Exposure Photography Festival.</div>
+          </div>
+          <div class="ci-tag">Feb 2027</div>
+        </div>
+
+        <div class="content-item">
+          <div class="ci-num">03</div>
+          <div>
+            <div class="ci-title">Kitra Cahana</div>
+            <div class="ci-desc">Photographer and filmmaker whose work explores spirituality, altered states of consciousness, and communities living outside mainstream structures. Her photographs of Hasidic community life — including intimate work made with her father, Rabbi Mordecai Cahana, whose family roots are in Calgary — represent documentary practice built from belonging rather than observation.</div>
+          </div>
+          <div class="ci-tag">May 2027</div>
+        </div>
+
+        <div class="content-item">
+          <div class="ci-num">04</div>
+          <div>
+            <div class="ci-title">Carlos Javier Ortiz + Darcy Padilla — Joint Exhibition</div>
+            <div class="ci-desc">The closing presentation pairs two photographers united by a structural commitment: they stayed. Ortiz spent more than a decade documenting the human cost of gun violence in Chicago's communities of colour — <em>We All We Got.</em> Padilla spent eighteen years in relationship with one woman and her family living in poverty in San Francisco — <em>Family Love.</em> Shown together, the two bodies of work make an argument that exceeds either individually.</div>
+          </div>
+          <div class="ci-tag">Sept / Oct 2027</div>
+        </div>
+
+      </div>
+
+      <p style="margin-top: 28px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--graphite); max-width: 680px;">All presentations include a public lecture free and open to the public. Associated practitioner workshops offered where artist availability permits. For press, partnership, and venue inquiries contact <a href="mailto:jon@artefakt.foundation" style="color: var(--ink); border-bottom: 1px solid var(--ink); text-decoration: none;">jon@artefakt.foundation</a>.</p>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PANEL 06 — PHOTO: Fieldwork
+       ═══════════════════════════════════════════════════ -->
+  <section class="panel" aria-labelledby="panel-fieldwork-photo">
+    <img src="images/canada-project-river.jpg"
+         alt="Landscape from the Canada Project — wide river corridor, documentary fieldwork in progress."
+         class="panel-image">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">AKD · 03</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Workshops</span>
+    </div>
+    <div class="overlay overlay--content">
+      <span class="label">All Akademy Workshops</span>
+      <h2 id="panel-fieldwork-photo">Seven workshops. <em>One standard.</em></h2>
+      <p class="body">All workshops offered under the Artefakt name are housed within the Akademy and held to the same standards of craft, ethics, and purpose. Open to the public. Fellows receive priority registration. Taught in Calgary and, when programming warrants, in Chicago.</p>
+      <p class="caption">Canada Project · Alberta · 2023</p>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>AKD / 03</div>
+      <div>Calgary · Chicago</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PANEL 07 — CONTENT: Workshops
+       ═══════════════════════════════════════════════════ -->
+  <section class="panel panel--paper" id="workshops" aria-labelledby="workshops-title">
+    <div class="panel-inner-scroll">
+
+      <div class="ak-top-meta">
+        <span>Workshops</span>
+        <span>Akademy</span>
+        <span>07 / 10</span>
+      </div>
+
+      <div class="ak-label first">All Akademy Workshops</div>
+      <h2 class="ak-heading" id="workshops-title">Seven workshops. <em>One standard.</em></h2>
+      <p class="ak-body">Taught at 4525 Monterey Ave NW, Calgary and, when programming warrants, in Chicago. Open to the public. Fellows receive priority registration.</p>
+
+      <div class="content-list" style="margin-top: 28px;">
+
+        <div class="content-item">
+          <div class="ci-num">01</div>
+          <div>
+            <div class="ci-title">Bearing Witness: The Ethics of Documentary Photography</div>
+            <div class="ci-desc">A two-day intensive on the foundational ethical questions of documentary practice. When do you photograph? When do you stop? What do you owe the people you photograph? Taught by Jon Lowenstein, drawing on over twenty-five years of embedded practice on Chicago's South Side and across the Americas.</div>
+          </div>
+          <div class="ci-tag">Witness</div>
+        </div>
+
+        <div class="content-item">
+          <div class="ci-num">02</div>
+          <div>
+            <div class="ci-title">The Long Project: Building a Documentary Body of Work</div>
+            <div class="ci-desc">For photographers and filmmakers developing sustained, multi-year projects rooted in community trust. Covers project structure, editorial logic, community relationship-building, and the discipline required to stay in one place long enough to see the truth. Includes individual project critique sessions.</div>
+          </div>
+          <div class="ci-tag">Witness</div>
+        </div>
+
+        <div class="content-item">
+          <div class="ci-num">03</div>
+          <div>
+            <div class="ci-title">The Edit: Sequencing, Narrative, and the Decisive Selection</div>
+            <div class="ci-desc">A focused workshop on the craft of editing — how a body of work becomes a story, how sequence creates meaning, and how the hardest decision in documentary is knowing which image not to use. Participants bring 200 images from a single project. They leave with 25.</div>
+          </div>
+          <div class="ci-tag">Witness</div>
+        </div>
+
+        <div class="content-item">
+          <div class="ci-num">04</div>
+          <div>
+            <div class="ci-title">Publishing and Distribution: Getting the Work Into the World</div>
+            <div class="ci-desc">A practical workshop covering editorial pitching, book development, exhibition strategies, grant applications, and the digital platforms that sustain independent documentary practice. No gatekeeping mythology — the actual mechanics of how work finds its audience.</div>
+          </div>
+          <div class="ci-tag">Akademy</div>
+        </div>
+
+        <div class="content-item">
+          <div class="ci-num">05</div>
+          <div>
+            <div class="ci-title">Archive as Practice: Preservation, Access, and the Permanent Record</div>
+            <div class="ci-desc">On the obligations documentary practitioners have to their own archives — and to the communities they've photographed. Covers physical and digital preservation, metadata, licensing, and how to think about who owns the image once the moment has passed.</div>
+          </div>
+          <div class="ci-tag">Preserve</div>
+        </div>
+
+        <div class="content-item">
+          <div class="ci-num">06</div>
+          <div>
+            <div class="ci-title">Sustaining the Practice: Economic Models for Independent Documentary Work</div>
+            <div class="ci-desc">A direct conversation about money, sustainability, and independence. How do you fund long-term work without compromising it? What are the real economics of a documentary practice — grants, editorial, licensing, workshops, residencies? Taught with radical transparency about what actually works.</div>
+          </div>
+          <div class="ci-tag">Sustain</div>
+        </div>
+
+        <div class="content-item">
+          <div class="ci-num">07</div>
+          <div>
+            <div class="ci-title">Masterclass Series: Visiting Practitioners</div>
+            <div class="ci-desc">Single-session masterclasses tied to the Bearing Witness lecture and exhibition series. Each visiting artist offers a two-hour public masterclass in addition to their lecture. Open to the public with priority registration for Akademy fellows and workshop alumni.</div>
+          </div>
+          <div class="ci-tag">Akademy</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PANEL 08 — PHOTO: Bridge Programs
+       ═══════════════════════════════════════════════════ -->
+  <section class="panel" aria-labelledby="panel-bridge-photo">
+    <img src="images/lincoln-challenge.jpg"
+         alt="Young participants from the Lincoln Challenge program in formation, documented in long-form project."
+         class="panel-image panel-image--top">
+    <div class="overlay overlay--meta">
+      <span class="pillar-code">AKD · 04</span>
+      <span class="rule" aria-hidden="true"></span>
+      <span>Next Practitioners</span>
+    </div>
+    <div class="overlay overlay--content">
+      <span class="label">Principles &amp; Bridge Programs</span>
+      <h2 id="panel-bridge-photo">The craft gets <em>passed on.</em></h2>
+      <p class="body">Artefakt partners with youth-serving organizations in Calgary and Chicago to run bridge programs — photograph-led workshops for young people who haven't yet named themselves documentarians but are already looking closely. The Lincoln Challenge partnership, documented here in 2002, is the prototype for Artefakt's current bridge program model.</p>
+      <p class="caption">Lincoln Challenge · Rantoul IL · 2002</p>
+    </div>
+    <div class="overlay overlay--stamp">
+      <div>AKD / 04</div>
+      <div>Partners · Schools</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PANEL 09 — CONTENT: Principles + Notify
+       ═══════════════════════════════════════════════════ -->
+  <section class="panel panel--paper" id="principles" aria-labelledby="principles-title">
+    <div class="panel-inner-scroll">
+
+      <div class="ak-top-meta">
+        <span>How the Akademy Teaches</span>
+        <span>Akademy</span>
+        <span>09 / 10</span>
+      </div>
+
+      <div class="ak-label first">Four Principles</div>
+      <h2 class="ak-heading" id="principles-title">What the Akademy <em>holds.</em></h2>
+
+      <div class="principles-grid">
+        <div class="principle">
+          <div class="p-num">01</div>
+          <div class="p-text">Practice precedes theory. Every Akademy session begins with work on the table — photographs, sequences, projects in progress. We discuss ideas through the images, not instead of them.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">02</div>
+          <div class="p-text">The community relationship comes first. Documentary work that is not grounded in genuine relationship with its subjects is not documentary work. The Akademy teaches this distinction and holds it.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">03</div>
+          <div class="p-text">Failure is curriculum. The photographs that didn't work, the access that fell through, the story that turned out to be different — these are the lessons. We teach from what happened, not from what should have.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">04</div>
+          <div class="p-text">Sustainability is not a compromise. The Akademy includes economic education because independence requires it. A practice that cannot sustain itself cannot bear witness over time. This is craft, not concession.</div>
+        </div>
+      </div>
+
+      <div class="notify-strip">
+        <div>
+          <div class="notify-label">Stay Informed</div>
+          <div class="notify-heading">Be the first to know when applications open.</div>
+          <div class="notify-sub">We announce open calls by email. No other correspondence unless you ask.</div>
+        </div>
+        <div class="notify-form">
+          <input class="notify-input" type="email" placeholder="your@email.com" aria-label="Email address">
+          <button class="notify-btn">Notify Me</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       PANEL 10 — COLOPHON (ink)
+       ═══════════════════════════════════════════════════ -->
+  <section class="panel panel--colophon" id="contact" aria-labelledby="akademy-close">
+    <div class="colophon-grid">
+      <div class="col-head">
+        <span>Akademy — Apply · Enroll · Attend</span>
+        <span>10 / 10</span>
+      </div>
+      <div class="col-block">
+        <h3 id="akademy-close">Fellowship &amp; Workshops</h3>
+        <p>The Fellowship opens its next call for applications in Summer 2026. Workshops and masterclasses are announced as they are confirmed. All public programming is free to attend.</p>
+        <p style="margin-top:16px;"><a href="mailto:jon@artefakt.foundation">jon@artefakt.foundation →</a></p>
+      </div>
+      <div class="col-block">
+        <h3>Partnerships &amp; Schools</h3>
+        <p>For bridge program partnerships, school visits, and institutional programming inquiries in Calgary and Chicago, contact the foundation directly.</p>
+        <p style="margin-top:16px;"><a href="mailto:jon@artefakt.foundation">jon@artefakt.foundation →</a></p>
+      </div>
+      <div class="col-foot">
+        <span>← Witness</span>
+        <span>Active programming in Calgary and Chicago</span>
+        <span>Preserve →</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>
