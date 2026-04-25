@@ -5,12 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Artefakt Foundation</title>
 <meta name="description" content="Artefakt Foundation — independent documentary photography, film, and arts. Calgary · Chicago.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<!-- NAV -->
 <nav class="nav" aria-label="Primary">
   <a href="index.html" class="wordmark" aria-label="Artefakt Foundation home">arte<span class="splice" aria-hidden="true"></span>fakt</a>
   <div class="nav-links">
@@ -21,110 +20,154 @@
     <a href="about.html">About</a>
   </div>
 </nav>
+
+<!-- META BAR -->
 <div class="meta" aria-hidden="true">
   <span>Calgary · Chicago</span>
   <span>Artefakt Foundation · 2026</span>
   <a href="mailto:jon@artefakt.foundation">jon@artefakt.foundation</a>
 </div>
+
 <main>
-  <section class="panel panel--paper" id="masthead" aria-labelledby="home-title">
-    <div class="masthead">
-      <div class="top-meta">
-        <span>Artefakt Foundation</span>
-        <span>Documentary · Film · Arts</span>
-        <span>Calgary · Chicago</span>
+
+  <!-- ── S1: PHOTOGRAPH ── -->
+  <div class="screen screen--photo screen--dark" aria-label="Opening photograph">
+    <div class="photo-wrap">
+      <!-- Replace with: <img src="images/hero.jpg" alt="…" > -->
+      <div class="photo-placeholder"></div>
+    </div>
+    <div class="photo-caption">
+      <div class="photo-caption-left">
+        <div class="photo-caption-code">Artefakt Foundation · Calgary + Chicago</div>
+        <div class="photo-caption-title">Documentary<br>that <em>stays.</em></div>
       </div>
-      <div class="main">
-        <h1 class="display" id="home-title">Documentary<br>that <em>stays.</em></h1>
-        <p class="lede">Artefakt is an independent documentary photography, film, and arts organization — built from inside the practice, not alongside it. We support the long-form work, teach the craft to the next practitioners, preserve the record, and fund ourselves through an ethical materials-reuse operation. Four pillars. One archive. Two cities.</p>
-      </div>
-      <div class="bottom-meta">
-        <span>Scroll ↓</span>
-        <span>04 Pillars</span>
-        <span>01 / 06</span>
-      </div>
-    </div>
-  </section>
-  <section class="panel" aria-labelledby="home-witness">
-    <img src="images/witness.jpg" alt="Witness — long-form documentary practice." class="panel-image">
-    <div class="overlay overlay--meta">
-      <span class="pillar-code">01 · WITNESS</span>
-      <span class="rule" aria-hidden="true"></span>
-      <span>The photograph always leads</span>
-    </div>
-    <div class="overlay overlay--content">
-      <span class="label">Pillar 01 / 04</span>
-      <h2 id="home-witness">Work that <em>earns</em> its access.</h2>
-      <p class="body">Long-form documentary practice grounded in community trust and ethical rigor. Years, not weeks. Return visits, not parachute coverage.</p>
-      <p class="caption">→ <a href="witness.html" style="color:var(--paper);border-bottom:1px solid var(--paper);">Enter Witness</a></p>
-    </div>
-    <div class="overlay overlay--stamp"><div>01 / 04</div><div>Long-Form · Ongoing</div></div>
-  </section>
-  <section class="panel" aria-labelledby="home-connect">
-    <img src="images/connect.jpg" alt="Akademy — fellowship and academy." class="panel-image">
-    <div class="overlay overlay--meta">
-      <span class="pillar-code">02 · AKADEMY</span>
-      <span class="rule" aria-hidden="true"></span>
-      <span>Fellowship · Akademy</span>
-    </div>
-    <div class="overlay overlay--content">
-      <span class="label">Pillar 02 / 04</span>
-      <h2 id="home-connect">Teach what you <em>practice.</em></h2>
-      <p class="body">Fellowships for emerging documentarians. Masterclasses and lectures — Bearing Witness — taught by Kiana Hayeri, Amber Bracken, Kitra Cahana, Carlos Javier Ortiz, and Darcy Padilla.</p>
-      <p class="caption">→ <a href="akademy.html" style="color:var(--paper);border-bottom:1px solid var(--paper);">Enter Akademy</a></p>
-    </div>
-    <div class="overlay overlay--stamp"><div>02 / 04</div><div>Spring Intake · Fall Season</div></div>
-  </section>
-  <section class="panel" aria-labelledby="home-legacy">
-    <img src="images/legacy.jpg" alt="Preserve — the permanent archive." class="panel-image">
-    <div class="overlay overlay--meta">
-      <span class="pillar-code">03 · PRESERVE</span>
-      <span class="rule" aria-hidden="true"></span>
-      <span>The Archive</span>
-    </div>
-    <div class="overlay overlay--content">
-      <span class="label">Pillar 03 / 04</span>
-      <h2 id="home-legacy">What the photograph <em>keeps.</em></h2>
-      <p class="body">A permanent, publicly accessible archive of documentary work. Accessioned with consent, catalogued with care.</p>
-      <p class="caption">→ <a href="preserve.html" style="color:var(--paper);border-bottom:1px solid var(--paper);">Enter Preserve</a></p>
-    </div>
-    <div class="overlay overlay--stamp"><div>03 / 04</div><div>Public · By Appointment</div></div>
-  </section>
-  <section class="panel" aria-labelledby="home-sustain">
-    <img src="images/sustain.jpg" alt="Sustain — ethical materials reuse." class="panel-image">
-    <div class="overlay overlay--meta">
-      <span class="pillar-code">04 · SUSTAIN</span>
-      <span class="rule" aria-hidden="true"></span>
-      <span>Materials Reuse · Funding Model</span>
-    </div>
-    <div class="overlay overlay--content">
-      <span class="label">Pillar 04 / 04</span>
-      <h2 id="home-sustain">Nothing of value <em>thrown away.</em></h2>
-      <p class="body">An ethical materials-reuse and electronics-recycling operation that funds the foundation's programming. Stewardship, not charity.</p>
-      <p class="caption">→ <a href="sustain.html" style="color:var(--paper);border-bottom:1px solid var(--paper);">Enter Sustain</a></p>
-    </div>
-    <div class="overlay overlay--stamp"><div>04 / 04</div><div>Live · Calgary</div></div>
-  </section>
-  <section class="panel panel--colophon" id="colophon" aria-labelledby="colophon-title">
-    <div class="colophon-grid">
-      <div class="col-head"><span>Artefakt Foundation</span><span>06 / 06</span></div>
-      <div class="col-block">
-        <h3 id="colophon-title">Founded 2026</h3>
-        <p>Founded by Jon Lowenstein — Guggenheim Fellow, National Geographic Explorer, TED Senior Fellow, founding member of NOOR Images. Based in Calgary (Treaty 7 Territory) and Chicago.</p>
-        <p>Artefakt is an Alberta Society based in Calgary, with ongoing programming in Calgary and Chicago. A separate U.S. nonprofit entity may be established as the organization grows.</p>
-        <p style="margin-top:16px;"><a href="about.html">About the Foundation →</a></p>
-      </div>
-      <div class="col-block">
-        <h3>Stay in Touch</h3>
-        <p>For inquiries regarding programs, archive access, partnerships, press, or mailing-list updates, contact <a href="mailto:jon@artefakt.foundation">jon@artefakt.foundation</a>.</p>
-      </div>
-      <div class="col-foot">
-        <span>Active programming in Calgary and Chicago.</span>
-        <span>artefakt.foundation</span>
-        <span>© 2026</span>
+      <div class="photo-caption-loc">
+        artefakt.foundation<br>
+        Treaty 7 Territory
       </div>
     </div>
-  </section>
+  </div>
+
+  <!-- ── S2: THE WORD ──
+       RED MOMENT #1: "Bearing" in cadmium. -->
+  <div class="screen screen--word" aria-label="Bearing Witness — our position">
+    <div class="word-display">
+      <span class="bearing">Bearing</span>
+      Witness
+    </div>
+    <p class="word-sub">
+      Five photographers. Four presentations. Work made
+      inside communities — not extracted from them.
+      Calgary has never had an institutional home
+      for this argument.
+    </p>
+  </div>
+
+  <!-- ── S3: THE LIST ──
+       RED MOMENT #2: cadmium hover bar. -->
+  <div class="screen screen--list" aria-label="2026–2027 programming">
+    <div class="list-label">2026 — 2027 · Bearing Witness · Four Presentations</div>
+
+    <div class="list-row">
+      <div class="list-name">
+        Kiana Hayeri
+        <small>Afghanistan · Iran · Canada</small>
+      </div>
+      <span class="list-date">Sept – Oct 2026</span>
+    </div>
+
+    <div class="list-row">
+      <div class="list-name">
+        Amber Bracken
+        <small>Wet'suwet'en · World Press Photo 2022</small>
+      </div>
+      <span class="list-date">Feb 2027</span>
+    </div>
+
+    <div class="list-row">
+      <div class="list-name">
+        Kitra Cahana
+        <small>Spirituality · Community · Calgary roots</small>
+      </div>
+      <span class="list-date">May 2027</span>
+    </div>
+
+    <div class="list-row">
+      <div class="list-name">
+        Carlos Javier Ortiz + Darcy Padilla
+        <small>Chicago · San Francisco · Eighteen years</small>
+      </div>
+      <span class="list-date">Sept – Oct 2027</span>
+    </div>
+  </div>
+
+  <!-- ── S4: PHOTOGRAPH II ── -->
+  <div class="screen screen--photo screen--dark" aria-labelledby="photo2-title">
+    <div class="photo-wrap">
+      <!-- Replace with: <img src="images/padilla-family-love.jpg" alt="…" > -->
+      <div class="photo-placeholder"></div>
+    </div>
+    <div class="photo-caption">
+      <div class="photo-caption-left">
+        <div class="photo-caption-code">Darcy Padilla · 1993 – 2011</div>
+        <div class="photo-caption-title" id="photo2-title">Family<br>Love</div>
+        <p class="photo-caption-body">Eighteen years. One woman. Addiction, illness, displacement, death. The most sustained documentary commitment in the history of the medium.</p>
+      </div>
+      <div class="photo-caption-loc">
+        San Francisco<br>
+        1993 – 2011
+      </div>
+    </div>
+  </div>
+
+  <!-- ── S5: STATEMENT ──
+       RED MOMENT #3: "actually need." — the claim. -->
+  <div class="screen screen--statement" aria-label="Foundation statement">
+    <div class="statement-inner">
+      <div class="statement-n">Foundation</div>
+      <p class="statement-text">
+        Built from <strong>inside practice.</strong>
+        Not from a university program.
+        Not from a commercial gallery.
+        From what documentary photographers
+        <span class="claim">actually need.</span>
+      </p>
+      <p class="statement-small">
+        Founded by Jon Lowenstein — Guggenheim Fellow,
+        National Geographic Explorer, TED Senior Fellow,
+        founding member of NOOR Images. Thirty years
+        on Chicago's South Side. Calgary, 2024.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── S6: PILLARS ── -->
+  <div class="screen screen--pillars" aria-label="Four pillars">
+    <div class="pillars-label">Artefakt Foundation · Four Pillars</div>
+    <a href="witness.html" class="pillar-row" style="text-decoration:none;">Witness <span>Long-form documentary</span></a>
+    <a href="akademy.html" class="pillar-row" style="text-decoration:none;">Akademy <span>Fellowship + Academy</span></a>
+    <a href="preserve.html" class="pillar-row" style="text-decoration:none;">Preserve <span>Permanent archive</span></a>
+    <a href="sustain.html" class="pillar-row" style="text-decoration:none;">Sustain <span>Materials reuse</span></a>
+  </div>
+
+  <!-- ── S7: COLOPHON ──
+       RED MOMENT #4: the final rule. -->
+  <div class="screen screen--colophon" aria-label="Colophon">
+    <div class="colophon-mark" aria-hidden="true">Artefakt</div>
+    <div class="colophon-inner">
+      <div class="colophon-left">
+        4525 Monterey Ave NW · Calgary · Treaty 7<br>
+        <a href="mailto:jon@artefakt.foundation">jon@artefakt.foundation</a><br>
+        <a href="https://artefakt.foundation">artefakt.foundation</a>
+      </div>
+      <div class="colophon-right">
+        Alberta Society<br>
+        Est. 2026<br>
+        Calgary + Chicago
+      </div>
+    </div>
+  </div>
+
 </main>
 </body>
 </html>
